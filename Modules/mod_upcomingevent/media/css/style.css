@@ -1,0 +1,52 @@
+.countdown {
+    position: relative;
+    text-align: center;
+}
+
+.countdown-cont {
+    display: inline-block;
+}
+
+.countdown-expired .countdown-cont {
+    opacity: 0.25;
+    filter: grayscale(60%);
+}
+
+.countdown-block {
+    display: inline-block;
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+}
+
+.countdown-digit {
+    font-size: 4rem;
+    min-width: 5rem;
+}
+
+/* .countdown-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    align-items: center;
+    align-content: center;
+} */
+
+.countdown-message {
+    position: absolute;
+    top: 0;
+    display: none;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.countdown-text {
+  font-size: 3rem;
+}
+
+.countdown-expired .countdown-message {
+    display: block;
+}
+

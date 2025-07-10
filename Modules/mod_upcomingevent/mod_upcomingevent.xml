@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>ToKu Upcoming Event</name>
+    <version>1.0.10</version>
+    <author>ToKu</author>
+    <authorUrl>www.toku.cz</authorUrl>
+    <creationDate>2025-07-01</creationDate>
+    <description>
+    <![CDATA[
+        <p><strong>Upcoming Event Module</strong> displays the <em>next upcoming event</em> that matches a calendar-based custom field. The <em>event</em> is a Joomla article content item.</p>
+        <ul>
+            <li>Filters by custom calendar field value</li>
+            <li>Optional filters for categories and tags</li>
+            <li>Supports multiple layouts</li>
+            <li>Includes a live countdown timer</li>
+            <li>Built using Joomla 5 DI, dispatcher, and asset manager</li>
+        </ul>
+    ]]>
+    </description>
+    <namespace path="src">ToKu\Module\UpcomingEvent</namespace>
+    <files>
+        <folder module="mod_upcomingevent">services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+    <media destination="mod_upcomingevent" folder="media">
+        <filename>joomla.asset.json</filename>
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field name="criteria_field"
+                    type="text"
+                    label="Criteria Field Name"
+                    description="The name of the custom field to use as event start date"
+                    required="true" />
+
+                <field
+                    name="filter_categories"
+                    type="category"
+                    extension="com_content"
+                    multiple="true"
+                    layout="joomla.form.field.list-fancy-select"
+                    filter="intarray"
+                    label="Filter by Categories"
+                    description="Only include articles from selected categories (optional)"
+                    required="false" />
+
+                <field name="filter_tags"
+                    type="tag"
+                    multiple="true"
+                    label="Filter by Tags"
+                    description="Only include articles with selected tags (optional)"
+                    required="false" />
+
+                <field 
+                    name="upcoming_header"
+                    type="text"
+                    label="Upcoming Event Header"
+                    description="The header above the remaining time"
+                    required="true"/>
+                
+                <field 
+                    name="expired_text"
+                    type="text"
+                    label="Expired Message"
+                    description="Text to display when the time runs out"
+                    required="true"/>
+
+                <field 
+                    name="datetime_format"
+                    type="text"
+                    label="Date Time Format"
+                    description="Date and time format string (refer to PHP manual)"
+                    default="l, j. F Y H:i"
+                    required="true"/>
+
+                <field 
+                    name="show_readmore"
+                    type="radio" 
+                    default="1" 
+                    label="Show Readmore Button" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="show_readmore_title"
+                    type="radio" 
+                    showon="show_readmore:1"
+                    default="1" 
+                    label="Show Readmore Title" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="show_image"
+                    type="radio" 
+                    default="1" 
+                    label="Show Image" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="link_image"
+                    type="radio" 
+                    showon="show_image:1"
+                    default="1" 
+                    label="Link Image" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field name="countdown_labels"
+                    type="text"
+                    label="Countdown Labels"
+                    description="Labels for days, hours, minutes, seconds"
+                    default="days,hours,minutes,seconds"
+                    required="false" />
+
+            </fieldset>
+            <fieldset name="advanced">
+				
+                <field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout" />
+                
+                <field 
+                    name="module_class"
+                    type="text"
+                    label="Module Class"
+                    description="Additional styles"
+                    required="false"/>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>
