@@ -1,0 +1,27 @@
+{
+    "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+    "name": "mod_upcomingevent",
+    "version": "1.0.10",
+    "description": "Upcoming Event Module",
+    "license": "GPL-2.0-or-later",
+    "assets": [
+        {
+            "name": "mod_upcomingevent.style",
+            "type": "style",
+            "uri": "mod_upcomingevent/style.css",
+            "version": "1.0.10"
+        },
+        {
+            "name": "mod_upcomingevent.countdown",
+            "type": "script",
+            "uri": "mod_upcomingevent/countdown.js",
+            "dependencies": [
+                "core"
+            ],
+            "attributes": {
+                "type": "module"
+            },
+            "version": "1.0.10"
+        }
+    ]
+}
