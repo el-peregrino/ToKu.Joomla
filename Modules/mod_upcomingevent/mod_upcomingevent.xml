@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
     <name>ToKu Upcoming Event</name>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
+    <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-07-01</creationDate>
     <description>
     <![CDATA[
@@ -14,6 +15,7 @@
             <li>Supports multiple layouts</li>
             <li>Includes a live countdown timer</li>
             <li>Built using Joomla 5 DI, dispatcher, and asset manager</li>
+            <li>Uses ToKu Library</li>
         </ul>
     ]]>
     </description>
@@ -26,7 +28,6 @@
     <media destination="mod_upcomingevent" folder="media">
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
-        <folder>js</folder>
     </media>
     <config>
         <fields name="params">

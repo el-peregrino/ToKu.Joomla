@@ -11,16 +11,18 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
+use ToKu\Library\JToKu;
 
-$wa = Factory::getDocument()->getWebAssetManager();
-$wa->getRegistry()->addExtensionRegistryFile('mod_carousel');
-$wa->useScript('mod_carousel.carousel');
+$wa = JToKu::wamRegister('mod_carousel');
+$wa->useScript('toku.carousel');
+$wa->useStyle('toku.style');
 $wa->useStyle('mod_carousel.style');
 
 if (empty($items) || count($items) == 0) {
-    echo '<!-- no items -->';
+    echo '<!-- mod_carousel :: no items -->';
     return;
 }
 
@@ -75,7 +77,7 @@ $indicators = $params->get('show_indicators');
                                 <h3 class="card-title"><?= htmlspecialchars($item->heading) ?></h3>
                             <?php endif; ?>
                             <?php if (!empty($item->text)) : ?>
-                                <div class="card-text"><?= $item->text; ?></div>
+                                <div class="card-text"><?= HTMLHelper::_('content.prepare', $item->text); ?></div>
                             <?php endif; ?>
                         <?php else : ?>
                             <?php if (!empty($item->heading)) : ?>
@@ -86,7 +88,7 @@ $indicators = $params->get('show_indicators');
                                 </h3>
                             <?php endif; ?>
                             <?php if (!empty($item->text)) : ?>
-                                <div class="card-text"><?= $item->text; ?></div>
+                                <div class="card-text"><?= HTMLHelper::_('content.prepare', $item->text); ?></div>
                             <?php endif; ?>
                             <?php if ($params->get('show_readmore', 0)) : ?>
                                 <a href="<?= htmlspecialchars($link) ?>" class="btn btn-primary">
@@ -102,10 +104,10 @@ $indicators = $params->get('show_indicators');
 
     <?php if ($params->get('show_controls', 0)) : ?>
         <div class="carousel-controls">
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="carousel-control-prev">
+            <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="control-prev">
                 <span aria-hidden="true" class="fas fa-angle-left"></span>
             </a>
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="next" class="carousel-control-next">
+            <a href="#<?php echo $carouselId; ?>" role="button" data-js="next" class="control-next">
                 <span aria-hidden="true" class="fas fa-angle-right"></span>
             </a>
         </div>

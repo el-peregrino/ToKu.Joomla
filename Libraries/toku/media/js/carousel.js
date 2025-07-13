@@ -1,5 +1,14 @@
 /**
- * The infinite carousel.
+ * ToKu.Joomla
+ * Library for Joomla 5
+ *
+ * (C) 2025 ToKu <https://www.toku.cz>
+ * GNU General Public License version 3 or later
+ */
+
+/**
+ * The infinite carousel script
+ * version: 1.0.2
  */
 jQuery(function ($) {
   $('[data-js="carousel-infinite"]').each(function () {
@@ -10,15 +19,10 @@ jQuery(function ($) {
     const $next = $carousel.find('[data-js="next"]');
 
     // get carousel items
-    let $boxes = $container.find('[data-js="box"]');
-    if ($boxes.length < 2) return; // prevents issues with only 1 item
-    // only 2 items - clone
-    if ($boxes.length == 2) {
-        $boxes.clone(true).appendTo($container);
-        $boxes = $container.find('[data-js="box"]');
-    }
+    const $boxes = $container.find('[data-js="box"]');
     const boxCount = $boxes.length;
-
+    if (boxCount < 2) return; // prevents issues with only 1 item
+    
     // get box size
     const boxWidth = $boxes.first().outerWidth(true);
 
@@ -35,7 +39,7 @@ jQuery(function ($) {
         if (!indicators) return;
         const $dots = $carousel.find('[data-js="indicators"]').find('li');
         $dots.removeClass('active');
-        $dots.eq(currentIndex % 2).addClass('active');
+        $dots.eq(currentIndex % boxCount).addClass('active');
     }
 
     function slideLeft() {

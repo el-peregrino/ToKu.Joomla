@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" method="upgrade">
+    <name>ToKu Joomla 5 Library</name>
+    <libraryname>JToKu</libraryname>
+    <namespace path="src">ToKu\Library</namespace>
+    <version>1.0.1</version>
+    <author>ToKu</author>
+    <authorUrl>www.toku.cz</authorUrl>
+    <license>GNU General Public License version 3 or later</license>
+    <creationDate>2025-07-13</creationDate>
+    <description>
+    <![CDATA[
+        <p><strong>ToKu Library</strong> defines functions and resources for <em>ToKu</em> extensions.</p>
+        <p>Contains:</p>
+        <ul>
+            <li>PHP Library</li>
+            <li>ToKu Asset</li>
+        </ul>
+    ]]></description>
+    <files>
+        <folder>src</folder>
+    </files>
+    <media destination="toku" folder="media">
+        <filename>joomla.asset.json</filename>
+        <folder>js</folder>
+    </media>
+</extension>

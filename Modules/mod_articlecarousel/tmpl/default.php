@@ -10,17 +10,17 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
+use ToKu\Library\JToKu;
 
-$wa = Factory::getDocument()->getWebAssetManager();
-$wa->getRegistry()->addExtensionRegistryFile('mod_articlecarousel');
-$wa->useScript('mod_articlecarousel.carousel');
+$wa = JToKu::wamRegister('mod_articlecarousel');
+$wa->useScript('toku.carousel');
+$wa->useStyle('toku.style');
 $wa->useStyle('mod_articlecarousel.style');
 
 if (empty($articles) || count($articles) == 0) {
-    echo '<!-- no items -->';
+    echo '<!-- mod_articlecarousel :: no items -->';
     return;
 }
 
@@ -85,10 +85,10 @@ $indicators = $params->get('show_indicators');
 
     <?php if ($params->get('show_controls', 0)) : ?>
         <div class="carousel-controls">
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="carousel-control-prev">
+            <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="control-prev">
                 <span aria-hidden="true" class="fas fa-angle-left"></span>
             </a>
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="next" class="carousel-control-next">
+            <a href="#<?php echo $carouselId; ?>" role="button" data-js="next" class="control-next">
                 <span aria-hidden="true" class="fas fa-angle-right"></span>
             </a>
         </div>

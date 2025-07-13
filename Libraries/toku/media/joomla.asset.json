@@ -1,0 +1,41 @@
+{
+    "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+    "name": "toku",
+    "version": "1.0.2",
+    "description": "ToKu Library",
+    "license": "GPL-3.0-or-later",
+    "assets": [
+        {
+            "name": "toku.style",
+            "type": "style",
+            "uri": "toku/style.css",
+            "version": "1.0.1"
+        },
+        {
+            "name": "toku.carousel",
+            "type": "script",
+            "uri": "toku/carousel.js",
+            "dependencies": [
+                "jquery",
+                "core"
+            ],
+            "attributes": {
+                "type": "library"
+            },
+            "version": "1.0.2"
+        },
+        {
+            "name": "toku.countdown",
+            "type": "script",
+            "uri": "toku/countdown.js",
+            "dependencies": [
+                "jquery",
+                "core"
+            ],
+            "attributes": {
+                "type": "library"
+            },
+            "version": "1.0.10"
+        }
+    ]
+}

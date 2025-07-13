@@ -19,7 +19,7 @@ $wa->getRegistry()->addExtensionRegistryFile('mod_upcomingevent');
 $wa->useStyle('mod_upcomingevent.style');
 
 if (empty($event)) {
-    echo '<!-- no upcoming events -->';
+    echo '<!-- mod_upcomingevent :: no events -->';
     return;
 }
 

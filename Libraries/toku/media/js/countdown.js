@@ -1,3 +1,15 @@
+/**
+ * ToKu.Joomla
+ * Library for Joomla 5
+ *
+ * (C) 2025 ToKu <https://www.toku.cz>
+ * GNU General Public License version 3 or later
+ */
+
+/**
+ * The countdown script
+ * version: 1.0.10
+ */
 jQuery(function ($) {
     $('[data-js="countdown"]').each(function () {
         const $box = $(this);
