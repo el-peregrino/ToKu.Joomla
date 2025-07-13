@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field name="image" type="media" label="Image" />
+    <field name="image_alt" type="text" label="Image Alt" />
+    <field name="heading" type="text" label="Heading" />
+    <field name="text" type="editor" label="Text" />
+    <field name="url" type="url" label="Link URL" />
+    <field name="class" type="text" label="CSS Class" />
+
+    <field name="link_type" type="list" label="Link Type" default="none" description="Choose what the item should link to" required="true">
+        <option value="none">No Link</option>
+        <option value="menu">Menu Item</option>
+        <option value="article">Article</option>
+        <option value="external">External Link</option>
+    </field>
+
+    <field name="menu_item" type="menuitem" label="Select Menu Item" filter="component" showon="link_type:menu" />
+
+    <field
+        type="ModalSelect"
+        name="article_id"
+        label="Article"
+        select="true"
+        iconSelect="fa fa-list"
+        titleSelect="Selecting the Article"
+        urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+        clear="true"
+        sql_title_table="#__content"
+        sql_title_column="title"
+        sql_title_key="id"
+        showon="link_type:article" />
+
+    <field name="external_url" type="url" label="External Link" description="Enter full link starting with https://" showon="link_type:external" />
+
+    <field name="link_target" type="list" label="Open Link In" default="_self" description="Choose whether the link opens in a new tab or the same tab." showon="link_type!:none">
+        <option value="_self">Same Tab</option>
+        <option value="_blank">New Tab</option>
+    </field>
+</form>
