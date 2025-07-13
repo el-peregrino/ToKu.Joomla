@@ -1,0 +1,28 @@
+{
+    "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+    "name": "mod_carousel",
+    "version": "1.0.1",
+    "description": "Upcoming Event Module",
+    "license": "GPL-3.0-or-later",
+    "assets": [
+        {
+            "name": "mod_carousel.style",
+            "type": "style",
+            "uri": "mod_carousel/style.css",
+            "version": "1.0.1"
+        },
+        {
+            "name": "mod_carousel.carousel",
+            "type": "script",
+            "uri": "mod_carousel/carousel.js",
+            "dependencies": [
+                "jquery",
+                "core"
+            ],
+            "attributes": {
+                "type": "module"
+            },
+            "version": "1.0.1"
+        }
+    ]
+}
