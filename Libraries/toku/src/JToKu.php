@@ -5,10 +5,12 @@
  * @subpackage  toku
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
- * @license     GNU General Public License version 2 or later
+ * @license     GNU General Public License version 3 or later
  */
 
 namespace ToKu\Library;
+
+use Joomla\CMS\Factory;
 
 /**
  * ToKu.Joomla library
@@ -16,12 +18,26 @@ namespace ToKu\Library;
 class JToKu 
 {
     /**
-     * Returns version string of the library.
+     * Web Asset Manager - Register Asset Helper
      * 
-     * @return string
+     * Automatically registers the toku asset.
+     * 
+     * @param   string[]    $assets  comma separated list of asset names.
+     * 
+     * @return  object      Web Asset Manager
      */
-    public static function version() : string 
+    public static function wamRegister(...$assets) 
     {
-        return "ToKu Joomla Library 1.0.0";
+        // get web asset manager
+        $wa = Factory::getDocument()->getWebAssetManager();
+        // register toku library
+        $wa->getRegistry()->addExtensionRegistryFile('toku');
+        // register other assets
+        foreach($assets as $asset) 
+        {
+            $wa->getRegistry()->addExtensionRegistryFile($asset);
+        }
+
+        return $wa;
     }
 }

@@ -14,14 +14,14 @@ use Joomla\CMS\Date\Date;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
+use ToKu\Library\JToKu;
 
-$wa = Joomla\CMS\Factory::getDocument()->getWebAssetManager();
-$wa->getRegistry()->addExtensionRegistryFile('mod_upcomingevent');
-$wa->useScript('mod_upcomingevent.countdown');
-$wa->useStyle('mod_upcomingevent.style');
+$wa = JToKu::wamRegister('mod_upcomingevent');
+$wa->useScript('toku.countdown');
+$wa->useStyle('mod_carousel.style');
 
 if (empty($event)) {
-    echo '<!-- no upcoming events -->';
+    echo '<!-- mod_upcomingevent :: no events -->';
     return;
 }
 $date = new Date($event->value);

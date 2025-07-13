@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
     <name>ToKu Carousel</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
+    <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-07-10</creationDate>
     <description>
     <![CDATA[
@@ -12,6 +13,7 @@
             <li>Configurable</li>
             <li>Supports multiple layouts</li>
             <li>Built using Joomla 5 DI, dispatcher, and asset manager</li>
+            <li>Uses ToKu Library</li>
         </ul>
     ]]>
     </description>
@@ -25,7 +27,6 @@
     <media destination="mod_carousel" folder="media">
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
-        <folder>js</folder>
     </media>
     <config>
         <fields name="params">
