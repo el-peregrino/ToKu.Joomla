@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>ToKu Article Carousel</name>
+    <version>1.0.1</version>
+    <author>ToKu</author>
+    <authorUrl>www.toku.cz</authorUrl>
+    <creationDate>2025-07-13</creationDate>
+    <description>
+    <![CDATA[
+        <p><strong>Article Carousel Module</strong> displays random articles in an infinite carousel.
+        <ul>
+            <li>Configurable</li>
+            <li>Supports multiple layouts</li>
+            <li>Built using Joomla 5 DI, dispatcher, and asset manager</li>
+        </ul>
+    ]]>
+    </description>
+    <namespace path="src">ToKu\Module\ArticleCarousel</namespace>
+    <files>
+        <folder module="mod_articlecarousel">services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+    <media destination="mod_articlecarousel" folder="media">
+        <filename>joomla.asset.json</filename>
+        <folder>css</folder>
+        <folder>js</folder>
+    </media>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field
+                    name="filter_categories"
+                    type="category"
+                    extension="com_content"
+                    multiple="true"
+                    layout="joomla.form.field.list-fancy-select"
+                    filter="intarray"
+                    label="Filter by Categories"
+                    description="Only include articles from selected categories (optional)"
+                    required="false" />
+
+                <field name="filter_tags"
+                    type="tag"
+                    multiple="true"
+                    label="Filter by Tags"
+                    description="Only include articles with selected tags (optional)"
+                    required="false" />
+
+                <field 
+                    name="article_count" 
+                    type="number" 
+                    default="10" 
+                    label="Number of Articles" 
+                    min="5"
+                    max="20" />
+
+                <field 
+                    name="autoplay" 
+                    type="radio" 
+                    default="1" 
+                    label="Automatic Slide" 
+                    layout="joomla.form.field.radio.switcher"
+                    required="true">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field
+                    name="interval"
+                    type="number"
+                    default="5000"
+                    showon="autoplay:1"
+                    label="Slide Interval"
+                    description="The interval of item slides in milliseconds"
+                    min="1000"/>
+
+                <field
+                    name="direction" 
+                    type="list" 
+                    default="left" 
+                    showon="autoplay:1"
+                    label="Slide Direction" >
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                </field>
+
+                <field
+                    name="show_indicators" 
+                    type="list" 
+                    default="below" 
+                    label="Controls position" >
+                    <option value="none">None</option>
+                    <option value="above">Above</option>
+                    <option value="below">Below</option>
+                </field>
+
+                <field 
+                    name="show_controls"
+                    type="radio" 
+                    default="1" 
+                    label="Show Control Buttons" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="show_image"
+                    type="radio" 
+                    default="1" 
+                    label="Show Image" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="link_image"
+                    type="radio" 
+                    showon="show_image:1"
+                    default="1" 
+                    label="Link Image" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="show_readmore"
+                    type="radio" 
+                    default="1" 
+                    label="Show Readmore Button" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="show_readmore_title"
+                    type="radio" 
+                    showon="show_readmore:1"
+                    default="1" 
+                    label="Show Readmore Title" 
+                    layout="joomla.form.field.radio.switcher">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="advanced">
+				
+                <field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout" />
+                
+                <field 
+                    name="module_class"
+                    type="text"
+                    label="Module Class"
+                    description="Additional styles"
+                    required="false"/>
+
+                <field 
+                    name="box_class"
+                    type="text"
+                    label="Item Class"
+                    description="Additional styles for carousel items"
+                    required="false"/>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

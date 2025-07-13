@@ -1,0 +1,28 @@
+{
+    "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+    "name": "mod_articlecarousel",
+    "version": "1.0.1",
+    "description": "Article Carousel Module",
+    "license": "GPL-3.0-or-later",
+    "assets": [
+        {
+            "name": "mod_articlecarousel.style",
+            "type": "style",
+            "uri": "mod_articlecarousel/style.css",
+            "version": "1.0.1"
+        },
+        {
+            "name": "mod_articlecarousel.carousel",
+            "type": "script",
+            "uri": "mod_articlecarousel/carousel.js",
+            "dependencies": [
+                "jquery",
+                "core"
+            ],
+            "attributes": {
+                "type": "module"
+            },
+            "version": "1.0.1"
+        }
+    ]
+}
