@@ -39,7 +39,7 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
         $helper = $this->getHelperFactory()->getHelper('CarouselHelper');
 
         // get the items
-        $data['items'] = $helper->getItems($data['params']);
+        $data['items'] = $helper->getItems($data['params'], $this->getApplication());
 
         return $data;
     }

@@ -73,9 +73,16 @@ class ArticleCarouselHelper implements DatabaseAwareInterface
                 ->where($db->quoteName('tm.tag_id') . ' IN (' . implode(',', array_map('intval', $tagIds)) . ')');
         }
 
-        $query->order('RAND()');
-
-        $db->setQuery($query, 0, $params->get('limit', 10));
+        // ordering
+        if ($params->get('ordering', 'random') == 'random') {
+            $query->order('RAND()');
+        }
+        else {
+            $query->order('a.publish_up DESC');
+        }
+        
+        // set the query, no offset, limit
+        $db->setQuery($query, 0, $params->get('article_count', 10));
 
         return $db->loadObjectList();
     }

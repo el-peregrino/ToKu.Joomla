@@ -44,10 +44,11 @@ $indicators = $params->get('show_indicators');
     <div class="carousel-container" data-js="container">
         <?php foreach ($items as $item) : ?>
             <?php // get link url
+            $link = null;
             switch ($item->link_type) {
                 case 'menu':
                     $menu = Factory::getApplication()->getMenu()->getItem($item->menu_item);
-                    $link = JRoute::_($menu->link);
+                    $link = JRoute::_($menu->route);
                     break;
                 case 'article':
                     $link = JRoute::_('index.php?option=com_content&view=article&id=' . (int) $item->article_id);
@@ -57,7 +58,8 @@ $indicators = $params->get('show_indicators');
                     break;
             }
             // prepare image data
-            if (isset($item->image)) {
+            $image = null;
+            if (isset($item->image) && $params->get('show_image', 0)) {
                 $image = [
                     'src' => $item->image,
                     'alt' => $item->image_alt,
@@ -65,14 +67,23 @@ $indicators = $params->get('show_indicators');
             }
             ?>
             <div class="carousel-box <?= $params->get('box_class'); ?> <?= $item->class; ?>" data-js="box">
+                <?php if ($params->get('link_style') == 'card' && !empty($link)) : ?>
+                    <a href="<?= htmlspecialchars($link) ?>" target="<?= $item->link_target ?: '_self' ?>" rel="<?= $item->link_target === '_blank' ? 'noopener' : '' ?>">
+                <?php endif; ?>
                 <div class="card">
-                    <?php if (isset($image)) : ?>
-                        <div class="card-image">
-                            <?= LayoutHelper::render('joomla.html.image', $image); ?>
-                        </div>
+                    <?php if ($params->get('show_image', 0) && isset($image)) : ?>
+                        <figure class="card-image">
+                            <?php if ($params->get('link_style') == 'title' && $params->get('link_image', 0) && !empty($link)) : ?>
+                                <a href="<?= htmlspecialchars($link) ?>" title="<?= htmlspecialchars($item->heading) ?>">
+                                    <?= LayoutHelper::render('joomla.html.image', $image); ?>
+                                </a>
+                            <?php else : ?>
+                                <?= LayoutHelper::render('joomla.html.image', $image); ?>
+                            <?php endif; ?>
+                        </figure>
                     <?php endif; ?>
                     <div class="card-body">
-                        <?php if ($item->link_type == 'none' || empty($link)) : ?>
+                        <?php if (empty($link) || $params->get('link_style') == 'card') : ?>
                             <?php if (!empty($item->heading)) : ?>
                                 <h3 class="card-title"><?= htmlspecialchars($item->heading) ?></h3>
                             <?php endif; ?>
@@ -98,6 +109,9 @@ $indicators = $params->get('show_indicators');
                         <?php endif; ?>
                     </div>
                 </div>
+                <?php if ($params->get('link_style') == 'card') : ?>
+                    </a>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>

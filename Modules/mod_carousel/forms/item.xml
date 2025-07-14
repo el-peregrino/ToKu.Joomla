@@ -4,8 +4,14 @@
     <field name="image_alt" type="text" label="Image Alt" />
     <field name="heading" type="text" label="Heading" />
     <field name="text" type="editor" label="Text" />
-    <field name="url" type="url" label="Link URL" />
     <field name="class" type="text" label="CSS Class" />
+
+    <field
+        name="access"
+        type="accesslevel"
+        label="JFIELD_ACCESS_LABEL"
+        description="JFIELD_ACCESS_DESC"
+        required="true" />
 
     <field name="link_type" type="list" label="Link Type" default="none" description="Choose what the item should link to" required="true">
         <option value="none">No Link</option>

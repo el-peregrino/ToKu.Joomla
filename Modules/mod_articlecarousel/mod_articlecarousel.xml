@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
     <name>ToKu Article Carousel</name>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
@@ -56,6 +56,11 @@
                     label="Number of Articles" 
                     min="5"
                     max="20" />
+
+                <field name="ordering" type="list" label="Ordering" description="Choose how articles should be sorted">
+                    <option value="random">Random</option>
+                    <option value="newest">Newest First</option>
+                </field>
 
                 <field 
                     name="autoplay" 

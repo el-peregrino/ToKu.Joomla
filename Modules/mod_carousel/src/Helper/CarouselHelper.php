@@ -12,6 +12,7 @@ namespace ToKu\Module\Carousel\Site\Helper;
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Application\SiteApplication;
 use Joomla\Registry\Registry;
 
 /**
@@ -24,12 +25,19 @@ class CarouselHelper
         return isset($input) && !empty($input);
     }
 
-    public static function getItems(Registry $params): array
+    public static function getItems(Registry $params, SiteApplication $app): array
     {
         $items = $params->get('items');
+        $levels = $app->getIdentity()->getAuthorisedViewLevels();
+
         $output = [];
 
         foreach ($items as $key => $item) {
+            // check access
+            if (!in_array((int) $item->access, $levels))
+            {
+                continue;
+            }
             // check the data
             if (!self::hasValue($item->image) && !self::hasValue($item->heading) && !self::hasValue($item->text)) {
                 continue;

@@ -18,7 +18,7 @@ use ToKu\Library\JToKu;
 
 $wa = JToKu::wamRegister('mod_upcomingevent');
 $wa->useScript('toku.countdown');
-$wa->useStyle('mod_carousel.style');
+$wa->useStyle('mod_upcomingevent.style');
 
 if (empty($event)) {
     echo '<!-- mod_upcomingevent :: no events -->';
