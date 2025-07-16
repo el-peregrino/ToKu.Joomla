@@ -2,7 +2,7 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  toku
+ * @subpackage  JToKu
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
@@ -17,6 +17,11 @@ use Joomla\CMS\Factory;
  */
 class JToKu 
 {
+    /**
+     * Version of the library.
+     */
+    public const VERSION = '1.0.3';
+
     /**
      * Web Asset Manager - Register Asset Helper
      * 

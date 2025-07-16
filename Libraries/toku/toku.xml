@@ -3,7 +3,7 @@
     <name>ToKu Joomla 5 Library</name>
     <libraryname>JToKu</libraryname>
     <namespace path="src">ToKu\Library</namespace>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
@@ -14,6 +14,7 @@
         <p>Contains:</p>
         <ul>
             <li>PHP Library</li>
+            <li>CustomFieldSelectorField</li>
             <li>ToKu Asset</li>
         </ul>
     ]]></description>
@@ -25,4 +26,5 @@
         <folder>css</folder>
         <folder>js</folder>
     </media>
+    <scriptfile>script.php</scriptfile>
 </extension>

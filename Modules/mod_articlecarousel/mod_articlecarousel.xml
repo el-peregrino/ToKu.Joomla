@@ -27,6 +27,7 @@
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
     </media>
+    <scriptfile>script.php</scriptfile>
     <config>
         <fields name="params">
             <fieldset name="basic">
