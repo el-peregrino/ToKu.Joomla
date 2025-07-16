@@ -5,7 +5,7 @@
  * @subpackage  mod_upcomingevent
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
- * @license     GNU General Public License version 2 or later
+ * @license     GNU General Public License version 3 or later
  */
 
 namespace ToKu\Module\UpcomingEvent\Site\Helper;
@@ -40,6 +40,7 @@ class UpcomingEventHelper implements DatabaseAwareInterface
      */
     public function getUpcomingEvent(Registry $params, SiteApplication $app): ?\stdClass
     {
+        // id of the criteria field
         $criteriaField = $params->get('criteria_field');
         if (!$criteriaField) {
             return null;
@@ -58,11 +59,14 @@ class UpcomingEventHelper implements DatabaseAwareInterface
             ])
             ->from($db->quoteName('#__content', 'a'))
             ->join('INNER', $db->quoteName('#__fields_values', 'fv'), $db->quoteName('fv.item_id') . '=' . $db->quoteName('a.id'))
-            ->join('INNER', $db->quoteName('#__fields', 'f'), $db->quoteName('f.id') . '=' . $db->quoteName('fv.field_id'))
-            ->where($db->quoteName('f.name') . ' = ' . $db->quote($criteriaField))
-            ->where($db->quoteName('a.state') . ' = 1') // published only
-            ->where($db->quoteName('a.publish_up') . ' <= NOW()')
+            // criteria field
+            ->where($db->quoteName('fv.field_id') . ' = ' . $db->quote($criteriaField))
+            // published items only
+            ->where($db->quoteName('a.state') . ' = 1')
+            ->where($db->quoteName('a.publish_up') . ' <= NOW() AND (' . $db->quoteName('a.publish_down') . ' is null OR ' . $db->quoteName('a.publish_down') . ' <= NOW())')
+            // upcoming events only
             ->where($db->quoteName('fv.value') . ' >= NOW()')
+            // user access
             ->where($db->quoteName('a.access') . ' IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')');
 
         // optional category filter

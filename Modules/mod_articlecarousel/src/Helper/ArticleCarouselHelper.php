@@ -49,7 +49,10 @@ class ArticleCarouselHelper implements DatabaseAwareInterface
                 $db->quoteName('a.images')
             ])
             ->from($db->quoteName('#__content', 'a'))
-            ->where($db->quoteName('a.state') . ' = 1') // published only
+            // published items only
+            ->where($db->quoteName('a.state') . ' = 1')
+            ->where($db->quoteName('a.publish_up') . ' <= NOW() AND (' . $db->quoteName('a.publish_down') . ' is null OR ' . $db->quoteName('a.publish_down') . ' <= NOW())')
+            // user access
             ->where($db->quoteName('a.access') . ' IN (' . implode(',', $user->getAuthorisedViewLevels()) . ')');
 
         // filter current article

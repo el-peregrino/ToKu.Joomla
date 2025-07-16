@@ -5,7 +5,7 @@
  * @subpackage  mod_upcomingevent
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
- * @license     GNU General Public License version 2 or later
+ * @license     GNU General Public License version 3 or later
  */
 
 \defined('_JEXEC') or die;

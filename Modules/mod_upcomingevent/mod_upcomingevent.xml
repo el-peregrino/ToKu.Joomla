@@ -34,9 +34,13 @@
             <fieldset name="basic">
 
                 <field name="criteria_field"
-                    type="text"
-                    label="Criteria Field Name"
-                    description="The name of the custom field to use as event start date"
+                    addfieldprefix ="ToKu\Library\Field"
+                    type="customfieldselector"
+                    context="com_content.article"
+                    fieldtype="calendar"
+                    layout="joomla.form.field.list-fancy-select"
+                    label="Criteria Field"
+                    description="The custom field to use as event start date"
                     required="true" />
 
                 <field
