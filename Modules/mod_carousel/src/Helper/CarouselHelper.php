@@ -10,10 +10,10 @@
 
 namespace ToKu\Module\Carousel\Site\Helper;
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\Application\SiteApplication;
 use Joomla\Registry\Registry;
+
+\defined('_JEXEC') or die;
 
 /**
  * Helper for mod_upcomingevent
@@ -21,7 +21,8 @@ use Joomla\Registry\Registry;
  */
 class CarouselHelper
 {
-    static function hasValue($input) {
+    private static function hasValue($input)
+    {
         return isset($input) && !empty($input);
     }
 
@@ -35,13 +36,11 @@ class CarouselHelper
         foreach ($items as $key => $item) {
             // check access
             if (!in_array((int) $item->access, $levels))
-            {
                 continue;
-            }
+
             // check the data
-            if (!self::hasValue($item->image) && !self::hasValue($item->heading) && !self::hasValue($item->text)) {
+            if (!self::hasValue($item->image) && !self::hasValue($item->heading) && !self::hasValue($item->text))
                 continue;
-            }
 
             $output[] = $item;
         }

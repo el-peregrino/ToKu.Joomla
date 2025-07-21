@@ -8,13 +8,13 @@
  * @license     GNU General Public License version 3 or later
  */
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\Extension\Service\Provider\HelperFactory;
 use Joomla\CMS\Extension\Service\Provider\Module;
 use Joomla\CMS\Extension\Service\Provider\ModuleDispatcherFactory;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
+
+\defined('_JEXEC') or die;
 
 /**
  * The article carousel module service provider.
@@ -28,7 +28,7 @@ return new class () implements ServiceProviderInterface {
      * @return  void
      *
      */
-    public function register(Container $container) :void
+    public function register(Container $container): void
     {
         // Joomla services
         $container->registerServiceProvider(new ModuleDispatcherFactory('\\ToKu\\Module\\ArticleCarousel'));

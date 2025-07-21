@@ -10,24 +10,23 @@
 
 namespace ToKu\Library\Field;
 
-defined('_JEXEC') or die;
-
-use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Field\ListField;
+
+\defined('_JEXEC') or die;
 
 class CustomFieldSelectorField extends ListField
 {
     protected $type = "customfieldselector";
 
-    protected function getOptions()
+    protected function getOptions(): array
     {
         $options = [];
-        
+
         // get database
-        $db     = Factory::getDbo();
+        $db = $this->getDatabase(); // parent is database aware trait
 
         // build query
-        $query  = $db->getQuery(true)
+        $query = $db->getQuery(true)
             ->select([
                 $db->quoteName('f.id'),
                 $db->quoteName('f.title'),
@@ -36,7 +35,7 @@ class CustomFieldSelectorField extends ListField
                 $db->quoteName('fg.title') . ' AS group_title'
             ])
             ->from('#__fields AS f')
-            ->leftJoin('#__fields_groups AS fg ON f.group_id = fg.id')
+            ->join('LEFT', '#__fields_groups AS fg ON f.group_id = fg.id')
             ->where('f.state = 1'); // published
 
         // context filter
@@ -68,11 +67,11 @@ class CustomFieldSelectorField extends ListField
         // process data
         foreach ($fields as $field) {
             $label = $field->title;
-            $hint  = "Type: {$field->type}, Group: {$field->group_title}, Context: {$field->context}";
+            $hint = "Type: {$field->type}, Group: {$field->group_title}, Context: {$field->context}";
 
             $options[] = [
                 'value' => $field->id,
-                'text'  => $label,
+                'text' => $label,
                 'option.attr.title' => $hint // adds HTML tooltip
             ];
         }

@@ -11,15 +11,11 @@
 namespace ToKu\Module\UpcomingEvent\Site\Helper;
 
 use Joomla\CMS\Application\SiteApplication;
-use Joomla\CMS\User\User;
-use Joomla\CMS\Factory;
 use Joomla\Database\DatabaseAwareInterface;
 use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Registry\Registry;
 
-// phpcs:disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
-// phpcs:enable PSR1.Files.SideEffects
 
 /**
  * Helper for mod_upcomingevent

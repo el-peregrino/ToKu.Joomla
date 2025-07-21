@@ -10,12 +10,12 @@
 
 namespace ToKu\Module\ArticleCarousel\Site\Helper;
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\Application\SiteApplication;
 use Joomla\Database\DatabaseAwareInterface;
 use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Registry\Registry;
+
+\defined('_JEXEC') or die;
 
 /**
  * Helper for mod_articlecarousel
@@ -38,7 +38,7 @@ class ArticleCarouselHelper implements DatabaseAwareInterface
     {
         $input = $app->getInput();
         $user = $app->getIdentity();
-        
+
         // build query
         $db = $this->getDatabase();
         $query = $db->getQuery(true)
@@ -79,11 +79,10 @@ class ArticleCarouselHelper implements DatabaseAwareInterface
         // ordering
         if ($params->get('ordering', 'random') == 'random') {
             $query->order('RAND()');
-        }
-        else {
+        } else {
             $query->order('a.publish_up DESC');
         }
-        
+
         // set the query, no offset, limit
         $db->setQuery($query, 0, $params->get('article_count', 10));
 

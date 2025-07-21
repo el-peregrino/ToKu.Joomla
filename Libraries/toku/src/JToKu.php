@@ -10,12 +10,15 @@
 
 namespace ToKu\Library;
 
+use Joomla\CMS\WebAsset\WebAssetManager;
 use Joomla\CMS\Factory;
 
+\defined('_JEXEC') or die;
+
 /**
- * ToKu.Joomla library
+ * ToKu.Joomla 5 Library
  */
-class JToKu 
+class JToKu
 {
     /**
      * Version of the library.
@@ -25,21 +28,20 @@ class JToKu
     /**
      * Web Asset Manager - Register Asset Helper
      * 
-     * Automatically registers the toku asset.
+     * Automatically registers the ToKu asset.
      * 
-     * @param   string[]    $assets  comma separated list of asset names.
+     * @param   string[]        $assets  Comma separated list of asset names.
      * 
-     * @return  object      Web Asset Manager
+     * @return  WebAssetManager Instance of WebAssetManager      
      */
-    public static function wamRegister(...$assets) 
+    public static function wamRegister(...$assets): WebAssetManager
     {
         // get web asset manager
-        $wa = Factory::getDocument()->getWebAssetManager();
-        // register toku library
+        $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+        // register ToKu library
         $wa->getRegistry()->addExtensionRegistryFile('toku');
         // register other assets
-        foreach($assets as $asset) 
-        {
+        foreach ($assets as $asset) {
             $wa->getRegistry()->addExtensionRegistryFile($asset);
         }
 

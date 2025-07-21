@@ -8,17 +8,18 @@
  * @license     GNU General Public License version 3 or later
  */
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\InstallerAdapter;
 use Joomla\CMS\Installer\InstallerScriptInterface;
 use Joomla\CMS\Language\Text;
+use Joomla\Filesystem\File;
+
+\defined('_JEXEC') or die;
 
 return new class () implements InstallerScriptInterface {
 
     private string $minimumJoomla = '5.3.0';
-    private string $minimumPhp    = '8.2.0';
+    private string $minimumPhp = '8.2.0';
 
     public function install(InstallerAdapter $adapter): bool
     {
@@ -40,11 +41,13 @@ return new class () implements InstallerScriptInterface {
      */
     public function preflight(string $type, InstallerAdapter $adapter): bool
     {
+        // php version
         if (version_compare(PHP_VERSION, $this->minimumPhp, '<')) {
             Factory::getApplication()->enqueueMessage(sprintf(Text::_('JLIB_INSTALLER_MINIMUM_PHP'), $this->minimumPhp), 'error');
             return false;
         }
 
+        // joomla version
         if (version_compare(JVERSION, $this->minimumJoomla, '<')) {
             Factory::getApplication()->enqueueMessage(sprintf(Text::_('JLIB_INSTALLER_MINIMUM_JOOMLA'), $this->minimumJoomla), 'error');
             return false;
@@ -58,15 +61,14 @@ return new class () implements InstallerScriptInterface {
      */
     public function postflight(string $type, InstallerAdapter $adapter): bool
     {
-        $this->deleteUnexistingFiles();
-
+        $this->deleteFiles();
         return true;
     }
 
     /**
      * Safely removes files which are no longer needed.
      */
-    private function deleteUnexistingFiles()
+    private function deleteFiles(): void
     {
         $files = [];  // overwrite this line with your files to delete
 
@@ -74,11 +76,11 @@ return new class () implements InstallerScriptInterface {
             return;
         }
 
-        foreach ($files as $file) 
-        {
+        foreach ($files as $file) {
             try {
                 File::delete(JPATH_ROOT . $file);
-            } catch (\FilesystemException $e) {
+            } catch (\FilesystemException $e) { // global namespace
+                // \Joomla\Filesystem\Exception\FilesystemException
                 echo Text::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $file) . '<br>';
             }
         }

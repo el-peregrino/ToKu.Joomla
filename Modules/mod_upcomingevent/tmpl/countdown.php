@@ -8,13 +8,14 @@
  * @license     GNU General Public License version 3 or later
  */
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\Date\Date;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Router\Route;
 use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
 use ToKu\Library\JToKu;
+
+\defined('_JEXEC') or die;
 
 $wa = JToKu::wamRegister('mod_upcomingevent');
 $wa->useScript('toku.countdown');
@@ -25,8 +26,8 @@ if (empty($event)) {
     return;
 }
 $date = new Date($event->value);
-$link = JRoute::_('index.php?option=com_content&view=article&id=' . (int) $event->id);
-$images  = json_decode($event->images);
+$link = Route::_('index.php?option=com_content&view=article&id=' . (int) $event->id);
+$images = json_decode($event->images);
 if (!empty($images->image_intro)) {
     $image = [
         'src' => $images->image_intro,
@@ -34,7 +35,7 @@ if (!empty($images->image_intro)) {
     ];
 }
 $class = $params->get('module_class', '');
-$labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), ['days','hours','minutes','seconds']);
+$labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), ['days', 'hours', 'minutes', 'seconds']);
 
 ?>
 <div class="upcoming-event event-countdown <?= $class; ?>">
@@ -64,13 +65,13 @@ $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), [
     </div>
 
     <div class="event">
-        <?php if ($params->get('show_image', 0) && !empty($images->image_intro)) : ?>
+        <?php if ($params->get('show_image', 0) && !empty($images->image_intro)): ?>
             <figure class="event-image">
-                <?php if ($params->get('link_image')) : ?>
+                <?php if ($params->get('link_image')): ?>
                     <a href="<?= htmlspecialchars($link) ?>" title="<?= htmlspecialchars($event->title) ?>">
                         <?= LayoutHelper::render('joomla.html.image', $image); ?>
                     </a>
-                <?php else : ?>
+                <?php else: ?>
                     <?= LayoutHelper::render('joomla.html.image', $image); ?>
                 <?php endif; ?>
             </figure>
@@ -89,4 +90,3 @@ $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), [
         </div>
     </div>
 </div>
-

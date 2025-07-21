@@ -8,11 +8,12 @@
  * @license     GNU General Public License version 3 or later
  */
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Router\Route;
 use ToKu\Library\JToKu;
+
+\defined('_JEXEC') or die;
 
 $wa = JToKu::wamRegister('mod_articlecarousel');
 $wa->useScript('toku.carousel');
@@ -29,45 +30,49 @@ $carouselId = 'toku-' . uniqid();
 $indicators = $params->get('show_indicators');
 ?>
 
-<div id="<?= $carouselId; ?>" class="carousel slide <?= $params->get('module_class'); ?>" data-js="carousel-infinite" data-interval="<?= $params->get('interval'); ?>" data-autoplay="<?= $params->get('autoplay') ? "true" : "false"; ?>" data-direction="<?= $params->get('direction'); ?>" data-indicators="<?= $indicators != 'none' ? 'true' : 'false'; ?>">
-    
-    <?php if ($indicators == 'above') : ?>
+<div id="<?= $carouselId; ?>" class="carousel slide <?= $params->get('module_class'); ?>" data-js="carousel-infinite"
+    data-interval="<?= $params->get('interval'); ?>" data-autoplay="<?= $params->get('autoplay') ? "true" : "false"; ?>"
+    data-direction="<?= $params->get('direction'); ?>"
+    data-indicators="<?= $indicators != 'none' ? 'true' : 'false'; ?>">
+
+    <?php if ($indicators == 'above'): ?>
         <ol class="carousel-indicators" data-js="indicators">
-            <?php foreach ($articles as $_) : ?>
+            <?php foreach ($articles as $_): ?>
                 <li class="carousel-indicator fas fa-circle"></li>
             <?php endforeach; ?>
         </ol>
     <?php endif; ?>
 
     <div class="carousel-container" data-js="container">
-        <?php foreach ($articles as $article) : ?>
+        <?php foreach ($articles as $article): ?>
             <?php // get link url
-            $link = JRoute::_('index.php?option=com_content&view=article&id=' . (int) $article->id);
-            // prepare image data
-            $images  = json_decode($article->images);
-            if (!empty($images->image_intro)) {
-                $image = [
-                    'src' => $images->image_intro,
-                    'alt' => empty($images->image_intro_alt) && empty($images->image_intro_alt_empty) ? false : $images->image_intro_alt,
-                ];
-            }
-            ?>
+                $link = Route::_('index.php?option=com_content&view=article&id=' . (int) $article->id);
+                // prepare image data
+                $images = json_decode($article->images);
+                if (!empty($images->image_intro)) {
+                    $image = [
+                        'src' => $images->image_intro,
+                        'alt' => empty($images->image_intro_alt) && empty($images->image_intro_alt_empty) ? false : $images->image_intro_alt,
+                    ];
+                }
+                ?>
             <div class="carousel-box <?= $params->get('box_class'); ?>" data-js="box">
                 <div class="card">
-                    <?php if ($params->get('show_image', 0) && isset($image)) : ?>
+                    <?php if ($params->get('show_image', 0) && isset($image)): ?>
                         <figure class="card-image">
-                            <?php if ($params->get('link_image', 0)) : ?>
+                            <?php if ($params->get('link_image', 0)): ?>
                                 <a href="<?= htmlspecialchars($link) ?>" title="<?= htmlspecialchars($article->title) ?>">
                                     <?= LayoutHelper::render('joomla.html.image', $image); ?>
                                 </a>
-                            <?php else : ?>
+                            <?php else: ?>
                                 <?= LayoutHelper::render('joomla.html.image', $image); ?>
                             <?php endif; ?>
                         </figure>
                     <?php endif; ?>
-                    
+
                     <div class="card-body">
-                        <h3 class="card-title"><a href="<?= htmlspecialchars($link) ?>"><?= htmlspecialchars($article->title) ?></a></h3>
+                        <h3 class="card-title"><a
+                                href="<?= htmlspecialchars($link) ?>"><?= htmlspecialchars($article->title) ?></a></h3>
                         <div class="card-text"><?= HTMLHelper::_('content.prepare', $article->introtext); ?></div>
 
                         <?php if ($params->get('show_readmore', 0)) {
@@ -83,7 +88,7 @@ $indicators = $params->get('show_indicators');
         <?php endforeach; ?>
     </div>
 
-    <?php if ($params->get('show_controls', 0)) : ?>
+    <?php if ($params->get('show_controls', 0)): ?>
         <div class="carousel-controls">
             <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="control-prev">
                 <span aria-hidden="true" class="fas fa-angle-left"></span>
@@ -93,10 +98,10 @@ $indicators = $params->get('show_indicators');
             </a>
         </div>
     <?php endif; ?>
-    
-    <?php if ($indicators == 'below') : ?>
+
+    <?php if ($indicators == 'below'): ?>
         <ol class="carousel-indicators" data-js="indicators">
-            <?php foreach ($articles as $_) : ?>
+            <?php foreach ($articles as $_): ?>
                 <li class="carousel-indicator fas fa-circle"></li>
             <?php endforeach; ?>
         </ol>
