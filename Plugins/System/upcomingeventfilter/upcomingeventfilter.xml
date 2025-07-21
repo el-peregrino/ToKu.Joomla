@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>ToKu Upcoming Event Filter</name>
+    <author>ToKu</author>
+    <authorUrl>www.toku.cz</authorUrl>
+    <license>GNU General Public License version 3 or later</license>
+    <creationDate>2025-07-17</creationDate>
+    <version>1.0.0</version>
+    <description>Injects additional parameters into menu item forms and updates the query to get articles.</description>
+    <namespace path="src">ToKu\Plugin\System\UpcomingEventFilter</namespace>
+    <files>
+        <folder plugin="upcomingeventfilter">services</folder>
+        <folder>src</folder>
+        <folder>params</folder>
+    </files>
+</extension>

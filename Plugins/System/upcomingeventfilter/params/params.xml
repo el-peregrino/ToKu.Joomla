@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="params">
+        <fieldset name="upcomingeventfilter-params" label="Upcoming Event Filter">
+
+            <field
+                name="eventfilter_enabled"
+                type="radio"
+                default="0"
+                label="Enable Filter"
+                layout="joomla.form.field.radio.switcher">
+                <option value="0">JNo</option>
+                <option value="1">JYes</option>
+            </field>
+
+            <field
+                name="eventfilter_criteria_field"
+                addfieldprefix="ToKu\Library\Field"
+                type="customfieldselector"
+                context="com_content.article"
+                fieldtype="calendar"
+                layout="joomla.form.field.list-fancy-select"
+                label="Criteria Field"
+                description="The custom field to use as event start date"
+                showon="eventfilter_enabled:1"
+                required="true" />
+
+            <field
+                name="eventfilter_show_past"
+                type="radio"
+                default="0"
+                showon="eventfilter_enabled:1"
+                label="Show Past Events"
+                layout="joomla.form.field.radio.switcher">
+                <option value="0">JNo</option>
+                <option value="1">JYes</option>
+            </field>
+
+            <field
+                name="eventfilter_order_events"
+                type="list"
+                label="Order Events"
+                default="none"
+                showon="eventfilter_enabled:1"
+                description="Override system event ordering"
+                required="true">
+                <option value="none">Do Not Apply</option>
+                <option value="ascending">Ascending by Criteria Field</option>
+                <option value="descending">Descending by Criteria Field</option>
+            </field>
+
+        </fieldset>
+    </fields>
+</form>
