@@ -4,6 +4,17 @@
     <field name="image_alt" type="text" label="Image Alt" />
     <field name="heading" type="text" label="Heading" />
     <field name="text" type="editor" label="Text" />
+    <field 
+        name="show_author"
+        type="radio" 
+        default="0" 
+        label="Show Author" 
+        layout="joomla.form.field.radio.switcher">
+        <option value="0">JNo</option>
+        <option value="1">JYes</option>
+    </field>
+    <field name="author_name" type="text" lable="Author" showon="show_author:1" />
+    <field name="author_title" type="text" lable="Author Title" showon="show_author:1" />
     <field name="class" type="text" label="CSS Class" />
 
     <field

@@ -25,8 +25,9 @@ class ArticlesModel extends BaseModel
         $params = $this->getState('params');
 
         // check upcoming event filter enabled
-        if (!$params->get('eventfilter_enabled', 0))
+        if (!$params->get('eventfilter_enabled', 0)) {
             return $query;
+        }
 
         $db = $this->getDatabase();
 

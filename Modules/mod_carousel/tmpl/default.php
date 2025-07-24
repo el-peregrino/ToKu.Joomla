@@ -95,6 +95,12 @@ $indicators = $params->get('show_indicators');
                                 <?php if (!empty($item->text)): ?>
                                     <div class="card-text"><?= HTMLHelper::_('content.prepare', $item->text); ?></div>
                                 <?php endif; ?>
+                                <?php if ($item->show_author): ?>
+                                    <div class="card-footer">
+                                        <span class="author-name"><?= htmlspecialchars($item->author) ?></span>
+                                        <span class="author-title"><?= htmlspecialchars($item->author_title) ?></span>
+                                    </div>
+                                <?php endif; ?>
                             <?php else: ?>
                                 <?php if (!empty($item->heading)): ?>
                                     <h3 class="card-title">
@@ -106,6 +112,12 @@ $indicators = $params->get('show_indicators');
                                 <?php endif; ?>
                                 <?php if (!empty($item->text)): ?>
                                     <div class="card-text"><?= HTMLHelper::_('content.prepare', $item->text); ?></div>
+                                <?php endif; ?>
+                                <?php if ($item->show_author): ?>
+                                    <div class="card-footer">
+                                        <span class="author-name"><?= htmlspecialchars($item->author_name) ?></span>
+                                        <span class="author-title"><?= htmlspecialchars($item->author_title) ?></span>
+                                    </div>
                                 <?php endif; ?>
                                 <?php if ($params->get('show_readmore', 0)): ?>
                                     <a href="<?= htmlspecialchars($link) ?>" class="btn btn-primary">
