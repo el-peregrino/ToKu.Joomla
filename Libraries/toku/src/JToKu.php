@@ -10,8 +10,11 @@
 
 namespace ToKu\Library;
 
-use Joomla\CMS\WebAsset\WebAssetManager;
+use Joomla\CMS\Application\CMSApplicationInterface;
+use Joomla\CMS\Application\WebApplication;
+use Joomla\CMS\Document\Document;
 use Joomla\CMS\Factory;
+use Joomla\CMS\WebAsset\WebAssetManager;
 
 \defined('_JEXEC') or die;
 
@@ -20,10 +23,36 @@ use Joomla\CMS\Factory;
  */
 class JToKu
 {
+    private static $application;
+    private static $document;
+    private static $webAssetManager;
+
     /**
      * Version of the library.
      */
-    public const VERSION = '1.0.3';
+    public const string VERSION = '1.0.4';
+
+    public const string NAMESPACE = '\\ToKu\\Module\\';
+    public const string SITE_HELPER = '\\Site\\Helper';
+
+    public static function getNamespace(string $name): string
+    {
+        return self::NAMESPACE . $name;
+    }
+
+    public static function getSiteHelper(string $name): string
+    {
+        return self::getNamespace($name) . self::SITE_HELPER;
+    }
+
+    public static function registerWebAssets(array $assets, array $scripts, array $styles): WebAssetManager 
+    {
+        $wa = self::registerExtensionFile(...$assets);
+        self::useScripts(...$scripts);
+        self::useStyles(...$styles);
+
+        return $wa;
+    }
 
     /**
      * Web Asset Manager - Register Asset Helper
@@ -34,10 +63,10 @@ class JToKu
      * 
      * @return  WebAssetManager Instance of WebAssetManager      
      */
-    public static function wamRegister(...$assets): WebAssetManager
+    public static function registerExtensionFile(string ...$assets): WebAssetManager
     {
         // get web asset manager
-        $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+        $wa = self::getWebAssetManager();
         // register ToKu library
         $wa->getRegistry()->addExtensionRegistryFile('toku');
         // register other assets
@@ -47,4 +76,80 @@ class JToKu
 
         return $wa;
     }
+
+    /**
+     * Web Asset Manager - Use Script Helper
+     * 
+     * @param   string[]        $scripts  Comma separated list of script names.
+     * 
+     * @return  WebAssetManager Instance of WebAssetManager      
+     */
+    public static function useScripts(string ...$scripts): WebAssetManager
+    {
+        // get web asset manager
+        $wa = self::getWebAssetManager();
+        // register scripts
+        foreach ($scripts as $script) {
+            $wa->useScript($script);
+        }
+
+        return $wa;
+    }
+
+    /**
+     * Web Asset Manager - Use Style Helper
+     * 
+     * @param   string[]        $styles  Comma separated list of style names.
+     * 
+     * @return  WebAssetManager Instance of WebAssetManager      
+     */
+    public static function useStyles(string ...$styles): WebAssetManager
+    {
+        // get web asset manager
+        $wa = self::getWebAssetManager();
+        // register scripts
+        foreach ($styles as $style) {
+            $wa->useStyle($style);
+        }
+
+        return $wa;
+    }
+
+    /**
+     * Gets the global application object.
+     * Wraps the Factory::getApplication().
+     * @return CMSApplicationInterface | WebApplication
+     */
+    public static function getApp(): CMSApplicationInterface | WebApplication
+    {
+        if (!self::$application) {
+            self::$application = Factory::getApplication();
+        }
+        return self::$application;
+    }
+
+    /**
+     * Gets the application document object.
+     * @return Document
+     */
+    public static function getDocument(): Document
+    {
+        if (!self::$document) {
+            self::$document = self::getApp()->getDocument();
+        }
+        return self::$document;
+    }
+
+    /**
+     * Gets the web asset manager object.
+     * @return WebAssetManager
+     */
+    public static function getWebAssetManager() : WebAssetManager
+    {
+        if (!self::$webAssetManager) {
+            self::$webAssetManager = self::getDocument()->getWebAssetManager();
+        }
+        return self::$webAssetManager;
+    }
+
 }

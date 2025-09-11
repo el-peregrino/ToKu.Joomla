@@ -10,12 +10,24 @@
 
 namespace ToKu\Library\Content\Model;
 
+use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\Component\Content\Site\Model\ArticlesModel as BaseModel;
 
 \defined('_JEXEC') or die;
 
 class ArticlesModel extends BaseModel
 {
+    /**
+     * Constructor.
+     *
+     * @param   array                 $config   An optional associative array of configuration settings.
+     * @param   ?MVCFactoryInterface  $factory  The factory.
+     */
+    public function __construct($config = [], ?MVCFactoryInterface $factory = null)
+    {
+        parent::__construct($config, $factory);
+    }
+
     protected function getListQuery()
     {
         // get the original query

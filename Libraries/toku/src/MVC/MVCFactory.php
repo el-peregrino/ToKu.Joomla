@@ -27,7 +27,7 @@ class MVCFactory implements MVCFactoryInterface
         $model = $this->factory->createModel($name, $prefix, $config);
 
         if ($model instanceof BaseModel) {
-            return new ArticlesModel($config);
+            return new ArticlesModel($config, $this->factory);
         }
 
         return $model;
