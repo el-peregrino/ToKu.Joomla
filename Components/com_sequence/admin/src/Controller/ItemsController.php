@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @package     ToKu.Joomla
+ * @subpackage  com_sequence
+ *
+ * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @license     GNU General Public License version 3 or later
+ */
+
+namespace ToKu\Component\Sequence\Administrator\Controller;
+
+use Joomla\CMS\MVC\Controller\AdminController;
+
+\defined('_JEXEC') or die;
+
+class ItemsController extends AdminController
+{
+    public function getModel($name = 'Item', $prefix = 'Administrator', $config = ['ignore_request' => true])
+    {
+        return parent::getModel($name, $prefix, $config);
+    }
+
+    // the method is called on return to the list view e.g. after the save operation
+    protected function getRedirectToListAppend()
+    {
+        // TODO do we really need this? the state is used in the form
+        return '&sequence=' . $this->app->getUserState('com_sequence.items.sequence', '');
+    }
+}

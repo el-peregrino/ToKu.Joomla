@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @package     ToKu.Joomla
+ * @subpackage  com_sequence
+ *
+ * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @license     GNU General Public License version 3 or later
+ */
+
+namespace ToKu\Component\Sequence\Administrator\View;
+
+use Joomla\CMS\Application\CMSApplicationInterface;
+use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Toolbar\Toolbar;
+use ToKu\Library\JToKu;
+
+\defined('_JEXEC') or die;
+
+/**
+ * Base class for the Sequence Html View.
+ */
+abstract class BaseHtmlView extends HtmlView 
+{
+    /**
+     * Gets the toolbar object of the Html document.
+     * @param string $toolbar
+     * @param bool $create
+     * @return Toolbar|null
+     */
+    protected function getToolbar(string $toolbar = 'toolbar', bool $create = true): ?Toolbar
+    {
+        /** @var \Joomla\CMS\Document\HtmlDocument $document; */
+        $document = $this->getDocument();
+
+        return $document->getToolbar($toolbar, $create);
+    }
+
+    /**
+     * Gets the global application object.
+     * Wraps the JToKu::getApp().
+     * @return CMSApplicationInterface
+     */
+    protected function getApp(): CMSApplicationInterface 
+    { 
+        return JToKu::getApp();
+    }
+}

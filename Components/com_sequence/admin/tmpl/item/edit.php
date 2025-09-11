@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * @package     ToKu.Joomla
+ * @subpackage  com_sequence
+ *
+ * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @license     GNU General Public License version 3 or later
+ */
+
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+use ToKu\Library\JToKu;
+
+/**
+ * The View class of the MVC pattern.
+ * 
+ * Note: 
+ *      The properties of $this are injected into the template via the PHP extract.
+ *      They are defined in the HtmlView class, but not used directly.
+ * 
+ * @var \ToKu\Component\Sequence\Administrator\View\Item\HtmlView $this 
+ */
+
+/**
+ * IGNORE ERROR PHP1416
+ *      $this->form is injected via the PHP extract
+ *      $this->item is injected via the PHP extract
+ */
+
+\defined('_JEXEC') or die;
+
+JToKu::useScripts('keepalive', 'form.validate');
+
+HTMLHelper::_('script', 'system/toggle-help.js', ['version' => 'auto', 'relative' => true]);
+
+?>
+
+<form action="<?= Route::_('index.php?option=com_sequence&view=item&layout=edit&id=' . (int) $this->item->id); ?>" method="post"
+    name="adminForm" id="adminForm" class="form-validate">
+
+    <div class="main-card">
+        <div class="row">
+            <div class="col-lg-9">
+                <?= HTMLHelper::_('uitab.startTabSet', 'myTabs', ['active' => 'content']); ?>
+
+                    <?= HTMLHelper::_('uitab.addTab', 'myTabs', 'content', Text::_('COM_SQ_TAB_CONTENT')); ?>
+                    <fieldset class="adminform m-3">
+                        <?= $this->form->renderFieldset('content'); ?>
+                    </fieldset>
+                    <?= HTMLHelper::_('uitab.endTab'); ?>
+
+                    <?= HTMLHelper::_('uitab.addTab', 'myTabs', 'link', Text::_('COM_SQ_TAB_LINK')); ?>
+                    <?= $this->form->renderFieldset('content-link'); ?>
+                    <?= HTMLHelper::_('uitab.endTab'); ?>
+
+                    <?= HTMLHelper::_('uitab.addTab', 'myTabs', 'link', Text::_('COM_SQ_TAB_IMAGES')); ?>
+                    <fieldset id="fieldset-image-header" class="options-form">
+                        <legend><?php echo Text::_('COM_SQ_HEADER_IMAGE'); ?></legend>
+                        <div>
+                        <?= $this->form->renderFieldset('image-header'); ?>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id="fieldset-image-footer" class="options-form">
+                        <legend><?php echo Text::_('COM_SQ_FOOTER_IMAGE'); ?></legend>
+                        <div>
+                        <?= $this->form->renderFieldset('image-footer'); ?>
+                        </div>
+                    </fieldset>
+                    <?= HTMLHelper::_('uitab.endTab'); ?>
+
+                    <?= HTMLHelper::_('uitab.addTab', 'myTabs', 'params', Text::_('COM_SQ_TAB_PARAMS')); ?>
+                    <?= $this->form->renderFieldset('params'); ?>
+                    <?= HTMLHelper::_('uitab.endTab'); ?>
+
+                <?= HTMLHelper::_('uitab.endTabSet'); ?>
+            </div>
+            <div class="col-lg-3">
+                <fieldset class="form-vertical m-3">
+                    <?= $this->form->renderFieldset('general'); ?>
+                </fieldset>            
+            </div>
+        </div>
+
+    </div>
+
+    <?= $this->form->renderField('id', null, (int) $this->item->id); ?>
+    <?= $this->form->renderControlFields(); ?>
+</form>
+
+<script>
+jQuery(function($) {
+    const itemId = $('input[name="jform[id]"]').val();
+    const triggerField = $('#jform_sequence_id');
+
+    if (itemId && parseInt(itemId) > 0) {
+        // only attach listener if editing existing item
+        triggerField.on('change', function() {
+            $('#toolbar-apply button').click(); // press the save button
+        });
+    }
+});
+</script>

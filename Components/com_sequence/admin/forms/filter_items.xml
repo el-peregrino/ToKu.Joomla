@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+		name="sequence"
+		type="list"
+		label="COM_SEQUENCE_FILTER_SEQUENCE_LABEL"
+		accesstype="manage"
+		showAll="false"
+		filtermode="selector"
+		class="js-select-submit-on-change" >
+		<option value="">COM_SQ_SELECT_SEQUENCE</option>
+	</field>
+    
+    <fields name="filter">
+
+        <field
+            name="search"
+            type="text"
+            inputmode="search"
+            label="COM_SEQUENCE_FILTER_SEARCH_LABEL"
+            hint="JSEARCH_FILTER" />
+
+        <field
+            name="published"
+            type="list"
+            label="JSTATUS"
+            class="js-select-submit-on-change"
+            extension="com_sequence">
+            <option value="">JOPTION_SELECT_PUBLISHED</option>
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+
+        </field>
+
+        <field name="access" type="accesslevel" 
+            label="JFIELD_ACCESS_LABEL"
+            class="js-select-submit-on-change"
+            extension="com_sequence">
+            <option value="">JOPTION_SELECT_ACCESS</option>
+        </field>
+
+    </fields>
+
+    <fields name="list">
+
+        <field
+            name="limit"
+            type="limitbox"
+            label="JGLOBAL_LIST_LIMIT"
+            class="js-select-submit-on-change"
+            extension="com_sequence"/>
+
+    </fields>
+</form>
