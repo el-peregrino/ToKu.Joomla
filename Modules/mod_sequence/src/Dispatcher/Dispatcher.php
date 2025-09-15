@@ -62,9 +62,10 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
 
         $levels = $helper->getAccessLevels($this->app);
         // load sequence
-        $data['sequence'] = $helper->getSequence((int) $params->get('sequence'), $levels);
+        $sequence = $helper->getSequence((int) $params->get('sequence'), $levels);
+        $data['sequence'] = $sequence;
         // load items
-        $data['items'] = $helper->getItems($params, $levels);
+        $data['items'] = $helper->getItems($params, $levels, $sequence ? $sequence->type : -1);
 
         return $data;
     }

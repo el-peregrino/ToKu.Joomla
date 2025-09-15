@@ -11,7 +11,7 @@
 /**
  * Layout variables
  * -----------------
- * @var   array  $displayData  Array with all the given attributes for the sequence item element.
+ * @var   array  $displayData  Array with all the given attributes for the sequence time element.
  *                             Contains [justify, item, selector, styles, target, toggle, view]
  */
 

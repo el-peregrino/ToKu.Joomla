@@ -47,7 +47,7 @@ class SequenceHelper implements DatabaseAwareInterface
         return $db->loadObject(SequenceData::class);
     }
 
-    public function getItems(Registry $params, string $levels)
+    public function getItems(Registry $params, string $levels, int $type)
     {
         $db = $this->getDatabase();
         $sequence = (int) $params->get('sequence');
@@ -64,7 +64,41 @@ class SequenceHelper implements DatabaseAwareInterface
             ->where($db->quoteName('access') . ' IN(:levels)')
                 ->bind(':levels', $levels);
 
+        // ordering
+        $ordering = $params->get('ordering', 'component');
+        $direction = $this->getDirection($params->get('direction', 'component'), $type);
+
+        switch ($ordering) {
+            case 'random':
+                $query->order('RAND()');
+                break;
+            case 'heading':
+                $query->order("heading $direction");
+                break;
+            case 'component':
+            default:
+                if ($type === 1) {
+                    // order by date
+                    $query->order("date $direction");
+                }
+                else {
+                    $query->order("ordering $direction");
+                }
+                break;
+        }
+
         $db->setQuery($query);
         return $db->loadObjectList(ItemData::class);
+    }
+
+    private function getDirection(string $direction, int $type): string 
+    {
+        return match ($direction) {
+            'ascending' => 'ASC',
+            'descending' => 'DESC',
+            'reverse' => $type === 1 ? 'ASC' : 'DESC',
+            'component' => $type === 1 ? 'DESC' : 'ASC',
+            default => ''
+        };
     }
 }

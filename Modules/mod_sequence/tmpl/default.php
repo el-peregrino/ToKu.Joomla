@@ -2,9 +2,7 @@
 
 namespace ToKu\Module\Sequence\Site\View;
 
-use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
-use Joomla\Registry\Registry;
 use ToKu\Library\JToKu;
 use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
 use ToKu\Module\Sequence\Site\Helper\ViewData;
@@ -100,84 +98,4 @@ $selector = "sequence-$sequence->id";
         'src' => $images->image_footer,
         'alt' => $images->image_footer_alt
     ]); ?>
-</div>
-
-<div class="toku-timeline tl-<?php echo $data->line; ?>">
-    <div id="<?php echo $data->id; ?>">
-        <?php 
-        foreach ($data->groups as $group) {
-
-            $caret = ($group->justify == 'right') ? 'left' : 'right';
-            
-            foreach ($group->items as $key => $item) {
-
-                $target = $data->id . $group->indices[$key];
-
-                $css = array('tl-item', $group->justify, $item->data->css, 'col-12');
-                if ($data->line == 'center') {
-                    array_push($css, 'col-md-6');
-                } else {
-                    array_push($css, 'col-md');
-                }
-
-                $toggle = '';
-                if ($item->expandable) {
-                    $toggle = ' data-bs-toggle="collapse" data-bs-target="#' . $target .'" aria-controls="'. $target .'" aria-expanded="' . ($item->expanded ? "true" : "false") . '" ';
-                    array_push($css, 'tl-expandable');
-                }
-
-                if ($key > 0) {
-                    array_push($css, 'no-time');
-                }
-
-                // print html
-                ?>
-                <div class="<?php echo implode(' ', array_filter($css)); ?>">
-                    <div class="tl-control<?php if ($item->collapsed) echo ' collapsed'; ?>"<?php echo $toggle; ?>>
-                        <?php if ($key == 0 && $item->expandable) : ?>
-                            <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
-                            <i class="fa-solid fa-circle-minus" aria-hidden="true"></i>
-                        <?php elseif ($key == 0) : ?>
-                            <i class="fa-solid fa-circle-dot" aria-hidden="true"></i>
-                        <?php else : ?>
-                            <i class="fa-solid fa-circle" aria-hidden="true"></i>
-                        <?php endif; ?>
-                    </div>
-                    <?php if ($key == 0) : ?>
-                        <div class="tl-time<?php if ($item->collapsed) echo ' collapsed'; ?>"<?php echo $toggle; ?>>
-                            <span><?php echo $item->data->time; ?></span>
-                            <?php if ($item->data->duration) : ?>
-                                <span>(<?php echo $item->data->duration; ?>)</span>
-                            <?php endif; ?>
-                        </div>
-                    <?php endif; ?>
-                    <div class="tl-body">
-                        <i class="fa-solid fa-caret-<?php echo $caret; ?> tl-arrow" aria-hidden="true"></i>
-                        <i class="fa-solid fa-caret-up tl-caret" aria-hidden="true"></i>
-                        <div class="tl-body-header<?php if ($item->collapsed) echo ' collapsed'; ?><?php if ($item->data->icon) echo ' has-icon'; ?>" <?php echo $toggle; ?>>
-                            <?php if ($item->data->icon) : ?>
-                                <i class="<?php echo $item->data->icon; ?> tl-icon" aria-hidden="true"></i>
-                            <?php endif; ?>
-                            <div>
-                                <h3>
-                                    <?php echo $item->data->title; ?>
-                                </h3>
-                                <?php if ($item->data->subtitle) : ?>
-                                    <span class="tl-subtitle"><?php echo $item->data->subtitle; ?></span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <?php if ($item->body) : ?>
-                            <div id="<?php echo $target; ?>"<?php if ($item->parent) echo ' data-bs-parent="#' . $data->id .'"'; ?> class="tl-body-content<?php if ($item->expandable) echo ' collapse'; if ($item->expanded) echo ' show'; ?>">
-                                <?php echo $item->data->description; ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <?php
-            }
-        }
-        ?>
-    </div>
 </div>

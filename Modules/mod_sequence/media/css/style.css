@@ -1,0 +1,264 @@
+.cv-align-center, .cv-align-left, .cv-align-right {
+    background-image: url(/media/mod_sequence/images/sq-line.png);
+    background-repeat: repeat-y;
+  }
+  .cv-align-center {
+    background-position: center;
+  }
+  .cv-align-left {
+    background-position-x: calc(var(--cv-times) - 2px);
+  }
+  .cv-align-right {
+    background-position-x: calc(100% - var(--cv-times) + 1px);
+  }
+  .cv-item {
+    position: relative;
+  }
+  .cv-item .cv-control {
+    position: absolute;
+    top: 1rem;
+    width: 1.6rem;
+    font-size: 1.6rem;
+    line-height: 1;
+    text-align: center;
+  }
+  .cv-item .cv-time {
+    position: absolute;
+    top: 1rem;
+    font-family: Ubuntu;
+    font-weight: 500;
+    font-size: 1.1rem;
+    min-height: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    text-wrap: nowrap;
+  }
+  .cv-item .cv-time span:nth-child(2n) {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  .cv-item .cv-body {
+    position: relative;
+    padding: 1rem;
+    background-color: var(--cv-background);
+  }
+  .cv-item .cv-body h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  .cv-item .cv-body .cv-subtitle {
+    font-family: Ubuntu;
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+  .cv-item .cv-body .cv-arrow {
+    position: absolute;
+    font-size: 3rem;
+    top: 0.3rem;
+  }
+  .cv-item .cv-body .cv-icon {
+    font-size: 1.25rem;
+    text-align: center;
+    flex: 0 0 40px;
+  }
+  .cv-item .cv-body .cv-body-header {
+    display: flex;
+    align-items: center;
+  }
+  .cv-item .cv-body .cv-body-header div {
+    flex: 1 1 auto;
+  }
+  .cv-item .cv-body .cv-body-content {
+    margin-top: 0.25rem;
+    padding-top: 0.25rem;
+    border-top: 1px dotted;
+  }
+  .cv-item .cv-body .cv-body-content p {
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+  }
+  .cv-item.cv-left {
+    float: left;
+  }
+  .cv-item.cv-left .cv-control {
+    right: -0.8rem;
+  }
+  .cv-item.cv-left .cv-time {
+    left: 100%;
+    margin-left: 2rem;
+    text-align: left;
+  }
+  .cv-item.cv-left .cv-arrow {
+    right: -0.75rem;
+  }
+  .cv-item.cv-left .cv-body .cv-body-header {
+    flex-direction: row;
+  }
+  .cv-item.cv-left .cv-body .cv-body-header.has-icon div {
+    border-left: 1px solid;
+    padding-left: 0.5rem;
+  }
+  .cv-item.cv-right {
+    float: right;
+  }
+  .cv-item.cv-right .cv-control {
+    left: -0.8rem;
+  }
+  .cv-item.cv-right .cv-time {
+    right: 100%;
+    margin-right: 2rem;
+    text-align: right;
+  }
+  .cv-item.cv-right .cv-arrow {
+    left: -0.75rem;
+  }
+  .cv-item.cv-right .cv-body .cv-body-header {
+    flex-direction: row-reverse;
+  }
+  .cv-item.cv-right .cv-body .cv-body-header.has-icon div {
+    border-right: 1px solid;
+    padding-right: 0.5rem;
+  }
+  .cv-arrow, .cv-caret {
+    display: none;
+  }
+  .cv-expandable .cv-time, .cv-expandable .cv-body-header {
+    cursor: pointer;
+  }
+  .cv-expandable:hover .cv-control, .cv-expandable:hover .cv-time, .cv-expandable:hover .cv-body-header {
+    opacity: 0.5;
+  }
+  .cv-item[class*="cv-color-"] .cv-arrow {
+    color: var(--cv-background);
+    display: block;
+  }
+  .cv-item[class*="cv-color-"] .cv-caret {
+    color: var(--cv-background);
+  }
+  .cv-item[class*="cv-color-"] .cv-body {
+    border-radius: 0.3rem;
+    color: var(--cv-content);
+  }
+  .cv-item[class*="cv-color-"] .cv-body h3 {
+    color: var(--cv-heading);
+  }
+  .cv-item.cv-color-dark {
+    --cv-background: var(--bahama);
+  }
+  @media (min-width: 768px) {
+    .cv-align-left .col-md, .cv-align-right .col-md {
+      width: calc(100% - var(--cv-times));
+    }
+    .cv-align-left .clearfix, .cv-align-right .clearfix {
+      margin-bottom: 0.5rem;
+    }
+    .cv-item.cv-left .cv-body {
+      margin-right: 1rem;
+    }
+    .cv-item.cv-right .cv-body {
+      margin-left: 1rem;
+    }
+    .cv-item[class*="cv-color-"].cv-left .cv-body {
+      margin-right: 2rem;
+    }
+    .cv-item[class*="cv-color-"].cv-right .cv-body {
+      margin-left: 2rem;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .cv-align-center, .cv-align-left, .cv-align-right {
+      padding-bottom: 1rem;
+    }
+    .cv-align-left, .cv-align-center {
+      background-position-x: 13px;
+    }
+    .cv-align-right {
+      background-position-x: calc(100% - 13px);
+    }
+    .cv-item .cv-time {
+      font-size: 1rem;
+    }
+    .cv-item .cv-body {
+      margin: 3rem 0 0 0;
+    }
+    .cv-item .cv-body .cv-caret {
+      position: absolute;
+      font-size: 3rem;
+      top: -1.4rem;
+    }
+    .cv-item.cv-left .cv-control {
+      right: 2px;
+    }
+    .cv-item.cv-left .cv-time {
+      left: unset;
+      right: 2.5rem;
+      margin: 0;
+      text-align: right;
+    }
+    .cv-item.cv-left .cv-body {
+      padding: 1rem 1.25rem 1rem 0;
+    }
+    .cv-item.cv-left .cv-body .cv-caret {
+      right: 0;
+    }
+    .cv-item.cv-left[class*="cv-color-"] .cv-body {
+      padding: 1rem 1rem 1rem 0.25rem;
+    }
+    .cv-item.cv-left[class*="cv-color-"] .cv-body .cv-body-content {
+      padding-left: 0.5rem;
+    }
+    .cv-item.cv-right .cv-control {
+      left: 0.1rem;
+    }
+    .cv-item.cv-right .cv-time {
+      left: 2.5rem;
+      right: unset;
+      margin: 0;
+      text-align: left;
+    }
+    .cv-item.cv-right .cv-body {
+      padding: 1rem 0 1rem 1.25rem;
+    }
+    .cv-item.cv-right .cv-body .cv-caret {
+      left: 0;
+    }
+    .cv-item.cv-right[class*="cv-color-"] .cv-body {
+      padding: 1rem 0.25rem 1rem 1rem;
+    }
+    .cv-item.cv-right[class*="cv-color-"] .cv-body .cv-body-content {
+      padding-right: 0.5rem;
+    }
+    .cv-item[class*="cv-color-"] .cv-caret {
+      display: block;
+    }
+    .cv-item[class*="cv-color-"] .cv-arrow {
+      display: none;
+    }
+    .cv-item[class*="cv-color-"] .cv-body {
+      margin: 4rem 0 0 0;
+      padding: 1rem;
+    }
+    .cv-align-center .cv-item.cv-left .cv-control {
+      left: 0.1rem;
+    }
+    .cv-align-center .cv-item.cv-left .cv-time {
+      left: 2.5rem;
+      right: unset;
+      margin: 0;
+      text-align: left;
+    }
+    .cv-align-center .cv-item.cv-left .cv-body {
+      padding: 1rem 0 1rem 1.25rem;
+    }
+    .cv-align-center .cv-item.cv-left .cv-body .cv-caret {
+      left: 0;
+      right: unset;
+    }
+    .cv-align-center .cv-item.cv-left[class*="cv-color-"] .cv-body {
+      padding: 1rem 0.25rem 1rem 1rem;
+    }
+    .cv-align-center .cv-item.cv-left[class*="cv-color-"] .cv-body .cv-body-content {
+      padding-right: 0.5rem;
+    }
+  }
+  

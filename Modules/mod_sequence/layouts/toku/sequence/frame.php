@@ -11,9 +11,8 @@
 /**
  * Layout variables
  * -----------------
- * @var   array  $displayData  Array with all the given attributes for the image element.
- *                             Eg: src, class, alt, width, height, loading, decoding, style, data-*
- *                             Note: only the alt and src attributes are escaped by default!
+ * @var   array  $displayData  Array with all the given attributes for the sequence frame.
+ *                             Contains [text, src, alt, position, type]
  */
 
 use Joomla\CMS\HTML\HTMLHelper;
