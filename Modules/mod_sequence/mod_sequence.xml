@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
     <name>MOD_SEQUENCE</name>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <author>ToKu</author>
     <creationDate>2025-01-31</creationDate>
     <description>MOD_SEQUENCE_DESCRIPTION</description>
@@ -20,6 +20,7 @@
         <language tag="en-GB">language/en-GB/mod_sequence.ini</language>
         <language tag="en-GB">language/en-GB/mod_sequence.sys.ini</language>
     </languages>
+    <scriptfile>script.php</scriptfile>
     <config>
         <fields name="params">
 
