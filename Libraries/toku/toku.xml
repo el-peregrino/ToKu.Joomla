@@ -9,9 +9,6 @@
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-07-13</creationDate>
     <description><strong>ToKu Library</strong> defines functions and resources for <em>ToKu</em> extensions. The package contains:<ul><li>PHP Library</li><li>CustomFieldSelectorField</li><li>ToKu Asset (js and css)</li></ul></description>
-    <languages>
-        <language tag="en-GB">language/en-GB/lib_toku.sys.ini</language>
-    </languages>
     <files>
         <folder>src</folder>
     </files>
