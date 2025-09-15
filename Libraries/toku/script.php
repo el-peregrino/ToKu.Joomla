@@ -43,13 +43,13 @@ return new class () implements InstallerScriptInterface {
     {
         // php version
         if (version_compare(PHP_VERSION, $this->minimumPhp, '<')) {
-            Factory::getApplication()->enqueueMessage(sprintf(Text::_('JLIB_INSTALLER_MINIMUM_PHP'), $this->minimumPhp), 'error');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_INSTALLER_MINIMUM_PHP', $this->minimumPhp), 'error');
             return false;
         }
 
         // joomla version
         if (version_compare(JVERSION, $this->minimumJoomla, '<')) {
-            Factory::getApplication()->enqueueMessage(sprintf(Text::_('JLIB_INSTALLER_MINIMUM_JOOMLA'), $this->minimumJoomla), 'error');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minimumJoomla), 'error');
             return false;
         }
 
@@ -80,7 +80,7 @@ return new class () implements InstallerScriptInterface {
             try {
                 File::delete(JPATH_ROOT . $file);
             } catch (\FilesystemException $e) { // global namespace
-                // \Joomla\Filesystem\Exception\FilesystemException
+                /** @var \Joomla\Filesystem\Exception\FilesystemException $e */
                 echo Text::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $file) . '<br>';
             }
         }

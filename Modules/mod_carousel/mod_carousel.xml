@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
-    <name>ToKu Carousel</name>
+    <name>MOD_CAROUSEL</name>
     <version>1.0.3</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
@@ -28,6 +28,10 @@
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
     </media>
+    <languages folder="admin">
+        <language tag="en-GB">language/en-GB/mod_carousel.ini</language>
+        <language tag="en-GB">language/en-GB/mod_carousel.sys.ini</language>
+    </languages>
     <scriptfile>script.php</scriptfile>
     <config>
         <fields name="params">

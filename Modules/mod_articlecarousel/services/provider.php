@@ -13,6 +13,8 @@ use Joomla\CMS\Extension\Service\Provider\Module;
 use Joomla\CMS\Extension\Service\Provider\ModuleDispatcherFactory;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
+use ToKu\Library\JToKu;
+use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 
 \defined('_JEXEC') or die;
 
@@ -31,8 +33,8 @@ return new class () implements ServiceProviderInterface {
     public function register(Container $container): void
     {
         // Joomla services
-        $container->registerServiceProvider(new ModuleDispatcherFactory('\\ToKu\\Module\\ArticleCarousel'));
-        $container->registerServiceProvider(new HelperFactory('\\ToKu\\Module\\ArticleCarousel\\Site\\Helper'));
+        $container->registerServiceProvider(new ModuleDispatcherFactory(JToKu::getNamespace(ArticleCarouselHelper::NAME)));
+        $container->registerServiceProvider(new HelperFactory(JToKu::getSiteHelper(ArticleCarouselHelper::NAME)));
         $container->registerServiceProvider(new Module());
     }
 };
