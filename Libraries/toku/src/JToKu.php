@@ -27,30 +27,37 @@ class JToKu
     private static $document;
     private static $webAssetManager;
 
+    // TYPED CONSTANTS ARE SUPPORTED SINCE PHP 8.3
+
     /**
      * Name of the library.
+     * @var string
      */
-    public const string NAME = 'ToKu';
+    public const NAME = 'ToKu';
 
     /**
      * Asset name of the library.
+     * @var string
      */
-    public const string LIBRARY = 'toku';
+    public const LIBRARY = 'toku';
 
     /**
      * Version of the library.
+     * @var string
      */
-    public const string VERSION = '1.0.6';
+    public const VERSION = '1.0.9';
 
     /**
      * Namespace prefix of the library.
+     * @var string
      */
-    public const string NAMESPACE = '\\ToKu\\Module\\';
+    public const NAMESPACE = '\\ToKu\\Module\\';
 
     /**
      * Site helper namespace path.
+     * @var string
      */
-    public const string SITE_HELPER = '\\Site\\Helper';
+    public const SITE_HELPER = '\\Site\\Helper';
 
     /**
      * Gets the path of the asset in the ToKu library.
