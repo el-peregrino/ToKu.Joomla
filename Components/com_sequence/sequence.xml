@@ -5,7 +5,7 @@
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2024-07-28</creationDate>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <description>COM_SEQUENCE_DESCRIPTION</description>
     <namespace path="src">ToKu\Component\Sequence</namespace>
 
@@ -78,6 +78,5 @@
         <schemapath type="mysql">sql/updates/mysql</schemapath>
     </schemas>
 
-    <!-- Optional scripts -->
     <scriptfile>script.php</scriptfile>
 </extension>

@@ -238,6 +238,13 @@
             validate="CssIdentifier"
             label="COM_SEQUENCE_FIELD_CSS_LABEL"/>
 
+        <field name="control" type="radio" default="1" 
+            layout="joomla.form.field.radio.switcher"
+            label="COM_SEQUENCE_FIELD_CONTROL_LABEL" >
+            <option value="0">JNo</option>
+            <option value="1">JYes</option>
+        </field>
+
         <field name="keep" type="radio" default="0" 
             layout="joomla.form.field.radio.switcher"
             label="COM_SEQUENCE_FIELD_KEEP_LABEL" >
