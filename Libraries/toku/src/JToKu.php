@@ -28,23 +28,81 @@ class JToKu
     private static $webAssetManager;
 
     /**
+     * Name of the library.
+     */
+    public const string NAME = 'ToKu';
+
+    /**
+     * Asset name of the library.
+     */
+    public const string LIBRARY = 'toku';
+
+    /**
      * Version of the library.
      */
-    public const string VERSION = '1.0.4';
+    public const string VERSION = '1.0.6';
 
+    /**
+     * Namespace prefix of the library.
+     */
     public const string NAMESPACE = '\\ToKu\\Module\\';
+
+    /**
+     * Site helper namespace path.
+     */
     public const string SITE_HELPER = '\\Site\\Helper';
 
+    /**
+     * Gets the path of the asset in the ToKu library.
+     * @param string $name  Name of the asset
+     * @return string
+     */
+    public static function getAsset(string $name): string
+    {
+        return self::LIBRARY . ".$name";
+    }
+
+    /**
+     * Gets unique id.
+     * @return string
+     */
+    public static function getUniqueId(): string
+    {
+        return self::LIBRARY . '-' . uniqid();
+    }
+
+    /**
+     * Gets namespace of a ToKu extension.
+     * @param string $name  Name of the extension.
+     * @return string
+     */
     public static function getNamespace(string $name): string
     {
         return self::NAMESPACE . $name;
     }
 
+    /**
+     * Gets site helper path of a ToKu extension.
+     * @param string $name  Name of the extension.
+     * @return string
+     */
     public static function getSiteHelper(string $name): string
     {
         return self::getNamespace($name) . self::SITE_HELPER;
     }
 
+    /**
+     * Web Asset Manager - Register Asset Helper
+     * 
+     * Registers all assets at once.
+     * 
+     * Automatically registers the ToKu asset.
+     * 
+     * @param array $assets     Array of asset names to register.
+     * @param array $scripts    Array of script names to use.
+     * @param array $styles     Array of style names to use.
+     * @return WebAssetManager  Instance of WebAssetManager
+     */
     public static function registerWebAssets(array $assets, array $scripts, array $styles): WebAssetManager 
     {
         $wa = self::registerExtensionFile(...$assets);
@@ -68,7 +126,7 @@ class JToKu
         // get web asset manager
         $wa = self::getWebAssetManager();
         // register ToKu library
-        $wa->getRegistry()->addExtensionRegistryFile('toku');
+        $wa->getRegistry()->addExtensionRegistryFile(self::LIBRARY);
         // register other assets
         foreach ($assets as $asset) {
             $wa->getRegistry()->addExtensionRegistryFile($asset);
