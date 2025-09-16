@@ -10,8 +10,7 @@
 
 namespace ToKu\Library;
 
-use Joomla\CMS\Application\CMSApplicationInterface;
-use Joomla\CMS\Application\WebApplication;
+use Joomla\CMS\Application\SiteApplication;
 use Joomla\CMS\Document\Document;
 use Joomla\CMS\Factory;
 use Joomla\CMS\WebAsset\WebAssetManager;
@@ -36,22 +35,28 @@ class JToKu
     public const NAME = 'ToKu';
 
     /**
-     * Asset name of the library.
-     * @var string
-     */
-    public const LIBRARY = 'toku';
-
-    /**
      * Version of the library.
      * @var string
      */
-    public const VERSION = '1.0.9';
+    public const VERSION = '1.0.10';
 
     /**
-     * Namespace prefix of the library.
+     * Namespace prefix of a component.
      * @var string
      */
-    public const NAMESPACE = '\\ToKu\\Module\\';
+    public const COMPONENT = 'Component';
+
+    /**
+     * Namespace prefix of a library.
+     * @var string
+     */
+    public const LIBRARY = 'Library';
+
+    /**
+     * Namespace prefix of a module.
+     * @var string
+     */
+    public const MODULE = 'Module';
 
     /**
      * Site helper namespace path.
@@ -60,13 +65,30 @@ class JToKu
     public const SITE_HELPER = '\\Site\\Helper';
 
     /**
+     * Namespace separator.
+     * @var string
+     */
+    public const NAMESPACE_SEPARATOR = '\\';
+
+    /**
+     * Builds namespace path for ToKu extension.
+     * @param string[] $names   Names of the path parts.
+     * @return string
+     */
+    public static function getPath(string ...$names): string 
+    {
+        array_unshift($names, self::NAMESPACE_SEPARATOR, self::NAME);
+        return implode(self::NAMESPACE_SEPARATOR, $names);
+    }
+
+    /**
      * Gets the path of the asset in the ToKu library.
      * @param string $name  Name of the asset
      * @return string
      */
     public static function getAsset(string $name): string
     {
-        return self::LIBRARY . ".$name";
+        return strtolower(self::NAME) . ".$name";
     }
 
     /**
@@ -75,17 +97,18 @@ class JToKu
      */
     public static function getUniqueId(): string
     {
-        return self::LIBRARY . '-' . uniqid();
+        return self::NAME . '-' . uniqid();
     }
 
     /**
      * Gets namespace of a ToKu extension.
-     * @param string $name  Name of the extension.
+     * @param string $name      Name of the extension.
+     * @param string $extension Type of the extension.
      * @return string
      */
-    public static function getNamespace(string $name): string
+    public static function getNamespace(string $name, string $extension): string
     {
-        return self::NAMESPACE . $name;
+        return self::getPath($extension, $name);
     }
 
     /**
@@ -95,7 +118,7 @@ class JToKu
      */
     public static function getSiteHelper(string $name): string
     {
-        return self::getNamespace($name) . self::SITE_HELPER;
+        return self::getPath(self::MODULE, $name) . self::SITE_HELPER;
     }
 
     /**
@@ -133,7 +156,7 @@ class JToKu
         // get web asset manager
         $wa = self::getWebAssetManager();
         // register ToKu library
-        $wa->getRegistry()->addExtensionRegistryFile(self::LIBRARY);
+        $wa->getRegistry()->addExtensionRegistryFile(strtolower(self::NAME));
         // register other assets
         foreach ($assets as $asset) {
             $wa->getRegistry()->addExtensionRegistryFile($asset);
@@ -183,11 +206,11 @@ class JToKu
     /**
      * Gets the global application object.
      * Wraps the Factory::getApplication().
-     * @return CMSApplicationInterface | WebApplication
+     * @return SiteApplication
      */
-    public static function getApp(): CMSApplicationInterface | WebApplication
+    public static function getApp(): SiteApplication
     {
-        if (!self::$application) {
+        if (!self::$application && (Factory::getApplication() instanceof SiteApplication)) {
             self::$application = Factory::getApplication();
         }
         return self::$application;
@@ -215,6 +238,33 @@ class JToKu
             self::$webAssetManager = self::getDocument()->getWebAssetManager();
         }
         return self::$webAssetManager;
+    }
+
+    /**
+     * Gets the value of a user state variable.
+     *
+     * @param   string  $key      The key of the user state variable.
+     * @param   string  $request  The name of the variable passed in a request.
+     * @param   string  $default  The default value for the variable if not found. Optional.
+     * @param   string  $type     Filter for the variable. Optional.
+     *                  @see      \Joomla\CMS\Filter\InputFilter::clean() for valid values.
+     *
+     * @return  mixed  The request user state.
+     */
+    public static function getUserStateFromRequest(string $key, string $request, $default = null, string $type = 'none'): mixed
+    {
+        $app = self::getApp();
+
+        // get value from the session
+        $state = $app->getUserState($key, $default);
+        
+        // get value from the input
+        $value = $app->getInput()->get($request, $state, $type);
+
+        // set user state
+        $app->setUserState($key, $value);
+
+        return $value;
     }
 
 }
