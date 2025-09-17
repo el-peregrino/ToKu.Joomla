@@ -44,7 +44,6 @@ class SequenceModel extends AdminModel
 
     protected function loadFormData(): mixed
     {
-        /** @var \Joomla\CMS\Application\CMSWebApplicationInterface $app */
         $app = JToKu::getApp();
         $data = $app->getUserState('com_sequence.edit.sequence.data', []);
 
@@ -53,7 +52,6 @@ class SequenceModel extends AdminModel
 
     protected function prepareTable($table)
     {
-        /** @var \Joomla\CMS\Application\CMSWebApplicationInterface $app */
         $app = JToKu::getApp();
         $task = $app->getInput()->getCmd('task');
         if ($task === 'save2copy') {

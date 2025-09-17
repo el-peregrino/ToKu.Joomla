@@ -43,18 +43,18 @@ class ItemsModel extends ListModel
 
     protected function populateState($ordering = 'si.id', $direction = 'asc')
     {
-        /** @var \Joomla\CMS\Application\CMSWebApplicationInterface $app */
         $app = JToKu::getApp();
 
         /**
-         * Get the session value. It check multiple sources in the following order:
-         * 1. POST request values (form data)
-         * 2. GET request values (url params)
-         * 3. Session values (user state)
-         * 4. Default value
-         * The result value is stored in the user state (session).
+         * Current sequence.
+         * The sequence is read from input. If not defined, session value is used.
+         * The result value is written back to the session (user state).
+         * 
+         * Notice: The original getUserStateFromRequest() should do the job, but it may fail silently.
+         * 
+         * @var int $sequence
          */
-        $sequence = $app->getUserStateFromRequest('com_sequence.items.sequence', 'sequence', '', 'cmd');
+        $sequence = JToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
 
         // get the sequence filter value from the request state (local, not affected by session)
         $sequenceFilter = $this->getState('filter.sequence', '');

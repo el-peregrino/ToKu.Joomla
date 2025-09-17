@@ -16,12 +16,5 @@ use Joomla\CMS\MVC\Controller\FormController;
 
 class ItemController extends FormController
 {
-    protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')
-    {
-        // TODO do we really need this? the state is used in the form
-        $append = parent::getRedirectToItemAppend($recordId, $urlVar);
-
-        $sequence = $this->input->get('sequence', '', 'cmd');
-        return "&sequence=$sequence$append";        
-    }
+    
 }

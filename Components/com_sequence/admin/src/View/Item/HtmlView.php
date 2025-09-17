@@ -10,6 +10,7 @@
 
 namespace ToKu\Component\Sequence\Administrator\View\Item;
 
+use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use ToKu\Component\Sequence\Administrator\View\BaseHtmlView;
@@ -31,6 +32,10 @@ class HtmlView extends BaseHtmlView
 
         $this->form = $model->getForm();
         $this->item = $model->getItem();
+
+        if (!$this->item->sequence_id) {
+            $this->getApp()->enqueueMessage(Text::_('COM_SQ_MSG_PARENT_SEQUENCE'), CMSApplication::MSG_NOTICE);
+        }
 
         /** @var \Joomla\Input\Input */
         $input = $this->getApp()->getInput();

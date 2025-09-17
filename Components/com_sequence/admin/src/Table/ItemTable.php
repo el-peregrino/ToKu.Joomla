@@ -10,9 +10,9 @@
 
 namespace ToKu\Component\Sequence\Administrator\Table;
 
-use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
 use Joomla\Database\DatabaseDriver;
+use Joomla\Event\DispatcherInterface;
 use Joomla\Registry\Registry;
 
 \defined('_JEXEC') or die;
@@ -79,11 +79,23 @@ class ItemTable extends BaseTable
      */
     public $images;
 
+    /**
+     * Item ordering.
+     * @var int
+     */
     public $ordering;
     
-    public function __construct(DatabaseDriver &$db)
+    /**
+     * Constructor
+     *
+     * @param   DatabaseDriver        $db          Database connector object
+     * @param   ?DispatcherInterface  $dispatcher  Event dispatcher for this table
+     */
+    public function __construct(DatabaseDriver $db, ?DispatcherInterface $dispatcher = null)
     {
-        parent::__construct('#__sequence_items', 'id', $db);
+        parent::__construct('#__sequence_items', 'id', $db, $dispatcher);
+
+        $this->typeAlias = 'com_sequence.item';
     }
 
     public function bind($array, $ignore = '')

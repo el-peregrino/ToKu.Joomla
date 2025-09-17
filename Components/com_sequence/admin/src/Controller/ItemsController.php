@@ -20,11 +20,4 @@ class ItemsController extends AdminController
     {
         return parent::getModel($name, $prefix, $config);
     }
-
-    // the method is called on return to the list view e.g. after the save operation
-    protected function getRedirectToListAppend()
-    {
-        // TODO do we really need this? the state is used in the form
-        return '&sequence=' . $this->app->getUserState('com_sequence.items.sequence', '');
-    }
 }

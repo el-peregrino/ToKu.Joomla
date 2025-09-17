@@ -23,13 +23,6 @@ class ItemModel extends AdminModel
         return parent::getTable($type, $prefix, $config);
     }
 
-    protected function populateState() 
-    {
-        parent::populateState();
-
-
-    }
-
     private function getSequenceType(array $data): ?int 
     {
         // load form data
@@ -58,6 +51,7 @@ class ItemModel extends AdminModel
         if ($type === null) {
             // the sequence type cannot be determined
             $form->setFieldAttribute('date', 'readonly', 'true');
+            $form->setFieldAttribute('date', 'required', 'false');
         }
         elseif ($type === 0) {
             // the sequence is a list
@@ -81,21 +75,21 @@ class ItemModel extends AdminModel
 
     protected function loadFormData()
     {
-        /** @var \Joomla\CMS\Application\CMSWebApplicationInterface $app */
         $app = JToKu::getApp();
         $state = $app->getUserState('com_sequence.edit.item.data', []);
 
         $data = $state ?: (array) $this->getItem();
 
         /**
-         * Get the session value. It check multiple sources in the following order:
-         * 1. POST request values (form data)
-         * 2. GET request values (url params)
-         * 3. Session values (user state)
-         * 4. Default value
-         * The result value is stored in the user state (session).
+         * Current sequence.
+         * The sequence is read from input. If not defined, session value is used.
+         * The result value is written back to the session (user state).
+         * 
+         * Notice: The original getUserStateFromRequest() should do the job, but it may fail silently.
+         * 
+         * @var int $sequence
          */
-        $sequence = $app->getUserStateFromRequest('com_sequence.items.sequence', 'sequence', '', 'cmd');
+        $sequence = JToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
 
         // prefill the sequence_id
         if (empty($data['sequence_id']) && $sequence) {
@@ -107,7 +101,6 @@ class ItemModel extends AdminModel
 
     protected function prepareTable($table)
     {
-        /** @var \Joomla\CMS\Application\CMSWebApplicationInterface $app */
         $app = JToKu::getApp();
         $task = $app->getInput()->getCmd('task');
         if ($task === 'save2copy') {

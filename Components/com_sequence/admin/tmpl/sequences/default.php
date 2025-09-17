@@ -88,11 +88,9 @@ $listDir  = $this->escape($this->state->get('list.direction'));
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                /** @var \ToKu\Component\Sequence\Administrator\Table\SequenceTable $item */
-                foreach ($this->items as $i => $item): 
-                ?>
-                    <tr>
+                <?php foreach ($this->items as $i => $item): ?>
+                    <?php /** @var \ToKu\Component\Sequence\Administrator\Table\SequenceTable $item */ ?>
+                    <tr class="row<?= $i % 2; ?>">
                         <td><?= HTMLHelper::_('grid.id', $i, $item->id); ?></td>
                         <td class="center">
                             <?= HTMLHelper::_('jgrid.published', $item->published, $i, 'sequences.', true, 'cb'); ?>
@@ -123,7 +121,7 @@ $listDir  = $this->escape($this->state->get('list.direction'));
                             </a>
                         </td>
 
-                        <td class="text-center btns"></td>
+                        <td class="text-center btns">
                             <a href="<?= Route::_("index.php?option=com_sequence&view=items&task=item.add&sequence=$item->id"); ?>" title="<?= Text::_('COM_SQ_ADD_ITEM_TITLE'); ?>">
                                 <span class="icon-plus" aria-hidden="true"></span><span class="visually-hidden"><?= Text::_('COM_SQ_ADD_ITEM_TITLE'); ?></span>
                             </a>

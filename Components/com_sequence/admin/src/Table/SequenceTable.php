@@ -13,6 +13,7 @@ namespace ToKu\Component\Sequence\Administrator\Table;
 use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Factory;
 use Joomla\Database\DatabaseDriver;
+use Joomla\Event\DispatcherInterface;
 use Joomla\Registry\Registry;
 
 \defined('_JEXEC') or die;
@@ -86,9 +87,17 @@ class SequenceTable extends BaseTable
      */
     public $images;
 
-    public function __construct(DatabaseDriver &$db)
+    /**
+     * Constructor
+     *
+     * @param   DatabaseDriver        $db          Database connector object
+     * @param   ?DispatcherInterface  $dispatcher  Event dispatcher for this table
+     */
+    public function __construct(DatabaseDriver $db, ?DispatcherInterface $dispatcher = null)
     {
-        parent::__construct('#__sequences', 'id', $db);
+        parent::__construct('#__sequences', 'id', $db, $dispatcher);
+
+        $this->typeAlias = 'com_sequence.sequence';
     }
 
     public function bind($array, $ignore = '')

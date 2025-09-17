@@ -92,14 +92,15 @@ HTMLHelper::_('script', 'system/toggle-help.js', ['version' => 'auto', 'relative
 
 <script>
 jQuery(function($) {
-    const itemId = $('input[name="jform[id]"]').val();
-    const triggerField = $('#jform_sequence_id');
+    // get the sequence id input
+    const field = $('#jform_sequence_id');
 
-    if (itemId && parseInt(itemId) > 0) {
-        // only attach listener if editing existing item
-        triggerField.on('change', function() {
+    // listen the onChange event
+    field.on('change', function() {
+        // if there is a value, submit the form
+        if ($(this).val() > 0) {
             $('#toolbar-apply button').click(); // press the save button
-        });
-    }
+        }
+    });
 });
 </script>

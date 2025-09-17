@@ -16,5 +16,5 @@ use Joomla\CMS\Extension\MVCComponent;
 
 final class SequenceComponent extends MVCComponent
 {
-    
+    public const NAME = "Sequence";
 }

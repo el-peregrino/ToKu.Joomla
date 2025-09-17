@@ -13,7 +13,6 @@ namespace ToKu\Component\Sequence\Administrator\Model;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\ParameterType;
-use ToKu\Library\JToKu;
 
 \defined('_JEXEC') or die;
 
@@ -49,13 +48,6 @@ class SequencesModel extends ListModel
 
     protected function populateState($ordering = 's.id', $direction = 'asc')
     {
-        /** @var \Joomla\CMS\Application\CMSWebApplicationInterface $app */
-        $app = JToKu::getApp();
-
-        $extension = $app->getUserStateFromRequest("$this->context.filter.extension", 'extension', 'com_sequence', 'cmd');
-
-        $this->setState('filter.extension', $extension);
-        
         parent::populateState($ordering, $direction);
     }
 

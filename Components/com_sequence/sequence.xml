@@ -5,7 +5,7 @@
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2024-07-28</creationDate>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <description>COM_SEQUENCE_DESCRIPTION</description>
     <namespace path="src">ToKu\Component\Sequence</namespace>
 
@@ -34,6 +34,7 @@
             </menu>
         </submenu>
 
+        <!-- Sources -->
         <files folder="admin">
             <filename>index.html</filename>
             <folder>services</folder>
@@ -61,7 +62,7 @@
 
     </site> -->
 
-    <!-- SQL setup -->
+    <!-- SQL Setup -->
     <install>
         <sql>
             <file driver="mysql" charset="utf8">sql/install.sql</file>
@@ -78,5 +79,11 @@
         <schemapath type="mysql">sql/updates/mysql</schemapath>
     </schemas>
 
+    <!-- Installation Script -->
     <scriptfile>script.php</scriptfile>
+    
+    <!-- Update Servers -->
+    <updateservers>
+        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+    </updateservers>
 </extension>

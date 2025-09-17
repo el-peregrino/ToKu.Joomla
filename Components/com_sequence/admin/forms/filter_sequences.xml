@@ -29,7 +29,7 @@
 
         </field>
 
-        <field name="access" type="accesslevel" 
+        <field name="access" type="accesslevel"
             label="JFIELD_ACCESS_LABEL"
             class="js-select-submit-on-change"
             extension="com_sequence">
@@ -54,7 +54,7 @@
             type="limitbox"
             label="JGLOBAL_LIST_LIMIT"
             class="js-select-submit-on-change"
-            extension="com_sequence"/>
+            extension="com_sequence" />
 
     </fields>
 </form>

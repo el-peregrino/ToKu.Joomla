@@ -12,6 +12,8 @@ namespace ToKu\Component\Sequence\Administrator\Helper;
 
 use Joomla\CMS\Language\Text;
 
+\defined('_JEXEC') or die;
+
 class SequenceHelper {
 
     protected static array $sequenceTypes = [ 
