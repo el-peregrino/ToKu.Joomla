@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>ToKu Article Carousel Module</name>
+        <element>mod_articlecarousel</element>
+        <type>module</type>
+        <client>site</client>
+        <version>1.0.5</version>
+        <infourl title="ToKu Article Carousel Module">
+            https://joomla.toku.cz/modules/mod_articlecarousel-1.0.5.html
+        </infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">
+                https://joomla.toku.cz/modules/mod_articlecarousel-1.0.5.zip
+            </downloadurl>
+        </downloads>
+        <tags>
+            <tag>beta</tag>
+            <tag>rc</tag>
+        </tags>
+        <php_minimum>8.2.0</php_minimum>
+        <targetplatform name="joomla" version="5.[34]"/>
+        <maintainer>ToKu</maintainer>
+        <maintainerurl>https://www.toku.cz</maintainerurl>
+    </update>
+</updates>

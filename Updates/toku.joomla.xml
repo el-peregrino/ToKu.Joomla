@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extensionset name="ToKu Joomla Project" description="Updates of ToKu Joomla Extensions">
+    <extension name="ToKu Joomla Library" element="JToKu" type="library" client="site" version="1.0.10" detailsurl="https://joomla.toku.cz/libraries/lib_toku.xml"/>
+    <extension name="ToKu Sequence Manager" element="com_sequence" type="component" client="administrator" version="1.0.10" detailsurl="https://joomla.toku.cz/components/com_sequence.xml"/>
+    <extension name="ToKu Upcoming Event Filter" element="upcomingeventfilter" type="plugin" client="site" folder="system" version="1.0.2" detailsurl="https://joomla.toku.cz/plugins/plg_upcomingeventfilter.xml"/>
+    <extension name="ToKu Sequence Module" element="mod_sequence" type="module" client="site" version="1.0.4" detailsurl="https://joomla.toku.cz/modules/mod_sequence.xml"/>
+    <extension name="ToKu Upcoming Event Module" element="mod_upcomingevent" type="module" client="site" version="1.0.13" detailsurl="https://joomla.toku.cz/modules/mod_upcomingevent.xml"/>
+    <extension name="ToKu Carousel Module" element="mod_carousel" type="module" client="site" version="1.0.4" detailsurl="https://joomla.toku.cz/modules/mod_carousel.xml"/>
+    <extension name="ToKu Article Carousel Module" element="mod_articlecarousel" type="module" client="site" version="1.0.5" detailsurl="https://joomla.toku.cz/modules/mod_articlecarousel.xml"/>
+</extensionset>
