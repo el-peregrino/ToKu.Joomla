@@ -63,7 +63,7 @@ $listDir  = $this->escape($this->state->get('list.direction'));
                         <?= HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 's.title', $listDir, $listOrder); ?>
                     </th>
                     <th scope="col">
-                        <?= HTMLHelper::_('searchtools.sort', 'COM_SQ_FIELD_TYPE_LABEL', 's.type', $listDir, $listOrder); ?>
+                        <?= HTMLHelper::_('searchtools.sort', 'COM_SQ_GRID_TYPE', 's.type', $listDir, $listOrder); ?>
                     </th>
                     <th colspan="2" scope="col" class="w-5 text-center">
                         <?= Text::_('COM_SQ_GRID_ITEMS'); ?>

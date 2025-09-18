@@ -34,11 +34,12 @@
 
         <field name="type"
             type="list"
-            default="0"
+            default=""
             required="true"
             validate="options"
             label="COM_SQ_FIELD_SEQUENCE_TYPE_LABEL"
             description="COM_SQ_FIELD_SEQUENCE_TYPE_DESCRIPTION">
+            <option value="">COM_SQ_SELECT_TYPE</option>
             <option value="0">COM_SQ_TYPE_LIST</option>
             <option value="1">COM_SQ_TYPE_TIMELINE</option>
         </field>

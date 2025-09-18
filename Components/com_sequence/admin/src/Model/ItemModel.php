@@ -76,9 +76,14 @@ class ItemModel extends AdminModel
     protected function loadFormData()
     {
         $app = JToKu::getApp();
+        // get form data from session
         $state = $app->getUserState('com_sequence.edit.item.data', []);
 
-        $data = $state ?: (array) $this->getItem();
+        // load database values and convert to array safely
+        $item = (array) json_decode(json_encode($this->getItem()), true);
+        
+        // merge data to override missing fields from db
+        $data = array_merge($item, $state);
 
         /**
          * Current sequence.

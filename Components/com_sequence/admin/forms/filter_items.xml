@@ -3,7 +3,7 @@
     <field
         name="sequence"
         type="list"
-        label="COM_SEQUENCE_FILTER_SEQUENCE_LABEL"
+        label="COM_SQ_FILTER_SEQUENCE_LABEL"
         accesstype="manage"
         showAll="false"
         filtermode="selector"
@@ -17,7 +17,7 @@
             name="search"
             type="text"
             inputmode="search"
-            label="COM_SEQUENCE_FILTER_SEARCH_LABEL"
+            label="COM_SQ_FILTER_SEARCH_LABEL"
             hint="JSEARCH_FILTER" />
 
         <field

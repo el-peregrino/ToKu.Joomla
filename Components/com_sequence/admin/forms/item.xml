@@ -15,28 +15,30 @@
             format="%Y-%m-%d %H:%M"
             required="true"
             class="inputbox"
-            label="COM_SEQUENCE_FIELD_DATE_LABEL"
-            description="COM_SEQUENCE_FIELD_DATE_DESC" />
+            label="COM_SQ_FIELD_DATE_LABEL"
+            description="COM_SQ_FIELD_DATE_DESCRIPTION" />
 
         <field name="title" type="text" maxlength="255"
-            label="COM_SEQUENCE_FIELD_TITLE_LABEL" />
+            label="COM_SQ_FIELD_TITLE_LABEL"
+            description="COM_SQ_FIELD_TITLE_DESCRIPTION" />
 
         <field name="caption" type="text" maxlength="255"
-            label="COM_SEQUENCE_FIELD_CAPTION_LABEL" />
+            label="COM_SQ_FIELD_CAPTION_LABEL"
+            description="COM_SQ_FIELD_CAPTION_DESCRIPTION" />
 
         <field name="heading" type="text" maxlength="255" required="true"
-            label="COM_SEQUENCE_FIELD_HEADING_LABEL" />
+            label="COM_SQ_FIELD_HEADING_LABEL"
+            description="COM_SQ_FIELD_HEADING_DESCRIPTION" />
 
         <field name="subheading" type="text" maxlength="255"
-            label="COM_SEQUENCE_FIELD_SUBHEADING_LABEL" />
+            label="COM_SQ_FIELD_SUBHEADING_LABEL"
+            description="COM_SQ_FIELD_SUBHEADING_DESCRIPTION" />
 
         <field name="body" type="editor" filter="safehtml"
-            label="COM_SEQUENCE_FIELD_BODY_LABEL"
-            description="COM_SEQUENCE_FIELD_BODY_DESCRIPTION" />
+            label="COM_SQ_FIELD_BODY_LABEL" />
 
         <field name="footer" type="editor" filter="safehtml"
-            label="COM_SEQUENCE_FIELD_FOOTER_LABEL"
-            description="COM_SEQUENCE_FIELD_FOOTER_DESCRIPTION" />
+            label="COM_SQ_FIELD_FOOTER_LABEL" />
 
     </fieldset>
 
@@ -47,12 +49,12 @@
                 name="link_type"
                 type="list"
                 default="none"
-                label="COM_SEQUENCE_FIELD_LINK_LABEL"
-                description="COM_SEQUENCE_FIELD_LINK_DESCRIPTION">
-                <option value="none">COM_SEQUENCE_OPTION_LINK_NONE</option>
-                <option value="menu">COM_SEQUENCE_OPTION_LINK_MENU</option>
-                <option value="article">COM_SEQUENCE_OPTION_LINK_ARTICLE</option>
-                <option value="external">COM_SEQUENCE_OPTION_LINK_EXTERNAL</option>
+                label="COM_SQ_FIELD_LINK_LABEL"
+                description="COM_SQ_FIELD_LINK_DESCRIPTION">
+                <option value="none">COM_SQ_LINK_TYPE_NONE</option>
+                <option value="menu">COM_SQ_LINK_TYPE_MENU</option>
+                <option value="article">COM_SQ_LINK_TYPE_ARTICLE</option>
+                <option value="external">COM_SQ_LINK_TYPE_EXTERNAL</option>
             </field>
 
             <field
@@ -60,22 +62,22 @@
                 type="text"
                 maxlength="255"
                 showon="link_type!:none"
-                label="COM_SEQUENCE_FIELD_LINK_TEXT_LABEL" />
+                label="COM_SQ_FIELD_LINK_TEXT_LABEL" />
 
             <field
                 name="menu_item"
                 type="menuitem"
                 filter="component"
                 showon="link_type:menu"
-                label="COM_SEQUENCE_FIELD_LINK_MENU_LABEL" />
+                label="COM_SQ_FIELD_LINK_MENU_LABEL" />
 
             <field
                 type="ModalSelect"
                 name="article_id"
-                label="COM_SEQUENCE_FIELD_LINK_ARTICLE_LABEL"
+                label="COM_SQ_FIELD_LINK_ARTICLE_LABEL"
                 select="true"
                 iconSelect="fa fa-list"
-                titleSelect="COM_SEQUENCE_MODAL_ARTICLE"
+                titleSelect="COM_SQ_MODAL_ARTICLE"
                 urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
                 clear="true"
                 sql_title_table="#__content"
@@ -87,40 +89,40 @@
                 name="external_url"
                 type="url"
                 showon="link_type:external"
-                label="COM_SEQUENCE_FIELD_LINK_EXTERNAL_LABEL"
-                description="COM_SEQUENCE_FIELD_LINK_EXTERNAL_DESCRIPTION" />
+                label="COM_SQ_FIELD_LINK_EXTERNAL_LABEL"
+                description="COM_SQ_FIELD_LINK_EXTERNAL_DESCRIPTION" />
 
             <field
                 name="link_target"
                 type="list"
                 default="_self"
                 showon="link_type!:none"
-                label="COM_SEQUENCE_FIELD_LINK_TARGET_LABEL"
-                description="COM_SEQUENCE_FIELD_LINK_TARGET_DESCRIPTION">
-                <option value="_self">COM_SEQUENCE_OPTION_TARGET_SELF</option>
-                <option value="_blank">COM_SEQUENCE_OPTION_TARGET_NEW</option>
+                label="COM_SQ_FIELD_LINK_TARGET_LABEL"
+                description="COM_SQ_FIELD_LINK_TARGET_DESCRIPTION">
+                <option value="_self">COM_SQ_LINK_TARGET_SELF</option>
+                <option value="_blank">COM_SQ_LINK_TARGET_NEW</option>
             </field>
         </fieldset>
     </fields>
 
-    <fields name="images" label="COM_SEQUENCE_FIELD_IMAGES">
+    <fields name="images">
         <fieldset name="image-header">
 
             <field name="header_position"
                 type="list"
                 default="0"
                 validate="options"
-                label="COM_SEQUENCE_FIELD_IMAGE_POSITION_LABEL"
-                description="COM_SEQUENCE_FIELD_IMAGE_POSITION_DESCRIPTION">
-                <option value="0">COM_SEQUENCE_IMAGE_POSITION_NONE</option>
-                <option value="1">COM_SEQUENCE_IMAGE_POSITION_ABOVE</option>
-                <option value="2">COM_SEQUENCE_IMAGE_POSITION_BELOW</option>
+                label="COM_SQ_FIELD_IMAGE_POSITION_LABEL"
+                description="COM_SQ_FIELD_IMAGE_POSITION_DESCRIPTION">
+                <option value="0">COM_SQ_IMAGE_POSITION_NONE</option>
+                <option value="1">COM_SQ_IMAGE_POSITION_ABOVE</option>
+                <option value="2">COM_SQ_IMAGE_POSITION_BELOW</option>
             </field>
 
             <field
                 name="image_header"
                 type="media"
-                label="COM_SEQUENCE_FIELD_HEADER_IMAGE_LABEL"
+                label="COM_SQ_FIELD_IMAGE_LABEL"
                 schemes="http,https,ftp,ftps,data,file"
                 validate="url"
                 relative="true" />
@@ -128,27 +130,7 @@
             <field
                 name="image_header_alt"
                 type="text"
-                label="COM_SEQUENCE_FIELD_IMAGE_ALT_LABEL"
-            />
-
-            <field
-                name="image_header_alt_empty"
-                type="checkbox"
-                label="COM_SEQUENCE_FIELD_IMAGE_ALT_EMPTY_LABEL"
-                description="COM_SEQUENCE_FIELD_IMAGE_ALT_EMPTY_DESC" />
-
-            <field
-                name="float_header"
-                type="text"
-                label="COM_SEQUENCE_FIELD_IMAGE_CLASS_LABEL"
-                description="COM_SEQUENCE_FIELD_IMAGE_CLASS_DESC"
-                useglobal="true"
-                validate="CssIdentifier" />
-
-            <field
-                name="image_header_caption"
-                type="text"
-                label="COM_SEQUENCE_FIELD_IMAGE_CAPTION_LABEL" />
+                label="COM_SQ_FIELD_IMAGE_ALT_LABEL" />
 
         </fieldset>
 
@@ -158,17 +140,17 @@
                 type="list"
                 default="0"
                 validate="options"
-                label="COM_SEQUENCE_FIELD_IMAGE_POSITION_LABEL"
-                description="COM_SEQUENCE_FIELD_IMAGE_POSITION_DESCRIPTION">
-                <option value="0">COM_SEQUENCE_IMAGE_POSITION_NONE</option>
-                <option value="1">COM_SEQUENCE_IMAGE_POSITION_ABOVE</option>
-                <option value="2">COM_SEQUENCE_IMAGE_POSITION_BELOW</option>
+                label="COM_SQ_FIELD_IMAGE_POSITION_LABEL"
+                description="COM_SQ_FIELD_IMAGE_POSITION_DESCRIPTION">
+                <option value="0">COM_SQ_IMAGE_POSITION_NONE</option>
+                <option value="1">COM_SQ_IMAGE_POSITION_ABOVE</option>
+                <option value="2">COM_SQ_IMAGE_POSITION_BELOW</option>
             </field>
 
             <field
                 name="image_footer"
                 type="media"
-                label="COM_SEQUENCE_FIELD_FOOTER_IMAGE_LABEL"
+                label="COM_SQ_FIELD_IMAGE_LABEL"
                 schemes="http,https,ftp,ftps,data,file"
                 validate="url"
                 relative="true" />
@@ -176,27 +158,7 @@
             <field
                 name="image_footer_alt"
                 type="text"
-                label="COM_SEQUENCE_FIELD_IMAGE_ALT_LABEL"
-            />
-
-            <field
-                name="image_footer_alt_empty"
-                type="checkbox"
-                label="COM_SEQUENCE_FIELD_IMAGE_ALT_EMPTY_LABEL"
-                description="COM_SEQUENCE_FIELD_IMAGE_ALT_EMPTY_DESC" />
-
-            <field
-                name="float_footer"
-                type="text"
-                label="COM_SEQUENCE_FIELD_IMAGE_CLASS_LABEL"
-                description="COM_SEQUENCE_FIELD_IMAGE_CLASS_DESC"
-                useglobal="true"
-                validate="CssIdentifier" />
-
-            <field
-                name="image_footer_caption"
-                type="text"
-                label="COM_SEQUENCE_FIELD_IMAGE_CAPTION_LABEL" />
+                label="COM_SQ_FIELD_IMAGE_ALT_LABEL" />
 
         </fieldset>
     </fields>
@@ -206,7 +168,7 @@
         <field name="sequence_id"
             type="list"
             required="true"
-            label="COM_SEQUENCE_FIELD_SEQUENCE_LABEL">
+            label="COM_SQ_FIELD_SEQUENCE_LABEL">
             <option value="">COM_SQ_SELECT_SEQUENCE</option>
         </field>
 
@@ -224,12 +186,8 @@
             label="JFIELD_ACCESS_LABEL"
             description="JFIELD_ACCESS_DESC" />
 
-        <field name="tags" type="tag"
-            readonly="true" hint="not yet supported"
-            label="COM_SEQUENCE_FIELD_TAGS_LABEL" />
-
         <field name="note" type="text" maxlength="255"
-            label="COM_SEQUENCE_FIELD_NOTE_LABEL" />
+            label="COM_SQ_FIELD_NOTE_LABEL" />
 
     </fieldset>
 
@@ -237,29 +195,34 @@
 
         <field name="icon" type="text" maxlength="55"
             validate="CssIdentifier"
-            label="COM_SEQUENCE_FIELD_ICON_LABEL" />
+            label="COM_SQ_FIELD_ICON_LABEL"
+            description="COM_SQ_FIELD_ICON_DESCRIPTION" />
 
         <field name="css" type="text" maxlength="255"
             validate="CssIdentifier"
-            label="COM_SEQUENCE_FIELD_CSS_LABEL" />
+            label="COM_SQ_FIELD_CSS_LABEL"
+            description="COM_SQ_FIELD_CSS_DESCRIPTION" />
 
         <field name="control" type="radio" default="1"
             layout="joomla.form.field.radio.switcher"
-            label="COM_SEQUENCE_FIELD_CONTROL_LABEL">
+            label="COM_SQ_FIELD_CONTROL_LABEL"
+            description="COM_SQ_FIELD_CONTROL_DESCRIPTION">
             <option value="0">JNo</option>
             <option value="1">JYes</option>
         </field>
 
         <field name="keep" type="radio" default="0"
             layout="joomla.form.field.radio.switcher"
-            label="COM_SEQUENCE_FIELD_KEEP_LABEL">
+            label="COM_SQ_FIELD_KEEP_LABEL"
+            description="COM_SQ_FIELD_KEEP_DESCRIPTION">
             <option value="0">JNo</option>
             <option value="1">JYes</option>
         </field>
 
         <field name="initial" type="radio" default="0"
             layout="joomla.form.field.radio.switcher"
-            label="COM_SEQUENCE_FIELD_INITIAL_LABEL">
+            label="COM_SQ_FIELD_INITIAL_LABEL"
+            description="COM_SQ_FIELD_INITIAL_DESCRIPTION">
             <option value="0">JNo</option>
             <option value="1">JYes</option>
         </field>

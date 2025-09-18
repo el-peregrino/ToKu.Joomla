@@ -9,12 +9,12 @@
             hint="JSEARCH_FILTER" />
 
         <field name="type" type="list"
-            label="COM_SEQUENCE_FIELD_TYPE_LABEL"
+            label="COM_SQ_FILTER_TYPE_LABEL"
             class="js-select-submit-on-change"
             extension="com_sequence">
-            <option value="">COM_SEQUENCE_SELECT_TYPE</option>
-            <option value="0">COM_SEQUENCE_TYPE_LIST</option>
-            <option value="1">COM_SEQUENCE_TYPE_TIMELINE</option>
+            <option value="">COM_SQ_SELECT_TYPE</option>
+            <option value="0">COM_SQ_TYPE_LIST</option>
+            <option value="1">COM_SQ_TYPE_TIMELINE</option>
         </field>
 
         <field
