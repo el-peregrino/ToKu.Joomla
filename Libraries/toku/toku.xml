@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="library" method="upgrade">
-    <name>ToKu Joomla 5 Library</name>
+    <name>ToKu Joomla Library</name>
     <libraryname>JToKu</libraryname>
     <namespace path="src">ToKu\Library</namespace>
     <version>1.0.10</version>
@@ -18,13 +18,25 @@
             </ul>
         ]]>
     </description>
+    
+    <!-- Sources -->
     <files>
+        <folder target="layouts">layouts</folder>
         <folder>src</folder>
     </files>
+
+    <!-- Assets -->
     <media destination="toku" folder="media">
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
         <folder>js</folder>
     </media>
+
+    <!-- Installation Script -->
     <scriptfile>script.php</scriptfile>
+
+    <!-- Update Servers -->
+    <updateservers>
+        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+    </updateservers>
 </extension>
