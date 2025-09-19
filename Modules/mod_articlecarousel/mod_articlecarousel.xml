@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
     <name>MOD_ARTICLECAROUSEL</name>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
@@ -18,62 +18,97 @@
     ]]>
     </description>
     <namespace path="src">ToKu\Module\ArticleCarousel</namespace>
+
+    <!-- Sources -->
     <files>
         <folder module="mod_articlecarousel">services</folder>
         <folder>src</folder>
         <folder>tmpl</folder>
     </files>
+
+    <!-- Assets -->
     <media destination="mod_articlecarousel" folder="media">
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
     </media>
-    <languages folder="admin">
+
+    <languages>
         <language tag="en-GB">language/en-GB/mod_articlecarousel.ini</language>
         <language tag="en-GB">language/en-GB/mod_articlecarousel.sys.ini</language>
     </languages>
+
+    <!-- Installation Script -->
     <scriptfile>script.php</scriptfile>
+
+    <!-- Update Servers -->
+    <updateservers>
+        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+    </updateservers>
+
+    <!-- Module Configuration -->
     <config>
         <fields name="params">
             <fieldset name="basic">
 
                 <field
-                    name="filter_categories"
+                    name="categories"
                     type="category"
                     extension="com_content"
                     multiple="true"
                     layout="joomla.form.field.list-fancy-select"
                     filter="intarray"
-                    label="Filter by Categories"
-                    description="Only include articles from selected categories (optional)"
-                    required="false" />
+                    label="MOD_ARTICLECAROUSEL_CATEGORIES_LABEL"
+                    description="MOD_ARTICLECAROUSEL_CATEGORIES_DESCRIPTION" />
 
-                <field name="filter_tags"
+                <field name="tags"
                     type="tag"
                     multiple="true"
-                    label="Filter by Tags"
-                    description="Only include articles with selected tags (optional)"
-                    required="false" />
+                    filter="intarray"
+                    label="MOD_ARTICLECAROUSEL_TAGS_LABEL"
+                    description="MOD_ARTICLECAROUSEL_TAGS_DESCRIPTION" />
 
-                <field 
-                    name="article_count" 
-                    type="number" 
-                    default="10" 
-                    label="Number of Articles" 
+                <field
+                    name="limit"
+                    type="number"
                     min="5"
-                    max="20" />
+                    max="20"
+                    default="10"
+                    label="MOD_ARTICLECAROUSEL_LIMIT_LABEL"
+                    description="MOD_ARTICLECAROUSEL_LIMIT_DESCRIPTION" />
 
-                <field name="ordering" type="list" label="Ordering" description="Choose how articles should be sorted">
-                    <option value="random">Random</option>
-                    <option value="newest">Newest First</option>
+                <field
+                    name="current"
+                    type="radio"
+                    default="0"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_ARTICLECAROUSEL_CURRENT_LABEL"
+                    description="MOD_ARTICLECAROUSEL_CURRENT_DESCRIPTION">
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
                 </field>
 
-                <field 
-                    name="autoplay" 
-                    type="radio" 
-                    default="1" 
-                    label="Automatic Slide" 
+                <field
+                    name="ordering"
+                    type="list"
+                    default="newest"
+                    label="MOD_ARTICLECAROUSEL_ORDERING_LABEL"
+                    description="MOD_ARTICLECAROUSEL_ORDERING_DESCRIPTION">
+                    <option value="random">MOD_ARTICLECAROUSEL_ORDERING_OPTION_RANDOM</option>
+                    <option value="newest">MOD_ARTICLECAROUSEL_ORDERING_OPTION_NEWEST</option>
+                    <option value="oldest">MOD_ARTICLECAROUSEL_ORDERING_OPTION_OLDEST</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="options" label="MOD_ARTICLECAROUSEL_TAB_OPTIONS">
+
+                <field
+                    name="autoplay"
+                    type="radio"
+                    default="1"
                     layout="joomla.form.field.radio.switcher"
-                    required="true">
+                    label="MOD_ARTICLECAROUSEL_AUTOPLAY_LABEL"
+                    description="MOD_ARTICLECAROUSEL_AUTOPLAY_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
@@ -82,79 +117,87 @@
                     name="interval"
                     type="number"
                     default="5000"
+                    min="1000"
+                    max="3600000"
                     showon="autoplay:1"
-                    label="Slide Interval"
-                    description="The interval of item slides in milliseconds"
-                    min="1000"/>
+                    label="MOD_ARTICLECAROUSEL_INTERVAL_LABEL"
+                    description="MOD_ARTICLECAROUSEL_INTERVAL_DESCRIPTION" />
 
                 <field
-                    name="direction" 
-                    type="list" 
-                    default="left" 
+                    name="direction"
+                    type="list"
+                    default="left"
                     showon="autoplay:1"
-                    label="Slide Direction" >
-                    <option value="left">Left</option>
-                    <option value="right">Right</option>
+                    label="MOD_ARTICLECAROUSEL_DIRECTION_LABEL"
+                    description="MOD_ARTICLECAROUSEL_DIRECTION_DESCRIPTION">
+                    <option value="left">MOD_ARTICLECAROUSEL_DIRECTION_OPTION_LEFT</option>
+                    <option value="right">MOD_ARTICLECAROUSEL_DIRECTION_OPTION_RIGHT</option>
                 </field>
 
                 <field
-                    name="show_indicators" 
-                    type="list" 
-                    default="below" 
-                    label="Controls position" >
-                    <option value="none">None</option>
-                    <option value="above">Above</option>
-                    <option value="below">Below</option>
+                    name="indicators"
+                    type="list"
+                    default="below"
+                    label="MOD_ARTICLECAROUSEL_INDICATORS_LABEL"
+                    description="MOD_ARTICLECAROUSEL_INDICATORS_DESCRIPTION">
+                    <option value="none">MOD_ARTICLECAROUSEL_INDICATORS_OPTION_NONE</option>
+                    <option value="above">MOD_ARTICLECAROUSEL_INDICATORS_OPTION_ABOVE</option>
+                    <option value="below">MOD_ARTICLECAROUSEL_INDICATORS_OPTION_BELOW</option>
                 </field>
 
-                <field 
+                <field
                     name="show_controls"
-                    type="radio" 
-                    default="1" 
-                    label="Show Control Buttons" 
-                    layout="joomla.form.field.radio.switcher">
+                    type="radio"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_ARTICLECAROUSEL_CONTROLS_LABEL"
+                    description="MOD_ARTICLECAROUSEL_CONTROLS_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
-                <field 
+                <field
                     name="show_image"
-                    type="radio" 
-                    default="1" 
-                    label="Show Image" 
-                    layout="joomla.form.field.radio.switcher">
+                    type="radio"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_ARTICLECAROUSEL_IMAGE_LABEL"
+                    description="MOD_ARTICLECAROUSEL_IMAGE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
-                <field 
+                <field
                     name="link_image"
-                    type="radio" 
+                    type="radio"
                     showon="show_image:1"
-                    default="1" 
-                    label="Link Image" 
-                    layout="joomla.form.field.radio.switcher">
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_ARTICLECAROUSEL_LINK_LABEL"
+                    description="MOD_ARTICLECAROUSEL_LINK_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
-                <field 
+                <field
                     name="show_readmore"
-                    type="radio" 
-                    default="1" 
-                    label="Show Readmore Button" 
-                    layout="joomla.form.field.radio.switcher">
+                    type="radio"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_ARTICLECAROUSEL_READMORE_LABEL"
+                    description="MOD_ARTICLECAROUSEL_READMORE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
-                <field 
+                <field
                     name="show_readmore_title"
-                    type="radio" 
+                    type="radio"
                     showon="show_readmore:1"
-                    default="1" 
-                    label="Show Readmore Title" 
-                    layout="joomla.form.field.radio.switcher">
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_ARTICLECAROUSEL_READMORE_TITLE_LABEL"
+                    description="MOD_ARTICLECAROUSEL_READMORE_TITLE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
@@ -162,27 +205,25 @@
             </fieldset>
 
             <fieldset name="advanced">
-				
+
                 <field
-					name="layout"
-					type="modulelayout"
-					label="JFIELD_ALT_LAYOUT_LABEL"
-					class="form-select"
-					validate="moduleLayout" />
-                
-                <field 
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    class="form-select"
+                    validate="moduleLayout" />
+
+                <field
                     name="module_class"
                     type="text"
-                    label="Module Class"
-                    description="Additional styles"
-                    required="false"/>
+                    label="MOD_ARTICLECAROUSEL_MODULE_CLASS_LABEL"
+                    description="MOD_ARTICLECAROUSEL_MODULE_CLASS_DESCRIPTION" />
 
-                <field 
+                <field
                     name="box_class"
                     type="text"
-                    label="Item Class"
-                    description="Additional styles for carousel items"
-                    required="false"/>
+                    label="MOD_ARTICLECAROUSEL_ITEM_CLASS_LABEL"
+                    description="MOD_ARTICLECAROUSEL_ITEM_CLASS_DESCRIPTION" />
 
             </fieldset>
         </fields>

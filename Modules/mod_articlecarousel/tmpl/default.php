@@ -12,28 +12,53 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use ToKu\Library\JToKu;
+use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 
 \defined('_JEXEC') or die;
 
-$wa = JToKu::wamRegister('mod_articlecarousel');
-$wa->useScript('toku.carousel');
-$wa->useStyle('toku.style');
-$wa->useStyle('mod_articlecarousel.style');
+JToKu::registerWebAssets(
+    [ArticleCarouselHelper::MODULE], 
+    [JToKu::getAsset('carousel')], 
+    [JToKu::getAsset('style'), ArticleCarouselHelper::getAsset('style')]);
+
+/**
+ * @var \Joomla\Registry\Registry $params Module parameters
+ * @var array $articles
+ */
+
+$append = function(string $key) use ($params): string
+{
+    $value = $params->get($key, '');
+    return $value ? " $value" : $value;
+};
+
+$boolean = fn(bool $value): string
+    => $value ? 'true' : 'false';
 
 if (empty($articles) || count($articles) == 0) {
-    echo '<!-- mod_articlecarousel :: no items -->';
+    echo '<!-- ' . ArticleCarouselHelper::MODULE .' :: no items -->';
     return;
 }
 
 // create unique id
-$carouselId = 'toku-' . uniqid();
-$indicators = $params->get('show_indicators');
+$carouselId = JToKu::getUniqueId();
+$indicators = $params->get('indicators');
 ?>
 
-<div id="<?= $carouselId; ?>" class="carousel slide <?= $params->get('module_class'); ?>" data-js="carousel-infinite"
-    data-interval="<?= $params->get('interval'); ?>" data-autoplay="<?= $params->get('autoplay') ? "true" : "false"; ?>"
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'article-carousel',
+    'type' => 'header',
+    'text' => $params->get('module_header_text'),
+    'position' => $params->get('module_header_position'),
+    'src' => $params->get('module_header_image'),
+    'alt' => $params->get('module_header_alt'),
+    'css' => $params->get('module_header_css')
+]); ?>
+
+<div id="<?= $carouselId; ?>" class="carousel slide<?= $append('module_class'); ?>" data-js="carousel-infinite"
+    data-interval="<?= $params->get('interval'); ?>" data-autoplay="<?= $boolean($params->get('autoplay')); ?>"
     data-direction="<?= $params->get('direction'); ?>"
-    data-indicators="<?= $indicators != 'none' ? 'true' : 'false'; ?>">
+    data-indicators="<?= $boolean($indicators != 'none'); ?>">
 
     <?php if ($indicators == 'above'): ?>
         <ol class="carousel-indicators" data-js="indicators">
@@ -52,11 +77,11 @@ $indicators = $params->get('show_indicators');
                 if (!empty($images->image_intro)) {
                     $image = [
                         'src' => $images->image_intro,
-                        'alt' => empty($images->image_intro_alt) && empty($images->image_intro_alt_empty) ? false : $images->image_intro_alt,
+                        'alt' => empty($images->image_intro_alt) ? false : $images->image_intro_alt,
                     ];
                 }
                 ?>
-            <div class="carousel-box <?= $params->get('box_class'); ?>" data-js="box">
+            <div class="carousel-box<?= $append('box_class'); ?>" data-js="box">
                 <div class="card">
                     <?php if ($params->get('show_image', 0) && isset($image)): ?>
                         <figure class="card-image">
@@ -90,10 +115,10 @@ $indicators = $params->get('show_indicators');
 
     <?php if ($params->get('show_controls', 0)): ?>
         <div class="carousel-controls">
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="control-prev">
+            <a href="#<?= $carouselId; ?>" role="button" data-js="prev" class="control-prev">
                 <span aria-hidden="true" class="fas fa-angle-left"></span>
             </a>
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="next" class="control-next">
+            <a href="#<?= $carouselId; ?>" role="button" data-js="next" class="control-next">
                 <span aria-hidden="true" class="fas fa-angle-right"></span>
             </a>
         </div>
@@ -107,3 +132,13 @@ $indicators = $params->get('show_indicators');
         </ol>
     <?php endif; ?>
 </div>
+
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'article-carousel',
+    'type' => 'footer',
+    'text' => $params->get('module_footer_text'),
+    'position' => $params->get('module_footer_position'),
+    'src' => $params->get('module_footer_image'),
+    'alt' => $params->get('module_footer_alt'),
+    'css' => $params->get('module_footer_css')
+]); ?>

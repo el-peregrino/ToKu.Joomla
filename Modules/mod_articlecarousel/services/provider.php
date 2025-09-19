@@ -32,8 +32,7 @@ return new class () implements ServiceProviderInterface {
      */
     public function register(Container $container): void
     {
-        // Joomla services
-        $container->registerServiceProvider(new ModuleDispatcherFactory(JToKu::getNamespace(ArticleCarouselHelper::NAME)));
+        $container->registerServiceProvider(new ModuleDispatcherFactory(JToKu::getNamespace(ArticleCarouselHelper::NAME, JToKu::MODULE)));
         $container->registerServiceProvider(new HelperFactory(JToKu::getSiteHelper(ArticleCarouselHelper::NAME)));
         $container->registerServiceProvider(new Module());
     }

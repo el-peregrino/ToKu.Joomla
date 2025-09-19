@@ -20,7 +20,7 @@ return new class () implements InstallerScriptInterface {
 
     private string $minimumJoomla = '5.3.0';
     private string $minimumPhp = '8.2.0';
-    private string $minimumToKu = "1.0.6";
+    private string $minimumToKu = "1.0.10";
 
     public function install(InstallerAdapter $adapter): bool
     {
