@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="params">
+
+        <fieldset name="module-frame" label="PLG_PARAMSINJECTOR_TAB_MODULE_FRAME" description="PLG_PARAMSINJECTOR_HELP_MODULE_FRAME">
+
+            <field name="group_header" type="spacer" label="PLG_PARAMSINJECTOR_SPACER_MODULE_HEADER" />
+
+            <field 
+                name="module_header_text" 
+                type="editor" 
+                filter="safehtml"
+                layout="joomla.form.field.labelabove"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_TEXT_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MODULE_TEXT_DESCRIPTION" />
+
+            <field name="module_header_position"
+                type="list"
+                default="none"
+                validate="options"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_POSITION_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MODULE_POSITION_DESCRIPTION">
+                <option value="none">PLG_PARAMSINJECTOR_MODULE_POSITION_OPTION_NONE</option>
+                <option value="above">PLG_PARAMSINJECTOR_MODULE_POSITION_OPTION_ABOVE</option>
+                <option value="below">PLG_PARAMSINJECTOR_MODULE_POSITION_OPTION_BELOW</option>
+            </field>
+
+            <field
+                name="module_header_image"
+                type="media"
+                schemes="http,https,ftp,ftps,data,file"
+                validate="url"
+                relative="true"
+                showon="module_header_position!:none"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_IMAGE_LABEL" />
+
+            <field
+                name="module_header_alt"
+                type="text"
+                showon="module_header_position!:none"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_ALT_LABEL" />
+
+            <field
+                name="module_header_css"
+                type="text"
+                validate="CssIdentifier"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_CSS_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MODULE_CSS_DESCRIPTION" />
+
+            <field name="group_footer" type="spacer" label="PLG_PARAMSINJECTOR_SPACER_MODULE_FOOTER" />
+
+            <field 
+                name="module_footer_text" 
+                type="editor" 
+                filter="safehtml"
+                layout="joomla.form.field.labelabove"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_TEXT_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MODULE_TEXT_DESCRIPTION" />
+
+            <field name="module_footer_position"
+                type="list"
+                default="none"
+                validate="options"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_POSITION_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MODULE_POSITION_DESCRIPTION">
+                <option value="none">PLG_PARAMSINJECTOR_MODULE_POSITION_OPTION_NONE</option>
+                <option value="above">PLG_PARAMSINJECTOR_MODULE_POSITION_OPTION_ABOVE</option>
+                <option value="below">PLG_PARAMSINJECTOR_MODULE_POSITION_OPTION_BELOW</option>
+            </field>
+
+            <field
+                name="module_footer_image"
+                type="media"
+                schemes="http,https,ftp,ftps,data,file"
+                validate="url"
+                relative="true"
+                showon="module_footer_position!:none"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_IMAGE_LABEL" />
+
+            <field
+                name="module_footer_alt"
+                type="text"
+                showon="module_footer_position!:none"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_ALT_LABEL" />
+
+            <field
+                name="module_footer_css"
+                type="text"
+                validate="CssIdentifier"
+                label="PLG_PARAMSINJECTOR_FIELD_MODULE_CSS_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MODULE_CSS_DESCRIPTION" />
+
+        </fieldset>
+
+    </fields>
+</form>
