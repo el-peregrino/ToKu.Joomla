@@ -6,10 +6,12 @@
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-07-17</creationDate>
     <version>1.0.1</version>
+    <stability>beta</stability>
     <description>PLG_UPCOMINGEVENTFILTER_DESCRIPTION</description>
     <namespace path="src">ToKu\Plugin\System\UpcomingEventFilter</namespace>
     <languages>
-        <language tag="en-GB">language/en-GB/upcomingeventfilter.sys.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_upcomingeventfilter.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_upcomingeventfilter.sys.ini</language>
     </languages>
     <files>
         <folder plugin="upcomingeventfilter">services</folder>

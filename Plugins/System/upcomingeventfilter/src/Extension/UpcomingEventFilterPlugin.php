@@ -23,6 +23,11 @@ use ToKu\Library\MVC\MVCFactory;
 
 final class UpcomingEventFilterPlugin extends CMSPlugin implements SubscriberInterface
 {
+    // TYPED CONSTANTS ARE SUPPORTED SINCE PHP 8.3
+
+    public const NAME = 'UpcomingEventFilter';
+    public const ELEMENT = 'upcomingeventfilter';
+
     public static function getSubscribedEvents(): array
     {
         return [
