@@ -43,14 +43,14 @@ class ArticlesModel extends BaseModel
 
         $db = $this->getDatabase();
 
-        // add the criteria field value - when the upcoming event starts
+        // add the event field value - when the upcoming event starts
         $query->select($db->quoteName('fv.value') . ' AS ' . $db->quoteName('event_start'));
 
         // join field values
         $query->join('INNER', $db->quoteName('#__fields_values', 'fv'), $db->quoteName('fv.item_id') . '=' . $db->quoteName('a.id'));
 
-        // use the configured criteria field
-        $query->where($db->quoteName('fv.field_id') . ' = ' . $params->get('eventfilter_criteria_field'));
+        // use the configured event field
+        $query->where($db->quoteName('fv.field_id') . ' = ' . $params->get('eventfilter_event_field'));
 
         // upcoming events filter
         if (!$params->get('eventfilter_show_past', 0)) {
