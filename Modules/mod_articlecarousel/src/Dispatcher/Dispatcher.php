@@ -10,12 +10,9 @@
 
 namespace ToKu\Module\ArticleCarousel\Site\Dispatcher;
 
-use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Dispatcher\AbstractModuleDispatcher;
 use Joomla\CMS\Helper\HelperFactoryAwareInterface;
 use Joomla\CMS\Helper\HelperFactoryAwareTrait;
-use Joomla\Input\Input;
-use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 
 \defined('_JEXEC') or die;
 
@@ -26,11 +23,6 @@ use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareInterface
 {
     use HelperFactoryAwareTrait;
-
-    public function __construct(\stdClass $module, CMSApplicationInterface $app, Input $input)
-    {
-        parent::__construct($module, $app, $input);
-    }
 
     /**
      * Returns the layout data.
@@ -47,7 +39,7 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
         // stop the dispatch process
         if ($data === false) return false;
 
-        /** @var ArticleCarouselHelper $helper */
+        /** @var \ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper $helper */
         $helper = $this->getHelperFactory()->getHelper('ArticleCarouselHelper');
 
         // get articles

@@ -43,7 +43,6 @@ class ArticleCarouselHelper implements DatabaseAwareInterface
      * @param   CMSApplicationInterface $app     The application.
      *
      * @return  array
-     *
      */
     public function getArticles(Registry $params, CMSApplicationInterface $app): array
     {

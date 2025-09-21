@@ -216,12 +216,14 @@
                 <field
                     name="module_class"
                     type="text"
+                    validate="CssIdentifier"
                     label="MOD_ARTICLECAROUSEL_MODULE_CLASS_LABEL"
                     description="MOD_ARTICLECAROUSEL_MODULE_CLASS_DESCRIPTION" />
 
                 <field
                     name="box_class"
                     type="text"
+                    validate="CssIdentifier"
                     label="MOD_ARTICLECAROUSEL_ITEM_CLASS_LABEL"
                     description="MOD_ARTICLECAROUSEL_ITEM_CLASS_DESCRIPTION" />
 

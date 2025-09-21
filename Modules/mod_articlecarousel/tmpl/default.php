@@ -11,6 +11,8 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
+use ToKu\Library\Closures;
+use ToKu\Library\Html;
 use ToKu\Library\JToKu;
 use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 
@@ -26,14 +28,9 @@ JToKu::registerWebAssets(
  * @var array $articles
  */
 
-$append = function(string $key) use ($params): string
-{
-    $value = $params->get($key, '');
-    return $value ? " $value" : $value;
-};
-
-$boolean = fn(bool $value): string
-    => $value ? 'true' : 'false';
+$isFalse = Closures::isFalse($params);
+$isTrue = Closures::isTrue($params);
+$param = Closures::param($params);
 
 if (empty($articles) || count($articles) == 0) {
     echo '<!-- ' . ArticleCarouselHelper::MODULE .' :: no items -->';
@@ -55,12 +52,14 @@ $indicators = $params->get('indicators');
     'css' => $params->get('module_header_css')
 ]); ?>
 
-<div id="<?= $carouselId; ?>" class="carousel slide<?= $append('module_class'); ?>" data-js="carousel-infinite"
-    data-interval="<?= $params->get('interval'); ?>" data-autoplay="<?= $boolean($params->get('autoplay')); ?>"
+<div id="<?= $carouselId; ?>" class="carousel slide<?= $param('module_class'); ?>"
+    data-js="carousel-infinite"
+    data-interval="<?= $params->get('interval'); ?>"
+    data-autoplay="<?= Html::boolean($params->get('autoplay')); ?>"
     data-direction="<?= $params->get('direction'); ?>"
-    data-indicators="<?= $boolean($indicators != 'none'); ?>">
+    data-indicators="<?= Html::boolean($indicators != 'none'); ?>">
 
-    <?php if ($indicators == 'above'): ?>
+    <?php if ($indicators === 'above'): ?>
         <ol class="carousel-indicators" data-js="indicators">
             <?php foreach ($articles as $_): ?>
                 <li class="carousel-indicator fas fa-circle"></li>
@@ -81,11 +80,11 @@ $indicators = $params->get('indicators');
                     ];
                 }
                 ?>
-            <div class="carousel-box<?= $append('box_class'); ?>" data-js="box">
+            <div class="carousel-box<?= $param('box_class'); ?>" data-js="box">
                 <div class="card">
-                    <?php if ($params->get('show_image', 0) && isset($image)): ?>
+                    <?php if ($isTrue('show_image') && isset($image)): ?>
                         <figure class="card-image">
-                            <?php if ($params->get('link_image', 0)): ?>
+                            <?php if ($isTrue('link_image')): ?>
                                 <a href="<?= htmlspecialchars($link) ?>" title="<?= htmlspecialchars($article->title) ?>">
                                     <?= LayoutHelper::render('joomla.html.image', $image); ?>
                                 </a>
@@ -100,7 +99,7 @@ $indicators = $params->get('indicators');
                                 href="<?= htmlspecialchars($link) ?>"><?= htmlspecialchars($article->title) ?></a></h3>
                         <div class="card-text"><?= HTMLHelper::_('content.prepare', $article->introtext); ?></div>
 
-                        <?php if ($params->get('show_readmore', 0)) {
+                        <?php if ($isTrue('show_readmore')) {
                             // override access view
                             $params->set('access-view', true);
                             // override alternative read more settings
@@ -113,7 +112,7 @@ $indicators = $params->get('indicators');
         <?php endforeach; ?>
     </div>
 
-    <?php if ($params->get('show_controls', 0)): ?>
+    <?php if ($isTrue('show_controls')): ?>
         <div class="carousel-controls">
             <a href="#<?= $carouselId; ?>" role="button" data-js="prev" class="control-prev">
                 <span aria-hidden="true" class="fas fa-angle-left"></span>
@@ -124,7 +123,7 @@ $indicators = $params->get('indicators');
         </div>
     <?php endif; ?>
 
-    <?php if ($indicators == 'below'): ?>
+    <?php if ($indicators === 'below'): ?>
         <ol class="carousel-indicators" data-js="indicators">
             <?php foreach ($articles as $_): ?>
                 <li class="carousel-indicator fas fa-circle"></li>

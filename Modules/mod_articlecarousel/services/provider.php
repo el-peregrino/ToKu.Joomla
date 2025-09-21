@@ -28,7 +28,6 @@ return new class () implements ServiceProviderInterface {
      * @param   Container  $container  The DI container.
      *
      * @return  void
-     *
      */
     public function register(Container $container): void
     {
