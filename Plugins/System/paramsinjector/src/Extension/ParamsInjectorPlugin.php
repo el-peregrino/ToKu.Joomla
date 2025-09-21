@@ -38,6 +38,10 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
     public function onContentPrepareForm(EventInterface $event): void
     {
         $app = Factory::getApplication();
+
+        // enforce loading the language file
+        $app->getLanguage()->load(Joomla::getPluginName(self::ELEMENT), JPATH_ADMINISTRATOR);
+
         /** @var \Joomla\CMS\Form\Form */
         $form = $event->getArgument('form');
         $data = $event->getArgument('data');
@@ -60,6 +64,6 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
         }
 
         // load field definitions
-        $form->loadFile(Joomla::getPath(JPATH_PLUGINS, Joomla::SYSTEM, self::ELEMENT, Joomla::FORMS, 'params.xml'));
+        $form->loadFile(Joomla::getPath(JPATH_PLUGINS, Joomla::SYSTEM, self::ELEMENT, Joomla::FORMS, 'module.xml'));
     }
 }

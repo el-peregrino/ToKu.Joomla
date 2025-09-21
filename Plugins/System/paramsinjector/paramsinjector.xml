@@ -5,14 +5,14 @@
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-09-18</creationDate>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <description>PLG_PARAMSINJECTOR_DESCRIPTION</description>
     <namespace path="src">ToKu\Plugin\System\ParamsInjector</namespace>
 
     <!-- Assets -->
     <languages>
-        <language tag="en-GB">language/en-GB/paramsinjector.ini</language>
-        <language tag="en-GB">language/en-GB/paramsinjector.sys.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_paramsinjector.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_paramsinjector.sys.ini</language>
     </languages>
 
     <!-- Sources -->
