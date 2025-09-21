@@ -17,6 +17,7 @@ use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Event\EventInterface;
 use Joomla\Event\SubscriberInterface;
+use ToKu\Library\Joomla;
 use ToKu\Library\MVC\MVCFactory;
 
 \defined('_JEXEC') or die;
@@ -43,6 +44,10 @@ final class UpcomingEventFilterPlugin extends CMSPlugin implements SubscriberInt
     {
 
         $app = Factory::getApplication();
+
+        // enforce loading the language file
+        $app->getLanguage()->load(Joomla::getPluginName(self::ELEMENT), JPATH_ADMINISTRATOR);
+
         $form = $event->getArgument('form');
         $data = $event->getArgument('data');
 
@@ -57,9 +62,8 @@ final class UpcomingEventFilterPlugin extends CMSPlugin implements SubscriberInt
             return;
         }
 
-        // inject your custom XML into the 'request' form group
-        Form::addFormPath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'params');
-        $form->loadFile('params', false);
+        // load field definitions
+        $form->loadFile(Joomla::getPath(JPATH_PLUGINS, Joomla::SYSTEM, self::ELEMENT, Joomla::FORMS, 'params.xml'));
     }
 
     /**

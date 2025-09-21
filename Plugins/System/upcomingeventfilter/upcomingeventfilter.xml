@@ -16,7 +16,7 @@
     <files>
         <folder plugin="upcomingeventfilter">services</folder>
         <folder>src</folder>
-        <folder>params</folder>
+        <folder>forms</folder>
     </files>
 
     <!-- Update Servers -->
