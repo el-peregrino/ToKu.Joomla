@@ -42,13 +42,13 @@ return new class () implements InstallerScriptInterface {
     public function preflight(string $type, InstallerAdapter $adapter): bool
     {
         // php version
-        if (version_compare(PHP_VERSION, $this->minimumPhp, '<')) {
+        if (version_compare(PHP_VERSION, $this->minimumPhp, '<=')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_INSTALLER_MINIMUM_PHP', $this->minimumPhp), 'error');
             return false;
         }
 
         // joomla version
-        if (version_compare(JVERSION, $this->minimumJoomla, '<')) {
+        if (version_compare(JVERSION, $this->minimumJoomla, '<=')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minimumJoomla), 'error');
             return false;
         }

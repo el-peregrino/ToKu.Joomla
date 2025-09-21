@@ -38,7 +38,7 @@ class JToKu
      * Version of the library.
      * @var string
      */
-    public const VERSION = '1.0.10';
+    public const VERSION = '1.0.12';
 
     /**
      * Namespace prefix of a component.
