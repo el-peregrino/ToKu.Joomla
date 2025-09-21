@@ -42,4 +42,14 @@ class Joomla
     {
         return implode(DIRECTORY_SEPARATOR, $names);
     }
+
+    /**
+     * Builds the plugin system name from its short name.
+     * @param string $name  The short name of the plugin.
+     * @return string
+     */
+    public static function getPluginName(string $name): string 
+    {
+        return implode('_', ['plg', Joomla::SYSTEM, $name]);
+    }
 }
