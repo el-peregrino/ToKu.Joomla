@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
     <fields name="params">
-        <fieldset name="upcomingeventfilter-params" label="Upcoming Event Filter">
+        <fieldset name="upcomingeventfilter-params" label="PLG_UPCOMINGEVENTFILTER_TAB_EVENT_FILTER" description="PLG_UPCOMINGEVENTFILTER_HELP_EVENT_FILTER">
 
             <field
                 name="eventfilter_enabled"
                 type="radio"
                 default="0"
-                label="Enable Filter"
-                layout="joomla.form.field.radio.switcher">
+                layout="joomla.form.field.radio.switcher"
+                label="PLG_UPCOMINGEVENTFILTER_FIELD_ENABLE_LABEL">
                 <option value="0">JNo</option>
                 <option value="1">JYes</option>
             </field>
 
             <field
-                name="eventfilter_criteria_field"
+                name="eventfilter_event_field"
                 addfieldprefix="ToKu\Library\Field"
                 type="customfieldselector"
                 context="com_content.article"
                 fieldtype="calendar"
                 layout="joomla.form.field.list-fancy-select"
-                label="Criteria Field"
-                description="The custom field to use as event start date"
+                required="true" 
                 showon="eventfilter_enabled:1"
-                required="true" />
+                label="PLG_UPCOMINGEVENTFILTER_FIELD_EVENT_LABEL"
+                description="PLG_UPCOMINGEVENTFILTER_FIELD_EVENT_DESCRIPTION"/>
 
             <field
                 name="eventfilter_show_past"
                 type="radio"
                 default="0"
                 showon="eventfilter_enabled:1"
-                label="Show Past Events"
-                layout="joomla.form.field.radio.switcher">
+                layout="joomla.form.field.radio.switcher"
+                label="PLG_UPCOMINGEVENTFILTER_FIELD_SHOW_PAST_LABEL"
+                description="PLG_UPCOMINGEVENTFILTER_FIELD_SHOW_PAST_DESCRIPTION">
                 <option value="0">JNo</option>
                 <option value="1">JYes</option>
             </field>
@@ -39,14 +40,14 @@
             <field
                 name="eventfilter_order_events"
                 type="list"
-                label="Order Events"
                 default="none"
+                required="true"
                 showon="eventfilter_enabled:1"
-                description="Override system event ordering"
-                required="true">
-                <option value="none">Do Not Apply</option>
-                <option value="ascending">Ascending by Criteria Field</option>
-                <option value="descending">Descending by Criteria Field</option>
+                label="PLG_UPCOMINGEVENTFILTER_FIELD_ORDER_LABEL"
+                description="PLG_UPCOMINGEVENTFILTER_FIELD_ORDER_DESCRIPTION">
+                <option value="none">PLG_UPCOMINGEVENTFILTER_ORDER_OPTION_NONE</option>
+                <option value="ascending">PLG_UPCOMINGEVENTFILTER_ORDER_OPTION_ASCENDING</option>
+                <option value="descending">PLG_UPCOMINGEVENTFILTER_ORDER_OPTION_DESCENDING</option>
             </field>
 
         </fieldset>
