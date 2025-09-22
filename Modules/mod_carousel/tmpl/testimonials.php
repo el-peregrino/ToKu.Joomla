@@ -13,31 +13,57 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
+use ToKu\Library\Closures;
+use ToKu\Library\Html;
 use ToKu\Library\JToKu;
+use ToKu\Module\Carousel\Site\Helper\CarouselHelper;
 
 \defined('_JEXEC') or die;
 
-$wa = JToKu::wamRegister('mod_carousel');
-$wa->useScript('toku.carousel');
-$wa->useStyle('toku.style');
-$wa->useStyle('mod_carousel.style');
+JToKu::registerWebAssets(
+    [CarouselHelper::MODULE],
+    [JToKu::getAsset('carousel')],
+    [JToKu::getAsset('style'), CarouselHelper::getAsset('style')]
+);
 
-if (empty($items) || count($items) == 0) {
-    echo '<!-- mod_carousel :: no items -->';
+/**
+ * @var \Joomla\Registry\Registry $params Module parameters
+ * @var array $items
+ */
+
+$equals = Closures::equals($params);
+$isFalse = Closures::isFalse($params);
+$isTrue = Closures::isTrue($params);
+$param = Closures::param($params);
+
+if (empty($items) || count($items) === 0) {
+    echo '<!-- ' . CarouselHelper::MODULE . ' :: no items -->';
     return;
 }
 
 // create unique id
-$carouselId = 'toku-' . uniqid();
-$indicators = $params->get('show_indicators');
+$carouselId = JToKu::getUniqueId();
+$indicators = $params->get('indicators');
 ?>
 
-<div id="<?= $carouselId; ?>" class="carousel slide <?= $params->get('module_class'); ?>" data-js="carousel-infinite"
-    data-interval="<?= $params->get('interval'); ?>" data-autoplay="<?= $params->get('autoplay') ? "true" : "false"; ?>"
-    data-direction="<?= $params->get('direction'); ?>"
-    data-indicators="<?= $indicators != 'none' ? 'true' : 'false'; ?>">
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'carousel',
+    'type' => 'header',
+    'text' => $params->get('module_header_text'),
+    'position' => $params->get('module_header_position'),
+    'src' => $params->get('module_header_image'),
+    'alt' => $params->get('module_header_alt'),
+    'css' => $params->get('module_header_css')
+]); ?>
 
-    <?php if ($indicators == 'above'): ?>
+<div id="<?= $carouselId; ?>" class="carousel slide<?= $param('module_class'); ?>"
+    data-js="carousel-infinite"
+    data-interval="<?= $params->get('interval'); ?>"
+    data-autoplay="<?= Html::boolean($params->get('autoplay')); ?>"
+    data-direction="<?= $params->get('direction'); ?>"
+    data-indicators="<?= Html::boolean($indicators !== 'none'); ?>">
+
+    <?php if ($indicators === 'above'): ?>
         <ol class="carousel-indicators" data-js="indicators">
             <?php foreach ($items as $_): ?>
                 <li class="carousel-indicator fas fa-circle"></li>
@@ -49,13 +75,12 @@ $indicators = $params->get('show_indicators');
         <?php foreach ($items as $item): ?>
             <?php
                 // prepare image data
-                $image = null;
-                if (isset($item->image) && $params->get('show_image', 0)) {
-                    $image = [
+                $image = $isFalse('show_image') || empty($item->image)
+                    ? false
+                    : [
                         'src' => $item->image,
-                        'alt' => $item->image_alt,
+                        'alt' => empty($item->image_alt) ? false : $item->image_alt,
                     ];
-                }
                 ?>
             <div class="carousel-box <?= $params->get('box_class'); ?> <?= $item->class; ?>" data-js="box">
                 <div class="card">

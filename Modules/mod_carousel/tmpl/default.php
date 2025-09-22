@@ -8,36 +8,58 @@
  * @license     GNU General Public License version 3 or later
  */
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
-use Joomla\CMS\Router\Route;
+use ToKu\Library\Closures;
+use ToKu\Library\Html;
 use ToKu\Library\JToKu;
+use ToKu\Module\Carousel\Site\Helper\CarouselHelper;
 
 \defined('_JEXEC') or die;
 
-$wa = JToKu::wamRegister('mod_carousel');
-$wa->useScript('toku.carousel');
-$wa->useStyle('toku.style');
-$wa->useStyle('mod_carousel.style');
+JToKu::registerWebAssets(
+    [CarouselHelper::MODULE],
+    [JToKu::getAsset('carousel')],
+    [JToKu::getAsset('style'), CarouselHelper::getAsset('style')]
+);
 
-if (empty($items) || count($items) == 0) {
-    echo '<!-- mod_carousel :: no items -->';
+/**
+ * @var \Joomla\Registry\Registry $params Module parameters
+ * @var array $items
+ */
+
+// define helper closures
+
+$isTrue = Closures::isTrue($params);
+$param = Closures::param($params);
+
+if (empty($items) || count($items) === 0) {
+    echo '<!-- ' . CarouselHelper::MODULE . ' :: no items -->';
     return;
 }
 
 // create unique id
-$carouselId = 'toku-' . uniqid();
-$indicators = $params->get('show_indicators');
+$carouselId = JToKu::getUniqueId();
+$indicators = $params->get('indicators');
 ?>
 
-<div id="<?= $carouselId; ?>" class="carousel slide <?= $params->get('module_class'); ?>" data-js="carousel-infinite"
-    data-interval="<?= $params->get('interval'); ?>" data-autoplay="<?= $params->get('autoplay') ? "true" : "false"; ?>"
-    data-direction="<?= $params->get('direction'); ?>"
-    data-indicators="<?= $indicators != 'none' ? 'true' : 'false'; ?>">
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'carousel',
+    'type' => 'header',
+    'text' => $params->get('module_header_text'),
+    'position' => $params->get('module_header_position'),
+    'src' => $params->get('module_header_image'),
+    'alt' => $params->get('module_header_alt'),
+    'css' => $params->get('module_header_css')
+]); ?>
 
-    <?php if ($indicators == 'above'): ?>
+<div id="<?= $carouselId; ?>" class="carousel slide<?= $param('module_class'); ?>" 
+    data-js="carousel-infinite"
+    data-interval="<?= $params->get('interval'); ?>"
+    data-autoplay="<?= Html::boolean($params->get('autoplay')); ?>"
+    data-direction="<?= $params->get('direction'); ?>"
+    data-indicators="<?= Html::boolean($indicators !== 'none'); ?>">
+
+    <?php if ($indicators === 'above'): ?>
         <ol class="carousel-indicators" data-js="indicators">
             <?php foreach ($items as $_): ?>
                 <li class="carousel-indicator fas fa-circle"></li>
@@ -47,105 +69,43 @@ $indicators = $params->get('show_indicators');
 
     <div class="carousel-container" data-js="container">
         <?php foreach ($items as $item): ?>
-            <?php // get link url
-                $link = null;
-                switch ($item->link_type) {
-                    case 'menu':
-                        $menu = Factory::getApplication()->getMenu()->getItem($item->menu_item);
-                        $link = Route::_($menu->route);
-                        break;
-                    case 'article':
-                        $link = Route::_('index.php?option=com_content&view=article&id=' . (int) $item->article_id);
-                        break;
-                    case 'external':
-                        $link = $item->external_url;
-                        break;
-                }
-                // prepare image data
-                $image = null;
-                if (isset($item->image) && $params->get('show_image', 0)) {
-                    $image = [
-                        'src' => $item->image,
-                        'alt' => $item->image_alt,
-                    ];
-                }
-                ?>
-            <div class="carousel-box <?= $params->get('box_class'); ?> <?= $item->class; ?>" data-js="box">
-                <?php if ($params->get('link_style') == 'card' && !empty($link)): ?>
-                    <a href="<?= htmlspecialchars($link) ?>" target="<?= $item->link_target ?: '_self' ?>"
-                        rel="<?= $item->link_target === '_blank' ? 'noopener' : '' ?>">
-                    <?php endif; ?>
-                    <div class="card">
-                        <?php if ($params->get('show_image', 0) && isset($image)): ?>
-                            <figure class="card-image">
-                                <?php if ($params->get('link_style') == 'title' && $params->get('link_image', 0) && !empty($link)): ?>
-                                    <a href="<?= htmlspecialchars($link) ?>" title="<?= htmlspecialchars($item->heading) ?>">
-                                        <?= LayoutHelper::render('joomla.html.image', $image); ?>
-                                    </a>
-                                <?php else: ?>
-                                    <?= LayoutHelper::render('joomla.html.image', $image); ?>
-                                <?php endif; ?>
-                            </figure>
-                        <?php endif; ?>
-                        <div class="card-body">
-                            <?php if (empty($link) || $params->get('link_style') == 'card'): ?>
-                                <?php if (!empty($item->heading)): ?>
-                                    <h3 class="card-title"><?= htmlspecialchars($item->heading) ?></h3>
-                                <?php endif; ?>
-                                <?php if (!empty($item->text)): ?>
-                                    <div class="card-text"><?= HTMLHelper::_('content.prepare', $item->text); ?></div>
-                                <?php endif; ?>
-                                <?php if ($item->show_author): ?>
-                                    <div class="card-footer">
-                                        <span class="author-name"><?= htmlspecialchars($item->author) ?></span>
-                                        <span class="author-title"><?= htmlspecialchars($item->author_title) ?></span>
-                                    </div>
-                                <?php endif; ?>
-                            <?php else: ?>
-                                <?php if (!empty($item->heading)): ?>
-                                    <h3 class="card-title">
-                                        <a href="<?= htmlspecialchars($link) ?>" target="<?= $item->link_target ?: '_self' ?>"
-                                            rel="<?= $item->link_target === '_blank' ? 'noopener' : '' ?>">
-                                            <?= htmlspecialchars($item->heading) ?>
-                                        </a>
-                                    </h3>
-                                <?php endif; ?>
-                                <?php if (!empty($item->text)): ?>
-                                    <div class="card-text"><?= HTMLHelper::_('content.prepare', $item->text); ?></div>
-                                <?php endif; ?>
-                                <?php if ($item->show_author): ?>
-                                    <div class="card-footer">
-                                        <span class="author-name"><?= htmlspecialchars($item->author_name) ?></span>
-                                        <span class="author-title"><?= htmlspecialchars($item->author_title) ?></span>
-                                    </div>
-                                <?php endif; ?>
-                                <?php if ($params->get('show_readmore', 0)): ?>
-                                    <a href="<?= htmlspecialchars($link) ?>" class="btn btn-primary">
-                                        <?= Text::_('JGLOBAL_READ_MORE'); ?>
-                                    </a>
-                                <?php endif; ?>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <?php if ($params->get('link_style') == 'card'): ?>
-                    </a>
-                <?php endif; ?>
+            <?php 
+            /** @var \ToKu\Module\Carousel\Site\Helper\CarouselData $item */
+            if (CarouselHelper::isNotSupported($item))
+            {
+                // TODO remove once article, quote, and sequence support added
+                continue; // not yet supported
+            }
+            // get link url
+            $link = CarouselHelper::getLinkUrl($item);
+            // prepare image data
+            $image = CarouselHelper::getImage($item);
+            ?>
+            <div class="carousel-box<?= $param('box_class'); ?><?= Html::append($item->item_class); ?>" data-js="box">
+                
+                <?= LayoutHelper::render("toku.carousel.$item->item_type", [
+                    'image' => $image, 
+                    'item' => $item, 
+                    'link' => $link, 
+                    'params' => $params
+                ]); ?>
+
             </div>
         <?php endforeach; ?>
     </div>
 
-    <?php if ($params->get('show_controls', 0)): ?>
+    <?php if ($isTrue('show_controls')): ?>
         <div class="carousel-controls">
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="control-prev">
+            <a href="#<?= $carouselId; ?>" role="button" data-js="prev" class="control-prev">
                 <span aria-hidden="true" class="fas fa-angle-left"></span>
             </a>
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="next" class="control-next">
+            <a href="#<?= $carouselId; ?>" role="button" data-js="next" class="control-next">
                 <span aria-hidden="true" class="fas fa-angle-right"></span>
             </a>
         </div>
     <?php endif; ?>
 
-    <?php if ($indicators == 'below'): ?>
+    <?php if ($indicators === 'below'): ?>
         <ol class="carousel-indicators" data-js="indicators">
             <?php foreach ($items as $_): ?>
                 <li class="carousel-indicator fas fa-circle"></li>
@@ -153,3 +113,13 @@ $indicators = $params->get('show_indicators');
         </ol>
     <?php endif; ?>
 </div>
+
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'carousel',
+    'type' => 'footer',
+    'text' => $params->get('module_footer_text'),
+    'position' => $params->get('module_footer_position'),
+    'src' => $params->get('module_footer_image'),
+    'alt' => $params->get('module_footer_alt'),
+    'css' => $params->get('module_footer_css')
+]); ?>

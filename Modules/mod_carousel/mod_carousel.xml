@@ -18,32 +18,59 @@
     ]]>
     </description>
     <namespace path="src">ToKu\Module\Carousel</namespace>
+
+    <!-- Sources -->
     <files>
         <folder module="mod_carousel">services</folder>
         <folder>src</folder>
         <folder>tmpl</folder>
         <folder>forms</folder>
+        <folder target="layouts">layouts</folder>
     </files>
+
+    <!-- Assets -->
     <media destination="mod_carousel" folder="media">
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
     </media>
-    <languages folder="admin">
+
+    <languages>
         <language tag="en-GB">language/en-GB/mod_carousel.ini</language>
         <language tag="en-GB">language/en-GB/mod_carousel.sys.ini</language>
     </languages>
+
+    <!-- Installation Script -->
     <scriptfile>script.php</scriptfile>
-    <config>
+
+    <!-- Update Servers -->
+    <updateservers>
+        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+    </updateservers>
+
+    <!-- Module Configuration -->
+    <config module="mod_carousel">
         <fields name="params">
             <fieldset name="basic">
 
+                <field name="items"
+                    type="subform"
+                    multiple="true"
+                    formsource="modules/mod_carousel/forms/item.xml"
+                    min="2"
+                    max="10"
+                    label="MOD_CAROUSEL_ITEMS_LABEL"
+                    description="MOD_CAROUSEL_ITEMS_DESCRIPTION"/>
+
+            </fieldset>
+            
+            <fieldset name="options" label="MOD_CAROUSEL_TAB_OPTIONS">
                 <field 
                     name="autoplay" 
                     type="radio" 
                     default="1" 
-                    label="Automatic Slide" 
                     layout="joomla.form.field.radio.switcher"
-                    required="true">
+                    label="MOD_CAROUSEL_AUTOPLAY_LABEL"
+                    description="MOD_CAROUSEL_AUTOPLAY_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
@@ -52,37 +79,41 @@
                     name="interval"
                     type="number"
                     default="5000"
+                    min="1000"
+                    max="3600000"
                     showon="autoplay:1"
-                    label="Slide Interval"
-                    description="The interval of item slides in milliseconds"
-                    min="1000"/>
+                    label="MOD_CAROUSEL_INTERVAL_LABEL"
+                    description="MOD_CAROUSEL_INTERVAL_DESCRIPTION" />
 
                 <field
-                    name="direction" 
-                    type="list" 
-                    default="left" 
+                    name="direction"
+                    type="list"
+                    default="left"
                     showon="autoplay:1"
-                    label="Slide Direction" >
-                    <option value="left">Left</option>
-                    <option value="right">Right</option>
+                    label="MOD_CAROUSEL_DIRECTION_LABEL"
+                    description="MOD_CAROUSEL_DIRECTION_DESCRIPTION">
+                    <option value="left">MOD_CAROUSEL_DIRECTION_OPTION_LEFT</option>
+                    <option value="right">MOD_CAROUSEL_DIRECTION_OPTION_RIGHT</option>
                 </field>
 
                 <field
-                    name="show_indicators" 
-                    type="list" 
-                    default="below" 
-                    label="Controls position" >
-                    <option value="none">None</option>
-                    <option value="above">Above</option>
-                    <option value="below">Below</option>
+                    name="indicators"
+                    type="list"
+                    default="below"
+                    label="MOD_CAROUSEL_INDICATORS_LABEL"
+                    description="MOD_CAROUSEL_INDICATORS_DESCRIPTION">
+                    <option value="none">MOD_CAROUSEL_INDICATORS_OPTION_NONE</option>
+                    <option value="above">MOD_CAROUSEL_INDICATORS_OPTION_ABOVE</option>
+                    <option value="below">MOD_CAROUSEL_INDICATORS_OPTION_BELOW</option>
                 </field>
 
-                <field 
+                <field
                     name="show_controls"
-                    type="radio" 
-                    default="1" 
-                    label="Show Control Buttons" 
-                    layout="joomla.form.field.radio.switcher">
+                    type="radio"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_CAROUSEL_CONTROLS_LABEL"
+                    description="MOD_CAROUSEL_CONTROLS_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
@@ -91,17 +122,19 @@
                     name="link_style" 
                     type="list" 
                     default="title" 
-                    label="Link Style" >
-                    <option value="title">Title</option>
-                    <option value="card">Card</option>
+                    label="MOD_CAROUSEL_LINK_STYLE_LABEL"
+                    description="MOD_CAROUSEL_LINK_STYLE_DESCRIPTION">
+                    <option value="title">MOD_CAROUSEL_LINK_STYLE_OPTION_TITLE</option>
+                    <option value="card">MOD_CAROUSEL_LINK_STYLE_OPTION_CARD</option>
                 </field>
 
-                <field 
+                <field
                     name="show_image"
-                    type="radio" 
-                    default="1" 
-                    label="Show Image" 
-                    layout="joomla.form.field.radio.switcher">
+                    type="radio"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_CAROUSEL_IMAGE_LABEL"
+                    description="MOD_CAROUSEL_IMAGE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
@@ -111,8 +144,9 @@
                     type="radio" 
                     showon="show_image:1[AND]link_style:title"
                     default="1" 
-                    label="Link Image" 
-                    layout="joomla.form.field.radio.switcher">
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_CAROUSEL_LINK_IMAGE_LABEL"
+                    description="MOD_CAROUSEL_LINK_IMAGE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
@@ -122,49 +156,37 @@
                     type="radio" 
                     showon="link_style:title"
                     default="1" 
-                    label="Show Readmore Button" 
-                    layout="joomla.form.field.radio.switcher">
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_CAROUSEL_READMORE_LABEL"
+                    description="MOD_CAROUSEL_READMORE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
             </fieldset>
 
-            <fieldset name="items" label="Carousel Items">
-                
-                <field 
-                    name="box_class"
-                    type="text"
-                    label="Item Class"
-                    description="Additional styles for carousel items"
-                    required="false"/>
-
-                <field name="items"
-                    type="subform"
-                    multiple="true"
-                    label="Carousel Items"
-                    description="Add items to the carousel"
-                    formsource="modules/mod_carousel/forms/item.xml"
-                    min="2"
-                    max="10" />
-
-            </fieldset>
-
             <fieldset name="advanced">
-				
-                <field
-					name="layout"
-					type="modulelayout"
-					label="JFIELD_ALT_LAYOUT_LABEL"
-					class="form-select"
-					validate="moduleLayout" />
                 
-                <field 
+                <field
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    class="form-select"
+                    validate="moduleLayout" />
+                
+                <field
                     name="module_class"
                     type="text"
-                    label="Module Class"
-                    description="Additional styles"
-                    required="false"/>
+                    validate="CssIdentifier"
+                    label="MOD_CAROUSEL_FIELD_MODULE_CLASS_LABEL"
+                    description="MOD_CAROUSEL_FIELD_MODULE_CLASS_DESCRIPTION" />
+
+                <field
+                    name="box_class"
+                    type="text"
+                    validate="CssIdentifier"
+                    label="MOD_CAROUSEL_FIELD_BOX_CLASS_LABEL"
+                    description="MOD_CAROUSEL_FIELD_BOX_CLASS_DESCRIPTION" />
 
             </fieldset>
         </fields>

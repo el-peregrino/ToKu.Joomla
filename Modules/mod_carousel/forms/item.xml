@@ -1,45 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-    <field name="image" type="media" label="Image" />
-    <field name="image_alt" type="text" label="Image Alt" />
-    <field name="heading" type="text" label="Heading" />
-    <field name="text" type="editor" label="Text" />
-    <field 
-        name="show_author"
-        type="radio" 
-        default="0" 
-        label="Show Author" 
-        layout="joomla.form.field.radio.switcher">
-        <option value="0">JNo</option>
-        <option value="1">JYes</option>
-    </field>
-    <field name="author_name" type="text" lable="Author" showon="show_author:1" />
-    <field name="author_title" type="text" lable="Author Title" showon="show_author:1" />
-    <field name="class" type="text" label="CSS Class" />
 
     <field
-        name="access"
-        type="accesslevel"
-        label="JFIELD_ACCESS_LABEL"
-        description="JFIELD_ACCESS_DESC"
-        required="true" />
-
-    <field name="link_type" type="list" label="Link Type" default="none" description="Choose what the item should link to" required="true">
-        <option value="none">No Link</option>
-        <option value="menu">Menu Item</option>
-        <option value="article">Article</option>
-        <option value="external">External Link</option>
+        name="item_type"
+        type="list"
+        default="carousel"
+        validate="options"
+        label="MOD_CAROUSEL_FIELD_ITEM_TYPE_LABEL"
+        description="MOD_CAROUSEL_FIELD_ITEM_TYPE_DESCRIPTION">
+        <option value="article-future">MOD_CAROUSEL_ITEM_TYPE_OPTION_ARTICLE</option>
+        <option value="carousel">MOD_CAROUSEL_ITEM_TYPE_OPTION_CAROUSEL</option>
+        <option value="quote-future">MOD_CAROUSEL_ITEM_TYPE_OPTION_QUOTE</option>
+        <option value="sequence-future">MOD_CAROUSEL_ITEM_TYPE_OPTION_SEQUENCE</option>
+        <option value="testimonial">MOD_CAROUSEL_ITEM_TYPE_OPTION_TESTIMONIAL</option>
     </field>
 
-    <field name="menu_item" type="menuitem" label="Select Menu Item" filter="component" showon="link_type:menu" />
+    <field name="group_article" type="spacer" showon="item_type:article"
+        label="MOD_CAROUSEL_SPACER_ARTICLE" />
+
+
+    <field name="group_carousel" type="spacer" showon="item_type:carousel"
+        label="MOD_CAROUSEL_SPACER_CAROUSEL" />
+
+    <field
+        name="carousel_heading"
+        type="text"
+        showon="item_type:carousel"
+        label="MOD_CAROUSEL_FIELD_CAROUSEL_HEADING_LABEL"
+        description="MOD_CAROUSEL_FIELD_CAROUSEL_HEADING_DESCRIPTION" />
+
+    <field
+        name="carousel_subheading"
+        type="text"
+        showon="item_type:carousel"
+        label="MOD_CAROUSEL_FIELD_CAROUSEL_SUBHEADING_LABEL"
+        description="MOD_CAROUSEL_FIELD_CAROUSEL_SUBHEADING_DESCRIPTION" />
+
+    <field
+        name="carousel_text"
+        type="editor"
+        validate="safehtml"
+        showon="item_type:carousel"
+        layout="joomla.form.field.labelabove"
+        label="MOD_CAROUSEL_FIELD_CAROUSEL_TEXT_LABEL"
+        description="MOD_CAROUSEL_FIELD_CAROUSEL_TEXT_DESCRIPTION" />
+
+    <field
+        name="carousel_image"
+        type="media"
+        schemes="http,https,ftp,ftps,data,file"
+        validate="url"
+        relative="true"
+        showon="item_type:carousel"
+        label="MOD_CAROUSEL_FIELD_IMAGE_LABEL" />
+
+    <field
+        name="carousel_image_alt"
+        type="text"
+        showon="item_type:carousel"
+        label="MOD_CAROUSEL_FIELD_IMAGE_ALT_LABEL" />
+
+
+    <field name="group_quote" type="spacer" showon="item_type:quote"
+        label="MOD_CAROUSEL_SPACER_QUOTE" />
+
+
+    <field name="group_sequence" type="spacer" showon="item_type:sequence"
+        label="MOD_CAROUSEL_SPACER_SEQUENCE" />
+
+
+    <field name="group_testimonial" type="spacer" showon="item_type:testimonial"
+        label="MOD_CAROUSEL_SPACER_TESTIMONIAL" />
+
+    <field
+        name="testimonial_heading"
+        type="text"
+        showon="item_type:testimonial"
+        label="MOD_CAROUSEL_FIELD_TESTIMONIAL_HEADING_LABEL"
+        description="MOD_CAROUSEL_FIELD_TESTIMONIAL_HEADING_DESCRIPTION" />
+
+    <field
+        name="testimonial_text"
+        type="editor"
+        validate="safehtml"
+        showon="item_type:testimonial"
+        layout="joomla.form.field.labelabove"
+        label="MOD_CAROUSEL_FIELD_TESTIMONIAL_TEXT_LABEL"
+        description="MOD_CAROUSEL_FIELD_TESTIMONIAL_TEXT_DESCRIPTION" />
+
+    <field
+        name="testimonial_image"
+        type="media"
+        schemes="http,https,ftp,ftps,data,file"
+        validate="url"
+        relative="true"
+        showon="item_type:testimonial"
+        label="MOD_CAROUSEL_FIELD_IMAGE_LABEL" />
+
+    <field
+        name="testimonial_image_alt"
+        type="text"
+        showon="item_type:testimonial"
+        label="MOD_CAROUSEL_FIELD_IMAGE_ALT_LABEL" />
+
+    <field
+        name="testimonial_author_name"
+        type="text"
+        showon="item_type:testimonial"
+        label="MOD_CAROUSEL_FIELD_TESTIMONIAL_AUTHOR_NAME_LABEL"
+        description="MOD_CAROUSEL_FIELD_TESTIMONIAL_AUTHOR_NAME_DESCRIPTION" />
+
+    <field
+        name="testimonial_author_title"
+        type="text"
+        showon="item_type:testimonial"
+        label="MOD_CAROUSEL_FIELD_TESTIMONIAL_AUTHOR_TITLE_LABEL"
+        description="MOD_CAROUSEL_FIELD_TESTIMONIAL_AUTHOR_TITLE_DESCRIPTION" />
+
+
+    <field name="group_link" type="spacer" showon="item_type:carousel"
+        label="MOD_CAROUSEL_SPACER_LINK" />
+
+    <field
+        name="link_type"
+        type="list"
+        default="none"
+        validate="options"
+        showon="item_type:carousel"
+        label="MOD_CAROUSEL_FIELD_LINK_TYPE_LABEL"
+        description="MOD_CAROUSEL_FIELD_LINK_TYPE_DESCRIPTION">
+        <option value="none">MOD_CAROUSEL_LINK_TYPE_OPTION_NONE</option>
+        <option value="menu">MOD_CAROUSEL_LINK_TYPE_OPTION_MENU</option>
+        <option value="article">MOD_CAROUSEL_LINK_TYPE_OPTION_ARTICLE</option>
+        <option value="external">MOD_CAROUSEL_LINK_TYPE_OPTION_EXTERNAL</option>
+    </field>
+
+    <field
+        name="link_menu"
+        type="menuitem"
+        filter="component"
+        showon="link_type:menu"
+        label="MOD_CAROUSEL_FIELD_LINK_MENU_LABEL"
+        description="" />
 
     <field
         type="ModalSelect"
-        name="article_id"
-        label="Article"
+        name="link_article"
+        label="MOD_CAROUSEL_FIELD_LINK_ARTICLE_LABEL"
         select="true"
         iconSelect="fa fa-list"
-        titleSelect="Selecting the Article"
+        titleSelect="MOD_CAROUSEL_MODAL_ARTICLE"
         urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
         clear="true"
         sql_title_table="#__content"
@@ -47,10 +157,40 @@
         sql_title_key="id"
         showon="link_type:article" />
 
-    <field name="external_url" type="url" label="External Link" description="Enter full link starting with https://" showon="link_type:external" />
+    <field
+        name="link_url"
+        type="url"
+        validate="url"
+        showon="link_type:external"
+        label="MOD_CAROUSEL_FIELD_LINK_EXTERNAL_LABEL"
+        description="MOD_CAROUSEL_FIELD_LINK_EXTERNAL_DESCRIPTION" />
 
-    <field name="link_target" type="list" label="Open Link In" default="_self" description="Choose whether the link opens in a new tab or the same tab." showon="link_type!:none">
-        <option value="_self">Same Tab</option>
-        <option value="_blank">New Tab</option>
+    <field
+        name="link_target"
+        type="list"
+        default="_self"
+        showon="link_type!:none"
+        label="MOD_CAROUSEL_FIELD_LINK_TARGET_LABEL"
+        description="MOD_CAROUSEL_FIELD_LINK_TARGET_DESCRIPTION">
+        <option value="_self">MOD_CAROUSEL_LINK_TARGET_OPTION_SELF</option>
+        <option value="_blank">MOD_CAROUSEL_LINK_TARGET_OPTION_NEW</option>
     </field>
+
+
+    <field name="group_options" type="spacer" label="MOD_CAROUSEL_SPACER_OPTIONS" />
+
+    <field
+        name="access"
+        type="accesslevel"
+        required="true"
+        label="JFIELD_ACCESS_LABEL"
+        description="JFIELD_ACCESS_DESC" />
+
+    <field
+        name="item_class"
+        type="text"
+        validate="CssIdentifier"
+        label="MOD_CAROUSEL_FIELD_ITEM_CLASS_LABEL"
+        description="MOD_CAROUSEL_FIELD_ITEM_CLASS_DESCRIPTION" />
+
 </form>
