@@ -10,11 +10,11 @@
 
 namespace ToKu\Plugin\System\ParamsInjector\Extension;
 
-use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Event\EventInterface;
 use Joomla\Event\SubscriberInterface;
 use ToKu\Library\Joomla;
+use ToKu\Library\JToKu;
 
 \defined('_JEXEC') or die;
 
@@ -24,6 +24,12 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
 
     public const NAME = 'ParamsInjector';
     public const ELEMENT = 'paramsinjector';
+
+    public function __construct($config = [])
+    {
+        $this->autoloadLanguage = true;
+        parent::__construct($config);
+    }
 
     public static function getSubscribedEvents(): array
     {
@@ -37,17 +43,12 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
      */
     public function onContentPrepareForm(EventInterface $event): void
     {
-        $app = Factory::getApplication();
-
-        // enforce loading the language file
-        $app->getLanguage()->load(Joomla::getPluginName(self::ELEMENT), JPATH_ADMINISTRATOR);
-
         /** @var \Joomla\CMS\Form\Form */
         $form = $event->getArgument('form');
         $data = $event->getArgument('data');
 
         // only apply to module forms in the administrator
-        if (!$app->isClient('administrator') || $form->getName() !== 'com_modules.module') {
+        if (!$this->getApplication()->isClient('administrator') || $form->getName() !== 'com_modules.module') {
             return;
         }
 
@@ -58,8 +59,8 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
             'mod_sequence', 
             'mod_upcomingevent'
         ];
-        $module = $data->module ?? '';
-        if (!in_array($module, $modules, true)) {
+        $module = $data->module ?? JToKu::getConfigModule($form);
+        if (!$module || !in_array($module, $modules, true)) {
             return;
         }
 

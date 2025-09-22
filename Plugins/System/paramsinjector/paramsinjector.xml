@@ -5,7 +5,7 @@
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-09-18</creationDate>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <description>PLG_PARAMSINJECTOR_DESCRIPTION</description>
     <namespace path="src">ToKu\Plugin\System\ParamsInjector</namespace>
 
