@@ -5,7 +5,7 @@
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-07-17</creationDate>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <stability>beta</stability>
     <description>PLG_UPCOMINGEVENTFILTER_DESCRIPTION</description>
     <namespace path="src">ToKu\Plugin\System\UpcomingEventFilter</namespace>

@@ -11,8 +11,6 @@
 namespace ToKu\Plugin\System\UpcomingEventFilter\Extension;
 
 use Joomla\CMS\Extension\ComponentInterface;
-use Joomla\CMS\Factory;
-use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Event\EventInterface;
@@ -29,6 +27,12 @@ final class UpcomingEventFilterPlugin extends CMSPlugin implements SubscriberInt
     public const NAME = 'UpcomingEventFilter';
     public const ELEMENT = 'upcomingeventfilter';
 
+    public function __construct($config = [])
+    {
+        $this->autoloadLanguage = true;
+        parent::__construct($config);
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
@@ -42,17 +46,12 @@ final class UpcomingEventFilterPlugin extends CMSPlugin implements SubscriberInt
      */
     public function onContentPrepareForm(EventInterface $event): void
     {
-
-        $app = Factory::getApplication();
-
-        // enforce loading the language file
-        $app->getLanguage()->load(Joomla::getPluginName(self::ELEMENT), JPATH_ADMINISTRATOR);
-
+        /** @var \Joomla\CMS\Form\Form */
         $form = $event->getArgument('form');
         $data = $event->getArgument('data');
 
         // only apply to menu item forms in the administrator
-        if (!$app->isClient('administrator') || $form->getName() !== 'com_menus.item') {
+        if (!$this->getApplication()->isClient('administrator') || $form->getName() !== 'com_menus.item') {
             return;
         }
 
