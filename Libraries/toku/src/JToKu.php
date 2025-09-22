@@ -13,6 +13,7 @@ namespace ToKu\Library;
 use Joomla\CMS\Application\SiteApplication;
 use Joomla\CMS\Document\Document;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Form\Form;
 use Joomla\CMS\WebAsset\WebAssetManager;
 
 \defined('_JEXEC') or die;
@@ -265,6 +266,19 @@ class JToKu
         $app->setUserState($key, $value);
 
         return $value;
+    }
+
+    /**
+     * Gets name of the module the config form.
+     * @param Form $form    The form object to inspect.
+     * @return string|false
+     */
+    public static function getConfigModule(Form $form): string|false
+    {
+        // find config element with module attribute
+        $config = $form->getXml()->xpath('//config[@module]');
+        // read module attribute or return empty
+        return $config ? $config[0]['module'] : false;
     }
 
 }
