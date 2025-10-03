@@ -1,154 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
-    <name>ToKu Upcoming Event</name>
-    <version>1.0.12</version>
+    <name>MOD_UPCOMINGEVENT</name>
+    <version>1.0.11</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-07-01</creationDate>
-    <description>
-    <![CDATA[
-        <p><strong>Upcoming Event Module</strong> displays the <em>next upcoming event</em> that matches a calendar-based custom field. The <em>event</em> is a Joomla article content item.</p>
-        <ul>
-            <li>Filters by custom calendar field value</li>
-            <li>Optional filters for categories and tags</li>
-            <li>Supports multiple layouts</li>
-            <li>Includes a live countdown timer</li>
-            <li>Built using Joomla 5 DI, dispatcher, and asset manager</li>
-            <li>Uses ToKu Library</li>
-        </ul>
-    ]]>
-    </description>
+    <description>MOD_UPCOMINGEVENT_DESCRIPTION</description>
     <namespace path="src">ToKu\Module\UpcomingEvent</namespace>
+
+    <!-- Sources -->
     <files>
         <folder module="mod_upcomingevent">services</folder>
         <folder>src</folder>
         <folder>tmpl</folder>
+        <filename>config.xml</filename>
     </files>
+
+    <!-- Assets -->
     <media destination="mod_upcomingevent" folder="media">
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
     </media>
+
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_upcomingevent.ini</language>
+        <language tag="en-GB">language/en-GB/mod_upcomingevent.sys.ini</language>
+    </languages>
+
+    <!-- Installation Script -->
     <scriptfile>script.php</scriptfile>
-    <config>
+
+    <!-- Update Servers -->
+    <updateservers>
+        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+    </updateservers>
+
+    <!-- Module Configuration -->
+    <config module="mod_upcomingevent">
         <fields name="params">
             <fieldset name="basic">
 
-                <field name="criteria_field"
-                    addfieldprefix ="ToKu\Library\Field"
+                <field name="event_field"
+                    addfieldprefix="ToKu\Library\Field"
                     type="customfieldselector"
                     context="com_content.article"
                     fieldtype="calendar"
+                    required="true"
                     layout="joomla.form.field.list-fancy-select"
-                    label="Criteria Field"
-                    description="The custom field to use as event start date"
-                    required="true" />
+                    label="MOD_UPCOMINGEVENT_EVENT_LABEL"
+                    description="MOD_UPCOMINGEVENT_EVENT_DESCRIPTION" />
 
                 <field
-                    name="filter_categories"
+                    name="categories"
                     type="category"
                     extension="com_content"
                     multiple="true"
                     layout="joomla.form.field.list-fancy-select"
                     filter="intarray"
-                    label="Filter by Categories"
-                    description="Only include articles from selected categories (optional)"
-                    required="false" />
+                    label="MOD_UPCOMINGEVENT_FILTER_CATEGORIES_LABEL"
+                    description="MOD_UPCOMINGEVENT_FILTER_CATEGORIES_DESCRIPTION" />
 
-                <field name="filter_tags"
+                <field name="tags"
                     type="tag"
                     multiple="true"
-                    label="Filter by Tags"
-                    description="Only include articles with selected tags (optional)"
-                    required="false" />
+                    label="MOD_UPCOMINGEVENT_FILTER_TAGS_LABEL"
+                    description="MOD_UPCOMINGEVENT_FILTER_TAGS_DESCRIPTION" />
 
-                <field 
-                    name="upcoming_header"
+                <field
+                    name="headline"
                     type="text"
-                    label="Upcoming Event Header"
-                    description="The header above the remaining time"
-                    required="true"/>
-                
-                <field 
+                    required="true"
+                    label="MOD_UPCOMINGEVENT_HEADLINE_LABEL"
+                    description="MOD_UPCOMINGEVENT_HEADLINE_DESCRIPTION" />
+
+                <field
                     name="expired_text"
                     type="text"
-                    label="Expired Message"
-                    description="Text to display when the time runs out"
-                    required="true"/>
+                    required="true"
+                    label="MOD_UPCOMINGEVENT_EXPIRED_TEXT_LABEL"
+                    description="MOD_UPCOMINGEVENT_EXPIRED_TEXT_DESCRIPTION" />
 
-                <field 
+                <field
                     name="datetime_format"
                     type="text"
-                    label="Date Time Format"
-                    description="Date and time format string (refer to PHP manual)"
+                    required="true"
                     default="l, j. F Y H:i"
-                    required="true"/>
+                    label="MOD_UPCOMINGEVENT_DATETIME_FORMAT_LABEL"
+                    description="MOD_UPCOMINGEVENT_DATETIME_FORMAT_DESCRIPTION" />
 
-                <field 
+            </fieldset>
+
+            <fieldset name="options" label="MOD_UPCOMINGEVENT_TAB_OPTIONS">
+
+                <field
                     name="show_readmore"
-                    type="radio" 
-                    default="1" 
-                    label="Show Readmore Button" 
-                    layout="joomla.form.field.radio.switcher">
+                    type="radio"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_UPCOMINGEVENT_READMORE_LABEL"
+                    description="MOD_UPCOMINGEVENT_READMORE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
-                <field 
+                <field
                     name="show_readmore_title"
-                    type="radio" 
+                    type="radio"
                     showon="show_readmore:1"
-                    default="1" 
-                    label="Show Readmore Title" 
-                    layout="joomla.form.field.radio.switcher">
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_UPCOMINGEVENT_READMORE_TITLE_LABEL"
+                    description="MOD_UPCOMINGEVENT_READMORE_TITLE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
-                <field 
+                <field
                     name="show_image"
-                    type="radio" 
-                    default="1" 
-                    label="Show Image" 
-                    layout="joomla.form.field.radio.switcher">
+                    type="radio"
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_UPCOMINGEVENT_IMAGE_LABEL"
+                    description="MOD_UPCOMINGEVENT_IMAGE_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
-                <field 
+                <field
                     name="link_image"
-                    type="radio" 
+                    type="radio"
                     showon="show_image:1"
-                    default="1" 
-                    label="Link Image" 
-                    layout="joomla.form.field.radio.switcher">
+                    default="1"
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_UPCOMINGEVENT_LINK_LABEL"
+                    description="MOD_UPCOMINGEVENT_LINK_DESCRIPTION">
                     <option value="0">JNo</option>
                     <option value="1">JYes</option>
                 </field>
 
                 <field name="countdown_labels"
                     type="text"
-                    label="Countdown Labels"
-                    description="Labels for days, hours, minutes, seconds"
-                    default="days,hours,minutes,seconds"
-                    required="false" />
+                    hint="days,hours,minutes,seconds"
+                    label="MOD_UPCOMINGEVENT_COUNTDOWN_LABEL"
+                    description="MOD_UPCOMINGEVENT_COUNTDOWN_DESCRIPTION" />
 
             </fieldset>
+
             <fieldset name="advanced">
-				
+
                 <field
-					name="layout"
-					type="modulelayout"
-					label="JFIELD_ALT_LAYOUT_LABEL"
-					class="form-select"
-					validate="moduleLayout" />
-                
-                <field 
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    class="form-select"
+                    validate="moduleLayout" />
+
+                <field
                     name="module_class"
                     type="text"
-                    label="Module Class"
-                    description="Additional styles"
-                    required="false"/>
+                    label="MOD_UPCOMINGEVENT_MODULE_CLASS_LABEL"
+                    description="MOD_UPCOMINGEVENT_MODULE_CLASS_DESCRIPTION" />
 
             </fieldset>
         </fields>

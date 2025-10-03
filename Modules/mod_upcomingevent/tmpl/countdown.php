@@ -12,33 +12,58 @@ use Joomla\CMS\Date\Date;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
-use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
+use ToKu\Library\Closures;
 use ToKu\Library\JToKu;
+use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
 
 \defined('_JEXEC') or die;
 
-$wa = JToKu::wamRegister('mod_upcomingevent');
-$wa->useScript('toku.countdown');
-$wa->useStyle('mod_upcomingevent.style');
+JToKu::registerWebAssets(
+    [UpcomingEventHelper::MODULE],
+    [JToKu::getAsset('countdown')],
+    [UpcomingEventHelper::getAsset('style')]
+);
+
+/**
+ * @var \Joomla\Registry\Registry $params Module parameters
+ * @var \stdClass $event
+ */
+
+$isTrue = Closures::isTrue($params);
+$param = Closures::param($params);
+
 
 if (empty($event)) {
-    echo '<!-- mod_upcomingevent :: no events -->';
+    echo '<!-- ' . UpcomingEventHelper::MODULE . ' :: no events -->';
     return;
 }
+
 $date = new Date($event->value);
 $link = Route::_('index.php?option=com_content&view=article&id=' . (int) $event->id);
+// prepare image data
 $images = json_decode($event->images);
-if (!empty($images->image_intro)) {
-    $image = [
+$image = empty($images->image_intro)
+    ? false
+    : [
         'src' => $images->image_intro,
-        'alt' => empty($images->image_intro_alt) && empty($images->image_intro_alt_empty) ? false : $images->image_intro_alt,
+        'alt' => empty($images->image_intro_alt) ? false : $images->image_intro_alt
     ];
-}
-$class = $params->get('module_class', '');
+
 $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), ['days', 'hours', 'minutes', 'seconds']);
 
 ?>
-<div class="upcoming-event event-countdown <?= $class; ?>">
+
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'upcoming-event',
+    'type' => 'header',
+    'text' => $params->get('module_header_text'),
+    'position' => $params->get('module_header_position'),
+    'src' => $params->get('module_header_image'),
+    'alt' => $params->get('module_header_alt'),
+    'css' => $params->get('module_header_css')
+]); ?>
+
+<div class="upcoming-event event-countdown<?= $param('module_class'); ?>">
     <div data-js="countdown" data-countdown="<?= $event->value ?>" class="countdown">
         <div class="upcoming-header"><?= $params->get('upcoming_header'); ?></div>
         <div class="countdown-cont">
@@ -65,9 +90,9 @@ $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), [
     </div>
 
     <div class="event">
-        <?php if ($params->get('show_image', 0) && !empty($images->image_intro)): ?>
+        <?php if ($isTrue('show_image') && $image): ?>
             <figure class="event-image">
-                <?php if ($params->get('link_image')): ?>
+                <?php if ($isTrue('link_image')): ?>
                     <a href="<?= htmlspecialchars($link) ?>" title="<?= htmlspecialchars($event->title) ?>">
                         <?= LayoutHelper::render('joomla.html.image', $image); ?>
                     </a>
@@ -80,7 +105,8 @@ $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), [
             <div class="event-start"><?= $date->format($params->get('detetime_format', 'l, j. F Y H:i'), true); ?></div>
             <h3><a href="<?= htmlspecialchars($link) ?>"><?= htmlspecialchars($event->title) ?></a></h3>
             <div class="event-intro"><?= HTMLHelper::_('content.prepare', $event->introtext); ?></div>
-            <?php if ($params->get('show_readmore', 0) == 1) {
+
+            <?php if ($isTrue('show_readmore')) {
                 // override access view
                 $params->set('access-view', true);
                 // override alternative read more settings
@@ -90,3 +116,13 @@ $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''), [
         </div>
     </div>
 </div>
+
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'upcoming-event',
+    'type' => 'footer',
+    'text' => $params->get('module_footer_text'),
+    'position' => $params->get('module_footer_position'),
+    'src' => $params->get('module_footer_image'),
+    'alt' => $params->get('module_footer_alt'),
+    'css' => $params->get('module_footer_css')
+]); ?>

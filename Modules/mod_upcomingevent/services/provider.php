@@ -13,6 +13,8 @@ use Joomla\CMS\Extension\Service\Provider\Module;
 use Joomla\CMS\Extension\Service\Provider\ModuleDispatcherFactory;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
+use ToKu\Library\JToKu;
+use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
 
 \defined('_JEXEC') or die;
 
@@ -26,13 +28,11 @@ return new class () implements ServiceProviderInterface {
      * @param   Container  $container  The DI container.
      *
      * @return  void
-     *
      */
     public function register(Container $container): void
     {
-        // Joomla services
-        $container->registerServiceProvider(new ModuleDispatcherFactory('\\ToKu\\Module\\UpcomingEvent'));
-        $container->registerServiceProvider(new HelperFactory('\\ToKu\\Module\\UpcomingEvent\\Site\\Helper'));
+        $container->registerServiceProvider(new ModuleDispatcherFactory(JToKu::getNamespace(UpcomingEventHelper::NAME, JToKu::MODULE)));
+        $container->registerServiceProvider(new HelperFactory(JToKu::getSiteHelper(UpcomingEventHelper::NAME)));
         $container->registerServiceProvider(new Module());
     }
 };
