@@ -39,7 +39,7 @@
     <field
         name="carousel_text"
         type="editor"
-        validate="safehtml"
+        filter="safehtml"
         showon="item_type:carousel"
         layout="joomla.form.field.labelabove"
         label="MOD_CAROUSEL_FIELD_CAROUSEL_TEXT_LABEL"
@@ -82,7 +82,7 @@
     <field
         name="testimonial_text"
         type="editor"
-        validate="safehtml"
+        filter="safehtml"
         showon="item_type:testimonial"
         layout="joomla.form.field.labelabove"
         label="MOD_CAROUSEL_FIELD_TESTIMONIAL_TEXT_LABEL"
