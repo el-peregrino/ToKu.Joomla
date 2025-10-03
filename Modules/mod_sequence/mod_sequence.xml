@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="module" client="site" method="upgrade">
     <name>MOD_SEQUENCE</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <author>ToKu</author>
     <creationDate>2025-01-31</creationDate>
     <description>MOD_SEQUENCE_DESCRIPTION</description>
     <namespace path="src">ToKu\Module\Sequence</namespace>
+
+    <!-- Sources -->
     <files>
         <folder module="mod_sequence">services</folder>
         <folder>src</folder>
         <folder>tmpl</folder>
+        <folder target="layouts">layouts</folder>
     </files>
+
+    <!-- Assets -->
     <media destination="mod_sequence" folder="media">
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
         <folder>images</folder>
     </media>
-    <languages folder="admin">
+
+    <languages>
         <language tag="en-GB">language/en-GB/mod_sequence.ini</language>
         <language tag="en-GB">language/en-GB/mod_sequence.sys.ini</language>
     </languages>
+
+    <!-- Installation Script -->
     <scriptfile>script.php</scriptfile>
-    <config>
+
+    <!-- Update Servers -->
+    <updateservers>
+        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+    </updateservers>
+
+    <!-- Module Configuration -->
+    <config module="mod_sequence">
         <fields name="params">
 
-            <fieldset name="basic" label="MOD_SEQUENCE_TAB_BASIC">
+            <fieldset name="basic">
                 
                 <field
                     name="sequence"
@@ -56,31 +71,53 @@
                     <option value="descending">MOD_SEQUENCE_DIRECTION_DESCENDING</option>
                 </field>
 
-                <field 
-                    name="sequence_css"
-                    type="text"
-                    validate="CssIdentifier"
-                    label="MOD_SEQUENCE_FIELD_SEQUENCE_CSS_LABEL" />
+            </fieldset>
+
+            <fieldset name="module-frame" label="MOD_SEQUENCE_TAB_MODULE_FRAME" description="MOD_SEQUENCE_HELP_MODULE_FRAME">
 
                 <field 
-                    name="item_css"
-                    type="text"
-                    validate="CssIdentifier"
-                    label="MOD_SEQUENCE_FIELD_ITEM_CSS_LABEL" />
+                    name="keep_header_text" 
+                    type="radio" 
+                    default="0" 
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_SEQUENCE_FIELD_KEEP_HEADER_TITLE_LABEL" >
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="keep_header_image" 
+                    type="radio" 
+                    default="0" 
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_SEQUENCE_FIELD_KEEP_HEADER_IMAGE_LABEL" >
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="keep_footer_text" 
+                    type="radio" 
+                    default="0" 
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_SEQUENCE_FIELD_KEEP_FOOTER_TITLE_LABEL" >
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="keep_footer_image" 
+                    type="radio" 
+                    default="0" 
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_SEQUENCE_FIELD_KEEP_FOOTER_IMAGE_LABEL" >
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
 
             </fieldset>
 
             <fieldset name="options" label="MOD_SEQUENCE_TAB_OPTIONS">
-
-                <field 
-                    name="show_title" 
-                    type="radio" 
-                    default="0" 
-                    layout="joomla.form.field.radio.switcher"
-                    label="MOD_SEQUENCE_FIELD_SHOW_TITLE_LABEL" >
-                    <option value="0">JNo</option>
-                    <option value="1">JYes</option>
-                </field>
 
                 <field 
                     name="collapsible" 
@@ -111,6 +148,37 @@
                     <option value="left">MOD_SEQUENCE_ALIGN_LEFT</option>
                     <option value="right">MOD_SEQUENCE_ALIGN_RIGHT</option>
                 </field>
+
+                <field
+                    name="datetime_format"
+                    type="text"
+                    required="true"
+                    default="l, j. F Y H:i"
+                    label="MOD_SEQUENCE_FIELD_DATETIME_FORMAT_LABEL"
+                    description="MOD_SEQUENCE_FIELD_DATETIME_FORMAT_DESCRIPTION" />
+
+            </fieldset>
+
+            <fieldset name="advanced">
+
+                <field
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    class="form-select"
+                    validate="moduleLayout" />
+
+                <field 
+                    name="module_class"
+                    type="text"
+                    validate="CssIdentifier"
+                    label="MOD_SEQUENCE_FIELD_MODULE_CLASS_LABEL" />
+
+                <field 
+                    name="box_class"
+                    type="text"
+                    validate="CssIdentifier"
+                    label="MOD_SEQUENCE_FIELD_ITEM_CLASS_LABEL" />
 
             </fieldset>
 

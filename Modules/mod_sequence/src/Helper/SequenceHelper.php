@@ -19,8 +19,10 @@ class SequenceHelper implements DatabaseAwareInterface
 {
     use DatabaseAwareTrait;
 
-    public static const string NAME = 'Sequence';
-    public static const string MODULE = 'mod_sequence';
+    // TYPED CONSTANTS ARE SUPPORTED SINCE PHP 8.3
+
+    public const NAME = 'Sequence';
+    public const MODULE = 'mod_sequence';
 
     public function getAccessLevels(CMSApplicationInterface $app): string 
     {

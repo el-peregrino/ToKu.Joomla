@@ -11,12 +11,15 @@
 /**
  * Layout variables
  * -----------------
- * @var   array  $displayData  Array with all the given attributes for the sequence time element.
- *                             Contains [justify, item, selector, styles, target, toggle, view]
+ * @var   array  $displayData  Array with all the given attributes for the sequence item element.
+ *                             Contains [format, item, justify, selector, styles, target, toggle, view]
  */
 
+use Joomla\CMS\Date\Date;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
+use ToKu\Library\Html;
 
 \defined('_JEXEC') or die;
 
@@ -37,22 +40,22 @@ $attributes = implode(' ', array_map(fn($key, $value) => "$key=\"$value\"", arra
 /** @var \ToKu\Module\Sequence\Site\Helper\ViewData $view */
 $view = $displayData['view'];
 
-$append = fn(string $value, bool $condition = true): string 
-    => $condition && $value ? " $value" : '';
-
 $collapsed = function() use ($view): string 
 {
     return $view->collapsed ? ' collapsed' : '';
 };
 
-// show label when control enabled and label is not empty
-$label = $view->control && (!empty($item->title) || !empty($item->caption));
+// show label when control enabled (label is not empty due to the time field)
+$label = $view->control;
+
+// format datetime
+$date = (new Date($item->date))->format($displayData['format'] ?: Text::_('DATE_FORMAT_LC2'));
 
 ?>
 
-<div class="<?php echo implode(' ', array_filter($styles)); ?>">
+<div class="<?= implode(' ', array_filter($styles)); ?>">
 
-    <div class="sq-item-control<?= $collapsed(); ?>"<?= $append($attributes); ?>>
+    <div class="sq-item-control<?= $collapsed(); ?>"<?= Html::append($attributes); ?>>
         <?php if ($view->control && $view->expandable) : ?>
             <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
             <i class="fa-solid fa-circle-minus" aria-hidden="true"></i>
@@ -64,7 +67,8 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
     </div>
 
     <?php if ($label) : ?>
-        <div class="sq-item-label<?= $collapsed(); ?>"<?= $append($attributes); ?>>
+        <div class="sq-item-label<?= $collapsed(); ?>"<?= Html::append($attributes); ?>>
+            <span class="sq-item-date"><?= htmlspecialchars($date); ?></span>
             <?php if ($item->title) : ?>
                 <span class="sq-item-title"><?= htmlspecialchars($item->title); ?></span>
             <?php endif; ?>
@@ -86,7 +90,7 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
             <i class="fa-solid fa-caret-<?php echo $caret; ?> sq-arrow" aria-hidden="true"></i>
             <i class="fa-solid fa-caret-up sq-caret" aria-hidden="true"></i>
 
-            <div class="sq-item-heading<?= $collapsed(); ?><?= $append('has-icon', $view->icon); ?>"<?= $append($attributes); ?>>
+            <div class="sq-item-heading<?= $collapsed(); ?><?= Html::append('has-icon', !!$view->icon); ?>"<?= Html::append($attributes); ?>>
                 <?php if ($view->icon) : ?>
                     <i class="<?= $view->icon; ?> sq-icon" aria-hidden="true"></i>
                 <?php endif; ?>
@@ -106,7 +110,7 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
         </div>
 
         <?php if ($view->body) : ?>
-            <div id="<?= $target; ?>"<?= $append("data-bs-parent=\"#$selector\"", $view->parent); ?> class="sq-item-container<?= $append('collapse', $view->expandable); ?><?= $append('show', $view->expanded); ?>">
+            <div id="<?= $target; ?>"<?= Html::append("data-bs-parent=\"#$selector\"", $view->parent); ?> class="sq-item-container<?= Html::append('collapse', $view->expandable); ?><?= Html::append('show', $view->expanded); ?>">
                 <?php if ($item->body) : ?>
                     <div class="sq-item-body">
                         <?= HTMLHelper::_('content.prepare', $item->body); ?>
@@ -114,9 +118,9 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
                 <?php endif; ?>
                 <?php if ($view->link) : ?>
                     <div class="sq-item-link">
-                        <a href="<?= htmlspecialchars($view->link['urk']) ?>"
+                        <a href="<?= htmlspecialchars($view->link['url']) ?>"
                             target="<?= $view->link['target'] ?: '_self' ?>"
-                            rel="<?= $view->link['target'] === '_blank' ? 'noopener' : '' ?>">
+                            rel="<?= Html::noopener($view->link['target']); ?>">
                             <?= $view->link['text']; ?>
                         </a>
                     </div>

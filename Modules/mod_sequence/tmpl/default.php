@@ -3,6 +3,8 @@
 namespace ToKu\Module\Sequence\Site\View;
 
 use Joomla\CMS\Layout\LayoutHelper;
+use ToKu\Library\Closures;
+use ToKu\Library\Html;
 use ToKu\Library\JToKu;
 use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
 use ToKu\Module\Sequence\Site\Helper\ViewData;
@@ -18,32 +20,25 @@ JToKu::useStyles(SequenceHelper::MODULE . '.style');
  * @var array $items
  */
 
-$append = function(string $key) use ($params): string
-{
-    $value = $params->get($key, '');
-    return $value ? " $value" : $value;
-};
-
-$boolean = fn(bool $value): string
-    => $value ? 'true' : 'false';
+$isTrue = Closures::isTrue($params);
+$param = Closures::param($params);
 
 $images = json_decode($sequence->images);
-$selector = "sequence-$sequence->id";
+$selector = JToKu::getUniqueId();
 ?>
 
-<div class="sq-sequence<?= $append('sequence_css'); ?>">
-    <?php if ($params->get('show_title')): ?>
-        <h2 class="sq-title"><?= htmlspecialchars($sequence->title); ?></h2>
-    <?php endif; ?>
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'sequence',
+    'type' => 'header',
+    'text' => $isTrue('keep_header_text') ? $sequence->header : $params->get('module_header_text'),
+    'position' => $isTrue('keep_header_image') ? $images->header_position : $params->get('module_header_position'),
+    'src' => $isTrue('keep_header_image') ? $images->image_header : $params->get('module_header_image'),
+    'alt' => $isTrue('keep_header_image') ? $images->image_header_alt : $params->get('module_header_alt'),
+    'css' => $params->get('module_header_css')
+]); ?>
 
-    <?= LayoutHelper::render('toku.sequence.frame', [
-        'type' => 'header',
-        'text' => $sequence->header,
-        'position' => $images->header_position,
-        'src' => $images->image_header,
-        'alt' => $images->image_header_alt
-    ]); ?>
-
+<div class="sq-sequence<?= $param('module_class'); ?>">
+    
     <div id="<?= $selector; ?>" class="sq-items-container sq-<?= $params->get('align'); ?>">
         <?php 
         $justify = '';
@@ -57,7 +52,7 @@ $selector = "sequence-$sequence->id";
             // line justification
             $justify = $view->getJustification($justify);
             // prepare css styles
-            $styles = ['sq-item', $justify, $view->css, $params->get('item_css', ''), 'col-12'];
+            $styles = ['sq-item', $justify, $view->css, $params->get('box_class', ''), 'col-12'];
             array_push($styles, $view->line === 'center' ? 'col-md-6' : 'col-md');
             if ($view->expandable) {
                 array_push($styles, 'sq-expandable');
@@ -65,7 +60,7 @@ $selector = "sequence-$sequence->id";
                     'data-bs-toggle' => 'collapse',
                     'data-bs-target' => "#$target",
                     'aria-controls' => $target,
-                    'aria-expanded' => $boolean($view->expanded)
+                    'aria-expanded' => Html::boolean($view->expanded)
                 ];
             }
             if (!$view->control) {
@@ -73,6 +68,7 @@ $selector = "sequence-$sequence->id";
             }
 
             $data = [
+                'format' => $params->get('datetime_format'),
                 'item' => $item,
                 'justify' => $justify,
                 'selector' => $selector,
@@ -83,7 +79,7 @@ $selector = "sequence-$sequence->id";
             ];
 
             if ($sequence->type === 1) {
-                echo LayoutHelper::render('toko.sequence.time', $data);
+                echo LayoutHelper::render('toku.sequence.time', $data);
             }
             else {
                 echo LayoutHelper::render('toku.sequence.item', $data);
@@ -91,11 +87,14 @@ $selector = "sequence-$sequence->id";
         } ?>
     </div>
     
-    <?= LayoutHelper::render('toku.sequence.frame', [
-        'type' => 'footer',
-        'text' => $sequence->footer,
-        'position' => $images->footer_position,
-        'src' => $images->image_footer,
-        'alt' => $images->image_footer_alt
-    ]); ?>
 </div>
+
+<?= LayoutHelper::render('toku.module.frame', [
+    'name' => 'sequence',
+    'type' => 'footer',
+    'text' => $isTrue('keep_footer_text') ? $sequence->footer : $params->get('module_footer_text'),
+    'position' => $isTrue('keep_footer_image') ? $images->footer_position : $params->get('module_footer_position'),
+    'src' => $isTrue('keep_footer_image') ? $images->image_footer : $params->get('module_footer_image'),
+    'alt' => $isTrue('keep_footer_image') ? $images->image_footer_alt : $params->get('module_footer_alt'),
+    'css' => $params->get('module_footer_css')
+]); ?>

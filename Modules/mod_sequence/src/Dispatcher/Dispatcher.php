@@ -10,27 +10,20 @@
 
 namespace ToKu\Module\Sequence\Site\Dispatcher;
 
-use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Dispatcher\AbstractModuleDispatcher;
-use Joomla\CMS\Dispatcher\DispatcherInterface;
 use Joomla\CMS\Helper\HelperFactoryAwareInterface;
 use Joomla\CMS\Helper\HelperFactoryAwareTrait;
 use Joomla\CMS\Helper\ModuleHelper;
-use Joomla\Input\Input;
-use Joomla\Registry\Registry;
 use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
-use ToKu\Module\Timeline\Site\Helper\TimelineData;
 
 \defined('_JEXEC') or die;
 
+/**
+ * Dispatcher class for mod_sequence
+ */
 class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareInterface
 {
     use HelperFactoryAwareTrait;
-
-    public function __construct(\stdClass $module, CMSApplicationInterface $app, Input $input)
-    {
-        parent::__construct($module, $app, $input);
-    }
 
     public function dispatch(): void
     {
@@ -66,6 +59,9 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
         $data['sequence'] = $sequence;
         // load items
         $data['items'] = $helper->getItems($params, $levels, $sequence ? $sequence->type : -1);
+        
+        // layout
+        $data['layout'] = $params->get('layout', 'default');
 
         return $data;
     }
