@@ -7,7 +7,7 @@
         <client>site</client>
         <version>1.0.4</version>
         <infourl title="ToKu Carousel Module">
-            https://joomla.toku.cz/modules/mod_carousel-1.0.4.html
+            https://joomla.toku.cz/modules/mod_carousel.html#version-1.0.4
         </infourl>
         <downloads>
             <downloadurl type="full" format="zip">
@@ -16,7 +16,6 @@
         </downloads>
         <tags>
             <tag>beta</tag>
-            <tag>rc</tag>
         </tags>
         <php_minimum>8.2.0</php_minimum>
         <targetplatform name="joomla" version="5.[34]"/>

@@ -1,0 +1,281 @@
+@font-face {
+    font-family: 'Goldman';
+    src: url('../fonts/goldman-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Goldman';
+    src: url('../fonts/goldman-bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('../fonts/ubuntu-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('../fonts/ubuntu-bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('../fonts/ubuntu-light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('../fonts/ubuntu-medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --font-primary: 'Ubuntu', Arial, sans-serif;
+    --font-heading: 'Goldman', Arial, sans-serif;
+    --color-primary: #0073aa;
+    --color-primary-hover: #005a8c;
+    --color-secondary: #e5f1fb;
+    --color-secondary-hover: #d0e7fa;
+    --color-dark: #222;
+    --color-dark-hover: #444;
+    --color-grey: #555;
+    --color-grey-dark: #333;
+    --color-light: #f0f0f0;
+    --color-light-hover: #e0e0e0;
+
+    --color-button: #fff;
+    --color-text: #222;
+    --color-text-light: #555;
+    --color-background: #f9f9f9;
+    --color-background-alt: #fff;
+    
+    --border-radius: 8px;
+    --box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+body { font-family: var(--font-primary); margin: 2em; background: var(--color-background); color: var(--color-text); }
+
+header { margin-bottom: 2em; }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: normal;
+}
+
+h1 { color: var(--color-primary); }
+
+h3 { font-size: 1.25em; margin-bottom: 0.5em; margin-top: 1.5em; }
+
+section { background: var(--color-background-alt); padding: 0.5em 1.5em; margin: 1em 0; border-radius: var(--border-radius); box-shadow: var(--box-shadow); }
+
+ul {
+    margin-top: 0.5em;
+    padding-left: 0;
+    list-style: none;
+}
+
+ul li {
+    position: relative;
+    padding-left: 2em;
+    margin-bottom: 1em;
+}
+
+ul li::before {
+    content: "\f1aa"; /* Joomla icon unicode from FontAwesome Free */
+    font-family: 'FontAwesome';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.2em;
+    color: #5091cd;
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+}
+
+.ext-params {
+    margin: 0.5em 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em;
+    align-items: center;
+}
+
+.ext-param {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+}
+
+.param-label {
+    font-size: 0.95em;
+    color: var(--color-text-light);
+    margin-right: 0.2em;
+}
+
+.badge {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    border-radius: 0.25em;
+    padding: 0.2em 0.7em;
+    font-size: 0.95em;
+    font-weight: 500;
+    display: inline-block;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+a:hover,
+a:focus {
+    color: var(--color-primary-hover);
+}
+
+.fancy {
+    position: relative;
+}
+.fancy::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 1px;
+    background: var(--color-primary-hover);
+    border-radius: 1px;
+    transition: transform 0.3s ease;
+    transform-origin: left;
+    transform: scaleX(0);
+}
+.fancy:hover::after,
+.fancy:focus::after {
+    transform: scaleX(1);
+}
+
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 500;
+    border-radius: 0.25em;
+    border: none;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 0.3em;
+}
+
+.btn:hover,
+.btn:focus {
+    background: var(--color-secondary-hover);
+    color: var(--color-primary-hover);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-button);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--color-primary-hover);
+    color: var(--color-button);
+}
+
+.btn-secondary {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background: var(--color-secondary-hover);
+    color: var(--color-primary-hover);
+}
+
+.btn-dark {
+    background: var(--color-dark);
+    color: var(--color-button);
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+    background: var(--color-dark-hover);
+    color: var(--color-button);
+}
+
+.btn-grey {
+    background: var(--color-grey);
+    color: var(--color-button);
+}
+
+.btn-grey:hover,
+.btn-grey:focus {
+    background: var(--color-grey-dark);
+    color: var(--color-button);
+}
+
+.btn-light {
+    background: var(--color-light);
+    color: var(--color-grey-dark);
+}
+
+.btn-light:hover,
+.btn-light:focus {
+    background: var(--color-light-hover);
+    color: var(--color-dark);
+}
+
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255,255,255,0.5);
+    padding: 0.25em 0.5em;
+}
+
+.btn-content {
+    display: inline-block;
+    padding: 0.25em 0.75em;
+}
+
+.text-light {
+    color: var(--color-text-light);
+    font-weight: 300;
+}
+
+@media (max-width: 600px) {
+    body {
+        margin: 1em;
+    }
+    .ext-params {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3em;
+    }
+    .ext-param-pair {
+        margin-right: 0;
+    }
+}

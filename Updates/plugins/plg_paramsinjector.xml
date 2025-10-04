@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
     <update>
-        <name>ToKu Article Carousel Module</name>
-        <element>mod_articlecarousel</element>
-        <type>module</type>
+        <name>ToKu Params Injector</name>
+        <element>paramsinjector</element>
+        <type>plugin</type>
         <client>site</client>
-        <version>1.0.5</version>
-        <infourl title="ToKu Article Carousel Module">
-            https://joomla.toku.cz/modules/mod_articlecarousel-1.0.5.html
+        <folder>system</folder>
+        <version>1.0.3</version>
+        <infourl title="ToKu Params Injector">
+            https://joomla.toku.cz/plugins/plg_paramsinjector.html#version-1-0-3
         </infourl>
         <downloads>
             <downloadurl type="full" format="zip">
-                https://joomla.toku.cz/modules/mod_articlecarousel-1.0.5.zip
+                https://joomla.toku.cz/plugins/plg_paramsinjector-1.0.3.zip
             </downloadurl>
         </downloads>
         <tags>
-            <tag>beta</tag>
             <tag>rc</tag>
         </tags>
         <php_minimum>8.2.0</php_minimum>
