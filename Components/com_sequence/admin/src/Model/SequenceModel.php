@@ -12,7 +12,7 @@ namespace ToKu\Component\Sequence\Administrator\Model;
 
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\Registry\Registry;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -44,7 +44,7 @@ class SequenceModel extends AdminModel
 
     protected function loadFormData(): mixed
     {
-        $app = JToKu::getApp();
+        $app = JooToKu::getApp();
         $data = $app->getUserState('com_sequence.edit.sequence.data', []);
 
         return $data ?: $this->getItem();
@@ -52,7 +52,7 @@ class SequenceModel extends AdminModel
 
     protected function prepareTable($table)
     {
-        $app = JToKu::getApp();
+        $app = JooToKu::getApp();
         $task = $app->getInput()->getCmd('task');
         if ($task === 'save2copy') {
             // reset ID so Joomla treats it as a new record

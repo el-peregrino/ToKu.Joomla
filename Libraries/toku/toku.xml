@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="library" method="upgrade">
     <name>ToKu Joomla Library</name>
-    <libraryname>JToKu</libraryname>
+    <libraryname>toku</libraryname>
     <namespace path="src">ToKu\Library</namespace>
-    <version>1.0.13</version>
+    <version>1.0.15</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>

@@ -13,15 +13,15 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use ToKu\Library\Closures;
 use ToKu\Library\Html;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 
 \defined('_JEXEC') or die;
 
-JToKu::registerWebAssets(
+JooToKu::registerWebAssets(
     [ArticleCarouselHelper::MODULE], 
-    [JToKu::getAsset('carousel')], 
-    [JToKu::getAsset('style'), ArticleCarouselHelper::getAsset('style')]);
+    [JooToKu::getAsset('carousel')], 
+    [JooToKu::getAsset('style'), ArticleCarouselHelper::getAsset('style')]);
 
 /**
  * @var \Joomla\Registry\Registry $params Module parameters
@@ -38,7 +38,7 @@ if (empty($articles) || count($articles) == 0) {
 }
 
 // create unique id
-$carouselId = JToKu::getUniqueId();
+$carouselId = JooToKu::getUniqueId();
 $indicators = $params->get('indicators');
 ?>
 

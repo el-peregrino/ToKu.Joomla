@@ -16,7 +16,7 @@ use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use ToKu\Component\Sequence\Administrator\Extension\SequenceComponent;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -34,8 +34,8 @@ return new class() implements ServiceProviderInterface {
      */
     public function register(Container $container): void
     {
-        $container->registerServiceProvider(new ComponentDispatcherFactory(JToKu::getNamespace(SequenceComponent::NAME, JToKu::COMPONENT)));
-        $container->registerServiceProvider(new MVCFactory(JToKu::getNamespace(SequenceComponent::NAME, JToKu::COMPONENT)));
+        $container->registerServiceProvider(new ComponentDispatcherFactory(JooToKu::getNamespace(SequenceComponent::NAME, JooToKu::COMPONENT)));
+        $container->registerServiceProvider(new MVCFactory(JooToKu::getNamespace(SequenceComponent::NAME, JooToKu::COMPONENT)));
         $container->set(
             ComponentInterface::class,
             function (Container $container) {

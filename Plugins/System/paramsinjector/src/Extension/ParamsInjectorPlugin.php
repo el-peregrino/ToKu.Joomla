@@ -14,7 +14,7 @@ use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Event\EventInterface;
 use Joomla\Event\SubscriberInterface;
 use ToKu\Library\Joomla;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -59,7 +59,7 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
             'mod_sequence', 
             'mod_upcomingevent'
         ];
-        $module = $data->module ?? JToKu::getConfigModule($form);
+        $module = $data->module ?? JooToKu::getConfigModule($form);
         if (!$module || !in_array($module, $modules, true)) {
             return;
         }

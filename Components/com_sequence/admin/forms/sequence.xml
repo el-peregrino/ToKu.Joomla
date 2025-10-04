@@ -21,10 +21,12 @@
     <fieldset name="content">
 
         <field name="header" type="editor" filter="safehtml"
+            layout="joomla.form.field.labelabove"
             label="COM_SQ_FIELD_SEQUENCE_HEADER_LABEL"
             description="COM_SQ_FIELD_SEQUENCE_HEADER_DESCRIPTION" />
 
         <field name="footer" type="editor" filter="safehtml"
+            layout="joomla.form.field.labelabove"
             label="COM_SQ_FIELD_SEQUENCE_FOOTER_LABEL"
             description="COM_SQ_FIELD_SEQUENCE_FOOTER_DESCRIPTION" />
 

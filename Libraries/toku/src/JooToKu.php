@@ -2,7 +2,7 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  JToKu
+ * @subpackage  JooToKu
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
@@ -21,7 +21,7 @@ use Joomla\CMS\WebAsset\WebAssetManager;
 /**
  * ToKu.Joomla 5 Library
  */
-class JToKu
+class JooToKu
 {
     private static $application;
     private static $document;
@@ -39,7 +39,7 @@ class JToKu
      * Version of the library.
      * @var string
      */
-    public const VERSION = '1.0.12';
+    public const VERSION = '1.0.14';
 
     /**
      * Namespace prefix of a component.

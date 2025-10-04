@@ -35,9 +35,11 @@
             description="COM_SQ_FIELD_SUBHEADING_DESCRIPTION" />
 
         <field name="body" type="editor" filter="safehtml"
+            layout="joomla.form.field.labelabove"
             label="COM_SQ_FIELD_BODY_LABEL" />
 
         <field name="footer" type="editor" filter="safehtml"
+            layout="joomla.form.field.labelabove"
             label="COM_SQ_FIELD_FOOTER_LABEL" />
 
     </fieldset>

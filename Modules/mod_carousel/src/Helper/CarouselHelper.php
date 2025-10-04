@@ -13,7 +13,7 @@ namespace ToKu\Module\Carousel\Site\Helper;
 use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -72,7 +72,7 @@ class CarouselHelper
     {
         switch ($item->link_type) {
             case 'menu':
-                $menu = JToKu::getApp()->getMenu()->getItem($item->link_menu);
+                $menu = JooToKu::getApp()->getMenu()->getItem($item->link_menu);
                 return Route::_($menu->route);
             case 'article':
                 return Route::_('index.php?option=com_content&view=article&id=' . (int) $item->link_article);

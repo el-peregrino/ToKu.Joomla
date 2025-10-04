@@ -13,7 +13,7 @@ namespace ToKu\Component\Sequence\Administrator\Model;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\ParameterType;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -43,7 +43,7 @@ class ItemsModel extends ListModel
 
     protected function populateState($ordering = 'si.id', $direction = 'asc')
     {
-        $app = JToKu::getApp();
+        $app = JooToKu::getApp();
 
         /**
          * Current sequence.
@@ -54,7 +54,7 @@ class ItemsModel extends ListModel
          * 
          * @var int $sequence
          */
-        $sequence = JToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
+        $sequence = JooToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
 
         // get the sequence filter value from the request state (local, not affected by session)
         $sequenceFilter = $this->getState('filter.sequence', '');

@@ -6,13 +6,13 @@
         <type>plugin</type>
         <client>site</client>
         <folder>system</folder>
-        <version>1.0.3</version>
+        <version>1.0.5</version>
         <infourl title="ToKu Upcoming Event Filter">
-            https://joomla.toku.cz/plugins/plg_upcomingeventfilter.html#version-1-0-3
+            https://joomla.toku.cz/plugins/plg_upcomingeventfilter.html#version-1-0-5
         </infourl>
         <downloads>
             <downloadurl type="full" format="zip">
-                https://joomla.toku.cz/plugins/plg_upcomingeventfilter-1.0.3.zip
+                https://joomla.toku.cz/plugins/plg_upcomingeventfilter-1.0.5.zip
             </downloadurl>
         </downloads>
         <tags>

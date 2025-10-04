@@ -15,15 +15,15 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use ToKu\Library\Closures;
 use ToKu\Library\Html;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 use ToKu\Module\Carousel\Site\Helper\CarouselHelper;
 
 \defined('_JEXEC') or die;
 
-JToKu::registerWebAssets(
+JooToKu::registerWebAssets(
     [CarouselHelper::MODULE],
-    [JToKu::getAsset('carousel')],
-    [JToKu::getAsset('style'), CarouselHelper::getAsset('style')]
+    [JooToKu::getAsset('carousel')],
+    [JooToKu::getAsset('style'), CarouselHelper::getAsset('style')]
 );
 
 /**
@@ -42,7 +42,7 @@ if (empty($items) || count($items) === 0) {
 }
 
 // create unique id
-$carouselId = JToKu::getUniqueId();
+$carouselId = JooToKu::getUniqueId();
 $indicators = $params->get('indicators');
 ?>
 
@@ -110,10 +110,10 @@ $indicators = $params->get('indicators');
 
     <?php if ($params->get('show_controls', 0)): ?>
         <div class="carousel-controls">
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="prev" class="control-prev">
+            <a href="#<?= $carouselId; ?>" role="button" data-js="prev" class="control-prev">
                 <span aria-hidden="true" class="fas fa-angle-left"></span>
             </a>
-            <a href="#<?php echo $carouselId; ?>" role="button" data-js="next" class="control-next">
+            <a href="#<?= $carouselId; ?>" role="button" data-js="next" class="control-next">
                 <span aria-hidden="true" class="fas fa-angle-right"></span>
             </a>
         </div>

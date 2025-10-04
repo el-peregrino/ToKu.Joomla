@@ -2,7 +2,7 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  JToKu
+ * @subpackage  JooToKu
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later

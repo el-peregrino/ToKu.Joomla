@@ -20,7 +20,7 @@ return new class () implements InstallerScriptInterface {
 
     private string $minimumJoomla = '5.3.0';
     private string $minimumPhp = '8.2.0';
-    private string $minimumToKu = "1.0.13";
+    private string $minimumToKu = "1.0.15";
 
     public function install(InstallerAdapter $adapter): bool
     {
@@ -55,12 +55,12 @@ return new class () implements InstallerScriptInterface {
         }
 
         // dependency check
-        if (!class_exists('ToKu\Library\JToKu')) {
+        if (!class_exists('ToKu\Library\JooToKu')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('PLG_PARAMSINJECTOR_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;
         }
 
-        $version = \ToKu\Library\JToKu::VERSION ?? null;
+        $version = \ToKu\Library\JooToKu::VERSION ?? null;
         if (version_compare($version, $this->minimumToKu, '<')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('PLG_PARAMSINJECTOR_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;

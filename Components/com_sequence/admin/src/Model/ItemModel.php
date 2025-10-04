@@ -12,7 +12,7 @@ namespace ToKu\Component\Sequence\Administrator\Model;
 
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\Registry\Registry;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -75,7 +75,7 @@ class ItemModel extends AdminModel
 
     protected function loadFormData()
     {
-        $app = JToKu::getApp();
+        $app = JooToKu::getApp();
         // get form data from session
         $state = $app->getUserState('com_sequence.edit.item.data', []);
 
@@ -94,7 +94,7 @@ class ItemModel extends AdminModel
          * 
          * @var int $sequence
          */
-        $sequence = JToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
+        $sequence = JooToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
 
         // prefill the sequence_id
         if (empty($data['sequence_id']) && $sequence) {
@@ -106,7 +106,7 @@ class ItemModel extends AdminModel
 
     protected function prepareTable($table)
     {
-        $app = JToKu::getApp();
+        $app = JooToKu::getApp();
         $task = $app->getInput()->getCmd('task');
         if ($task === 'save2copy') {
             // reset ID so Joomla treats it as a new record

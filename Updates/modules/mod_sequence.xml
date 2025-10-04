@@ -5,18 +5,17 @@
         <element>mod_sequence</element>
         <type>module</type>
         <client>site</client>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
         <infourl title="ToKu Sequence Module">
-            https://joomla.toku.cz/modules/mod_sequence-1.0.4.html
+            https://joomla.toku.cz/modules/mod_sequence.html#version-1-0-5
         </infourl>
         <downloads>
             <downloadurl type="full" format="zip">
-                https://joomla.toku.cz/modules/mod_sequence-1.0.4.zip
+                https://joomla.toku.cz/modules/mod_sequence-1.0.5.zip
             </downloadurl>
         </downloads>
         <tags>
             <tag>beta</tag>
-            <tag>rc</tag>
         </tags>
         <php_minimum>8.2.0</php_minimum>
         <targetplatform name="joomla" version="5.[34]"/>

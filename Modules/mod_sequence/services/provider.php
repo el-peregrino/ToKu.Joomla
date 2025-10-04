@@ -13,7 +13,7 @@ use Joomla\CMS\Extension\Service\Provider\Module;
 use Joomla\CMS\Extension\Service\Provider\ModuleDispatcherFactory;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
 
 \defined('_JEXEC') or die;
@@ -33,8 +33,8 @@ return new class () implements ServiceProviderInterface {
      */
     public function register(Container $container): void
     {
-        $container->registerServiceProvider(new ModuleDispatcherFactory(JToKu::getNamespace(SequenceHelper::NAME)));
-        $container->registerServiceProvider(new HelperFactory(JToKu::getSiteHelper(SequenceHelper::NAME)));
+        $container->registerServiceProvider(new ModuleDispatcherFactory(JooToKu::getNamespace(SequenceHelper::NAME)));
+        $container->registerServiceProvider(new HelperFactory(JooToKu::getSiteHelper(SequenceHelper::NAME)));
         $container->registerServiceProvider(new Module());
     }
 };

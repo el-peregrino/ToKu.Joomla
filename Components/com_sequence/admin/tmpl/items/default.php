@@ -93,22 +93,22 @@ $append = fn(string $value, bool $condition = true): string
                         <?= HTMLHelper::_('grid.checkall'); ?>
                     </th>
                     <th scope="col" class="w-1 text-center d-none d-md-table-cell">
-                        <?php echo HTMLHelper::_('searchtools.sort', '', 'si.ordering', $listDir, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-sort'); ?>
+                        <?= HTMLHelper::_('searchtools.sort', '', 'si.ordering', $listDir, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-sort'); ?>
                     </th>
                     <th scope="col" class="w-1 text-center">
-                        <?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'si.published', $listDir, $listOrder); ?>
+                        <?= HTMLHelper::_('searchtools.sort', 'JSTATUS', 'si.published', $listDir, $listOrder); ?>
                     </th>
                     <th scope="col">
-                        <?php echo HTMLHelper::_('searchtools.sort', 'COM_SQ_GRID_HEADING', 'si.heading', $listDir, $listOrder); ?>
+                        <?= HTMLHelper::_('searchtools.sort', 'COM_SQ_GRID_HEADING', 'si.heading', $listDir, $listOrder); ?>
                     </th>
                     <th scope="col">
-                        <?php echo HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 'si.title', $listDir, $listOrder); ?>
+                        <?= HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 'si.title', $listDir, $listOrder); ?>
                     </th>
                     <th scope="col">
-                        <?php echo HTMLHelper::_('searchtools.sort', 'COM_SQ_GRID_SEQUENCE', 's.title', $listDir, $listOrder); ?>
+                        <?= HTMLHelper::_('searchtools.sort', 'COM_SQ_GRID_SEQUENCE', 's.title', $listDir, $listOrder); ?>
                     </th>
                     <th scope="col">
-                        <?php echo HTMLHelper::_('searchtools.sort', 'COM_SQ_GRID_TYPE', 's.type', $listDir, $listOrder); ?>
+                        <?= HTMLHelper::_('searchtools.sort', 'COM_SQ_GRID_TYPE', 's.type', $listDir, $listOrder); ?>
                     </th>
                     <th scope="col" class="w-10 d-none d-md-table-cell">
                         <?= HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ACCESS', 'access_level', $listDir, $listOrder); ?>

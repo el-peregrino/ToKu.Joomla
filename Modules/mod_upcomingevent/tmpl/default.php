@@ -13,13 +13,13 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use ToKu\Library\Closures;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
 
 \defined('_JEXEC') or die;
 
-JToKu::registerExtensionFile(UpcomingEventHelper::MODULE);
-JToKu::useStyles(UpcomingEventHelper::getAsset('style'));
+JooToKu::registerExtensionFile(UpcomingEventHelper::MODULE);
+JooToKu::useStyles(UpcomingEventHelper::getAsset('style'));
 
 /**
  * @var \Joomla\Registry\Registry $params Module parameters

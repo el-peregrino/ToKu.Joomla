@@ -5,14 +5,14 @@ namespace ToKu\Module\Sequence\Site\View;
 use Joomla\CMS\Layout\LayoutHelper;
 use ToKu\Library\Closures;
 use ToKu\Library\Html;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
 use ToKu\Module\Sequence\Site\Helper\ViewData;
 
 \defined('_JEXEC') or die;
 
-JToKu::registerExtensionFile(SequenceHelper::MODULE);
-JToKu::useStyles(SequenceHelper::MODULE . '.style');
+JooToKu::registerExtensionFile(SequenceHelper::MODULE);
+JooToKu::useStyles(SequenceHelper::MODULE . '.style');
 
 /**
  * @var \Joomla\Registry\Registry $params Module parameters
@@ -24,7 +24,7 @@ $isTrue = Closures::isTrue($params);
 $param = Closures::param($params);
 
 $images = json_decode($sequence->images);
-$selector = JToKu::getUniqueId();
+$selector = JooToKu::getUniqueId();
 ?>
 
 <?= LayoutHelper::render('toku.module.frame', [

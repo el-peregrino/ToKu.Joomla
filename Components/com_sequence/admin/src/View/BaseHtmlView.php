@@ -13,7 +13,7 @@ namespace ToKu\Component\Sequence\Administrator\View;
 use Joomla\CMS\Application\SiteApplication;
 use Joomla\CMS\MVC\View\HtmlView;
 use Joomla\CMS\Toolbar\Toolbar;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -38,11 +38,11 @@ abstract class BaseHtmlView extends HtmlView
 
     /**
      * Gets the global application object.
-     * Wraps the JToKu::getApp().
+     * Wraps the JooToKu::getApp().
      * @return SiteApplication
      */
     protected function getApp(): SiteApplication 
     { 
-        return JToKu::getApp();
+        return JooToKu::getApp();
     }
 }

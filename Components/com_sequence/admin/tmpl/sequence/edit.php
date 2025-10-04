@@ -11,7 +11,7 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 /**
  * The View class of the MVC pattern.
@@ -31,7 +31,7 @@ use ToKu\Library\JToKu;
 
 \defined('_JEXEC') or die;
 
-JToKu::useScripts('keepalive', 'form.validate');
+JooToKu::useScripts('keepalive', 'form.validate');
 
 HTMLHelper::_('script', 'system/toggle-help.js', ['version' => 'auto', 'relative' => true]);
 
@@ -63,7 +63,7 @@ HTMLHelper::_('script', 'system/toggle-help.js', ['version' => 'auto', 'relative
                     </fieldset>
 
                     <fieldset id="fieldset-image-header" class="options-form">
-                        <legend><?php echo Text::_('COM_SQ_HEADER_IMAGE'); ?></legend>
+                        <legend><?= Text::_('COM_SQ_HEADER_IMAGE'); ?></legend>
                         <div>
                         <?= $this->form->renderFieldset('image-header'); ?>
                         </div>
@@ -80,7 +80,7 @@ HTMLHelper::_('script', 'system/toggle-help.js', ['version' => 'auto', 'relative
                     </fieldset>
 
                     <fieldset id="fieldset-image-footer" class="options-form">
-                        <legend><?php echo Text::_('COM_SQ_FOOTER_IMAGE'); ?></legend>
+                        <legend><?= Text::_('COM_SQ_FOOTER_IMAGE'); ?></legend>
                         <div>
                         <?= $this->form->renderFieldset('image-footer'); ?>
                         </div>

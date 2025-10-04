@@ -20,7 +20,7 @@ return new class () implements InstallerScriptInterface {
 
     private string $minimumJoomla = '5.3.0';
     private string $minimumPhp = '8.2.0';
-    private string $minimumToKu = "1.0.12";
+    private string $minimumToKu = "1.0.15";
 
     public function install(InstallerAdapter $adapter): bool
     {
@@ -43,25 +43,25 @@ return new class () implements InstallerScriptInterface {
     public function preflight(string $type, InstallerAdapter $adapter): bool
     {
         // php version
-        if (version_compare(PHP_VERSION, $this->minimumPhp, '<=')) {
+        if (version_compare(PHP_VERSION, $this->minimumPhp, '<')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_INSTALLER_MINIMUM_PHP', $this->minimumPhp), 'error');
             return false;
         }
 
         // joomla version
-        if (version_compare(JVERSION, $this->minimumJoomla, '<=')) {
+        if (version_compare(JVERSION, $this->minimumJoomla, '<')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minimumJoomla), 'error');
             return false;
         }
 
         // dependency check
-        if (!class_exists('ToKu\Library\JToKu')) {
+        if (!class_exists('ToKu\Library\JooToKu')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('COM_SEQUENCE_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;
         }
 
-        $version = \ToKu\Library\JToKu::VERSION ?? null;
-        if (version_compare($version, $this->minimumToKu, '<=')) {
+        $version = \ToKu\Library\JooToKu::VERSION ?? null;
+        if (version_compare($version, $this->minimumToKu, '<')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('COM_SEQUENCE_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;
         }

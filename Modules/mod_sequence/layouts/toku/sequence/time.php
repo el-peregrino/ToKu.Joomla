@@ -87,7 +87,7 @@ $date = (new Date($item->date))->format($displayData['format'] ?: Text::_('DATE_
                 </figure>
             <?php endif; ?>
             
-            <i class="fa-solid fa-caret-<?php echo $caret; ?> sq-arrow" aria-hidden="true"></i>
+            <i class="fa-solid fa-caret-<?= $caret; ?> sq-arrow" aria-hidden="true"></i>
             <i class="fa-solid fa-caret-up sq-caret" aria-hidden="true"></i>
 
             <div class="sq-item-heading<?= $collapsed(); ?><?= Html::append('has-icon', !!$view->icon); ?>"<?= Html::append($attributes); ?>>

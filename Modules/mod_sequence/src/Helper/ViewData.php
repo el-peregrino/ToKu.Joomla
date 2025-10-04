@@ -12,7 +12,7 @@ namespace ToKu\Module\Sequence\Site\Helper;
 
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
-use ToKu\Library\JToKu;
+use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
@@ -126,7 +126,7 @@ class ViewData
     {
         switch ($links->get('link_type')) {
             case 'menu':
-                $menu = JToKu::getApp()->getMenu()->getItem($links->get('menu_item'));
+                $menu = JooToKu::getApp()->getMenu()->getItem($links->get('menu_item'));
                 return Route::_($menu->route);
             case 'article':
                 return Route::_('index.php?option=com_content&view=article&id=' . (int) $links->get('article_id'));
