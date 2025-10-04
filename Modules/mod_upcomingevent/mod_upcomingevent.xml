@@ -14,7 +14,6 @@
         <folder module="mod_upcomingevent">services</folder>
         <folder>src</folder>
         <folder>tmpl</folder>
-        <filename>config.xml</filename>
     </files>
 
     <!-- Assets -->
