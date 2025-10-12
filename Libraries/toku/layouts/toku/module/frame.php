@@ -17,6 +17,7 @@
 
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
+use ToKu\Library\Html;
 
 \defined('_JEXEC') or die;
 
@@ -33,13 +34,9 @@ if ($name === false || $text === false && ($displayData['position'] === 'none' |
     // there is nothing to render
     return;
 }
-
-$append = fn(string $value, bool $condition = true): string 
-    => $condition && $value ? " $value" : '';
-
 ?>
 
-<div class="module-<?= $name; ?> module-<?= $type; ?><?= $append($displayData['css']); ?>">
+<div class="module-<?= $name; ?> module-<?= $type; ?><?= Html::append($displayData['css']); ?>">
     <?php if ($displayData['position'] === 'above' && $image !== false): ?>
         <figure class="module-image image-above">
             <?= LayoutHelper::render('joomla.html.image', $image); ?>

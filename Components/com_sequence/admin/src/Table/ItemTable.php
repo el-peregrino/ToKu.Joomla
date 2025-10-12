@@ -80,10 +80,21 @@ class ItemTable extends BaseTable
     public $images;
 
     /**
+     * Date of the timeline sequence item.
+     */
+    public $date;
+
+    /**
      * Item ordering.
      * @var int
      */
     public $ordering;
+
+    /**
+     * The ordering filter field. Needed for grouped ordering (by sequence_id).
+     */
+    protected $orderingFilter = 'sequence_id';
+
     
     /**
      * Constructor

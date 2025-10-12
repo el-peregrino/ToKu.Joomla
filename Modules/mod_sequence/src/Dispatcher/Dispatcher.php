@@ -59,7 +59,6 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
         $data['sequence'] = $sequence;
         // load items
         $data['items'] = $helper->getItems($params, $levels, $sequence ? $sequence->type : -1);
-        
         // layout
         $data['layout'] = $params->get('layout', 'default');
 

@@ -193,40 +193,42 @@
 
     </fieldset>
 
-    <fieldset name="params">
+    <fields name="params">
+        <fieldset name="params">
 
-        <field name="icon" type="text" maxlength="55"
-            validate="CssIdentifier"
-            label="COM_SQ_FIELD_ICON_LABEL"
-            description="COM_SQ_FIELD_ICON_DESCRIPTION" />
+            <field name="icon" type="text" maxlength="55"
+                validate="CssIdentifier"
+                label="COM_SQ_FIELD_ICON_LABEL"
+                description="COM_SQ_FIELD_ICON_DESCRIPTION" />
 
-        <field name="css" type="text" maxlength="255"
-            validate="CssIdentifier"
-            label="COM_SQ_FIELD_CSS_LABEL"
-            description="COM_SQ_FIELD_CSS_DESCRIPTION" />
+            <field name="css" type="text" maxlength="255"
+                validate="CssIdentifier"
+                label="COM_SQ_FIELD_CSS_LABEL"
+                description="COM_SQ_FIELD_CSS_DESCRIPTION" />
 
-        <field name="control" type="radio" default="1"
-            layout="joomla.form.field.radio.switcher"
-            label="COM_SQ_FIELD_CONTROL_LABEL"
-            description="COM_SQ_FIELD_CONTROL_DESCRIPTION">
-            <option value="0">JNo</option>
-            <option value="1">JYes</option>
-        </field>
+            <field name="control" type="radio" default="1"
+                layout="joomla.form.field.radio.switcher"
+                label="COM_SQ_FIELD_CONTROL_LABEL"
+                description="COM_SQ_FIELD_CONTROL_DESCRIPTION">
+                <option value="0">JNo</option>
+                <option value="1">JYes</option>
+            </field>
 
-        <field name="keep" type="radio" default="0"
-            layout="joomla.form.field.radio.switcher"
-            label="COM_SQ_FIELD_KEEP_LABEL"
-            description="COM_SQ_FIELD_KEEP_DESCRIPTION">
-            <option value="0">JNo</option>
-            <option value="1">JYes</option>
-        </field>
+            <field name="keep" type="radio" default="0"
+                layout="joomla.form.field.radio.switcher"
+                label="COM_SQ_FIELD_KEEP_LABEL"
+                description="COM_SQ_FIELD_KEEP_DESCRIPTION">
+                <option value="0">JNo</option>
+                <option value="1">JYes</option>
+            </field>
 
-        <field name="initial" type="radio" default="0"
-            layout="joomla.form.field.radio.switcher"
-            label="COM_SQ_FIELD_INITIAL_LABEL"
-            description="COM_SQ_FIELD_INITIAL_DESCRIPTION">
-            <option value="0">JNo</option>
-            <option value="1">JYes</option>
-        </field>
-    </fieldset>
+            <field name="initial" type="radio" default="0"
+                layout="joomla.form.field.radio.switcher"
+                label="COM_SQ_FIELD_INITIAL_LABEL"
+                description="COM_SQ_FIELD_INITIAL_DESCRIPTION">
+                <option value="0">JNo</option>
+                <option value="1">JYes</option>
+            </field>
+        </fieldset>
+    </fields>
 </form>

@@ -22,6 +22,8 @@
         <folder>css</folder>
     </media>
 
+    <media destination="layouts" folder="layouts" />
+
     <languages>
         <language tag="en-GB">language/en-GB/mod_upcomingevent.ini</language>
         <language tag="en-GB">language/en-GB/mod_upcomingevent.sys.ini</language>

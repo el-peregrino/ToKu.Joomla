@@ -12,7 +12,6 @@
         <folder module="mod_sequence">services</folder>
         <folder>src</folder>
         <folder>tmpl</folder>
-        <folder target="layouts">layouts</folder>
     </files>
 
     <!-- Assets -->
@@ -21,6 +20,8 @@
         <folder>css</folder>
         <folder>images</folder>
     </media>
+
+    <media destination="layouts" folder="layouts" />
 
     <languages>
         <language tag="en-GB">language/en-GB/mod_sequence.ini</language>
@@ -45,7 +46,9 @@
                     name="sequence"
                     type="sql"
                     required="true"
-                    query="SELECT id AS value, title AS text FROM #__sequences WHERE published = 1 ORDER BY title ASC"
+                    key_field="id"
+                    value_field="title"
+                    query="SELECT id, title FROM #__sequences WHERE published = 1 ORDER BY title ASC"
                     label="MOD_SEQUENCE_FIELD_SEQUENCE_LABEL"/>
 
                 <field 
@@ -54,9 +57,9 @@
                     default="component"
                     label="MOD_SEQUENCE_FIELD_ORDERING_LABEL" 
                     description="MOD_SEQUENCE_FIELD_ORDERING_DESCRIPTION">
-                    <option value="component">MOD_SEQUENCE_ORDERING_COMPONENT</option>
-                    <option value="random">MOD_SEQUENCE_ORDERING_RANDOM</option>
-                    <option value="heading">MOD_SEQUENCE_ORDERING_HEADING</option>
+                    <option value="component">MOD_SEQUENCE_ORDERING_OPTION_COMPONENT</option>
+                    <option value="random">MOD_SEQUENCE_ORDERING_OPTION_RANDOM</option>
+                    <option value="heading">MOD_SEQUENCE_ORDERING_OPTION_HEADING</option>
                 </field>
 
                 <field 
@@ -65,10 +68,10 @@
                     default="component"
                     label="MOD_SEQUENCE_FIELD_DIRECTION_LABEL" 
                     description="MOD_SEQUENCE_FIELD_DIRECTION_DESCRIPTION">
-                    <option value="component">MOD_SEQUENCE_DIRECTION_COMPONENT</option>
-                    <option value="reverse">MOD_SEQUENCE_DIRECTION_REVERSE</option>
-                    <option value="ascending">MOD_SEQUENCE_DIRECTION_ASCENDING</option>
-                    <option value="descending">MOD_SEQUENCE_DIRECTION_DESCENDING</option>
+                    <option value="component">MOD_SEQUENCE_DIRECTION_OPTION_COMPONENT</option>
+                    <option value="reverse">MOD_SEQUENCE_DIRECTION_OPTION_REVERSE</option>
+                    <option value="ascending">MOD_SEQUENCE_DIRECTION_OPTION_ASCENDING</option>
+                    <option value="descending">MOD_SEQUENCE_DIRECTION_OPTION_DESCENDING</option>
                 </field>
 
             </fieldset>
@@ -135,8 +138,8 @@
                     showon="collapsible:1"
                     default="single" 
                     label="MOD_SEQUENCE_FIELD_EXPANSION_MODE_LABEL" >
-                    <option value="single">MOD_SEQUENCE_EXPANSION_MODE_SINGLE</option>
-                    <option value="multiple">MOD_SEQUENCE_EXPANSION_MODE_MULTIPLE</option>
+                    <option value="single">MOD_SEQUENCE_EXPANSION_MODE_OPTION_SINGLE</option>
+                    <option value="multiple">MOD_SEQUENCE_EXPANSION_MODE_OPTION_MULTIPLE</option>
                 </field>
 
                 <field
@@ -144,9 +147,9 @@
                     type="list" 
                     default="center" 
                     label="MOD_SEQUENCE_FIELD_ALIGN_LABEL" >
-                    <option value="center">MOD_SEQUENCE_ALIGN_CENTER</option>
-                    <option value="left">MOD_SEQUENCE_ALIGN_LEFT</option>
-                    <option value="right">MOD_SEQUENCE_ALIGN_RIGHT</option>
+                    <option value="center">MOD_SEQUENCE_ALIGN_OPTION_CENTER</option>
+                    <option value="left">MOD_SEQUENCE_ALIGN_OPTION_LEFT</option>
+                    <option value="right">MOD_SEQUENCE_ALIGN_OPTION_RIGHT</option>
                 </field>
 
                 <field
@@ -172,13 +175,15 @@
                     name="module_class"
                     type="text"
                     validate="CssIdentifier"
-                    label="MOD_SEQUENCE_FIELD_MODULE_CLASS_LABEL" />
+                    label="MOD_SEQUENCE_FIELD_MODULE_CLASS_LABEL"
+                    description="MOD_SEQUENCE_FIELD_MODULE_CLASS_DESCRIPTION" />
 
                 <field 
                     name="box_class"
                     type="text"
                     validate="CssIdentifier"
-                    label="MOD_SEQUENCE_FIELD_ITEM_CLASS_LABEL" />
+                    label="MOD_SEQUENCE_FIELD_BOX_CLASS_LABEL"
+                    description="MOD_SEQUENCE_FIELD_BOX_CLASS_DESCRIPTION" />
 
             </fieldset>
 

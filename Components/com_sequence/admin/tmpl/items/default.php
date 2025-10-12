@@ -15,6 +15,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
 use ToKu\Component\Sequence\Administrator\Helper\SequenceHelper;
+use ToKu\Library\Html;
 
 /**
  * The View class of the MVC pattern.
@@ -35,13 +36,13 @@ use ToKu\Component\Sequence\Administrator\Helper\SequenceHelper;
 \defined('_JEXEC') or die;
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
-$listDir  = $this->escape($this->state->get('list.direction'));
+$listDir = $this->escape($this->state->get('list.direction'));
 
 /**
- * Manual ordering is enabled only if the list is ordered by the ordering columns and the list of items is not empty.
+ * Manual ordering is enabled only if the list displays one sequence items, is ordered by the ordering columns and there are items to order.
  * @var bool $manualOrder
  */
-$manualOrder = $listOrder == 'si.ordering' && !(empty($this->items));
+$manualOrder = $listOrder == 'si.ordering' && count($this->items) > 1;
 
 /**
  * Table attributes to support manual (drag and drop) ordering.
@@ -56,24 +57,15 @@ if ($manualOrder) {
         'class' => 'js-draggable',
         'data-url' => 'index.php?option=com_sequence&task=items.saveOrderAjax&' . Session::getFormToken() . '=1',
         'data-direction' => strtolower($listDir),
-        'data-nested' => 'true'
+        'data-nested' => 'false'
     ];
     $attributes = implode(' ', array_map(fn($key, $value) => "$key=\"$value\"", array_keys($draggable), $draggable));
 }
 
-/**
- * Closer function to append content.
- * If the value is not empty, the output is indented with a space char.
- * @param string    $value      The value to append.
- * @param bool      $condition  When true the value is appended.
- * @return string
- */
-$append = fn(string $value, bool $condition = true): string 
-    => $condition && $value ? " $value" : '';
-
 ?>
 
-<form action="<?= Route::_('index.php?option=com_sequence&view=items'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?= Route::_('index.php?option=com_sequence&view=items'); ?>" method="post" name="adminForm"
+    id="adminForm">
     <?= LayoutHelper::render('joomla.searchtools.default', ['view' => $this, 'options' => ['selectorFieldName' => 'sequence']]); ?>
     <?php if (empty($this->items)): ?>
         <div class="alert alert-info">
@@ -83,7 +75,7 @@ $append = fn(string $value, bool $condition = true): string
     <?php else: ?>
         <table class="table table-striped table-hover">
             <caption class="visually-hidden">
-                <?= Text::_('COM_SQ_LIST_ITEMS_TITLE'); ?>,
+                <?= Text::_('COM_SQ_LIST_ITEMS_TITLE'); ?>
                 <span id="orderedBy"><?= Text::_('JGLOBAL_SORTED_BY'); ?> </span>,
                 <span id="filteredBy"><?= Text::_('JGLOBAL_FILTERED_BY'); ?></span>
             </caption>
@@ -118,18 +110,18 @@ $append = fn(string $value, bool $condition = true): string
                     </th>
                 </tr>
             </thead>
-            <tbody<?= $append($attributes); ?>>
+            <tbody<?= Html::append($attributes); ?>>
                 <?php foreach ($this->items as $i => $item): ?>
                     <?php /** @var \ToKu\Component\Sequence\Administrator\Table\ItemTable $item */ ?>
-                    <tr class="row<?= $i % 2; ?>" data-draggable-group="<?= $item->sequence_id; ?>">
+                    <tr<?= Html::attribute('data-draggable-group', $item->sequence_id, $manualOrder); ?>>
 
                         <td><?= HTMLHelper::_('grid.id', $i, $item->id); ?></td>
-                        
+
                         <td class="text-center d-none d-md-table-cell">
-                            <span class="sortable-handler<?= $append('inactive', !$saveOrder) ; ?>">
+                            <span class="sortable-handler<?= Html::append('inactive', !$manualOrder); ?>">
                                 <span class="icon-ellipsis-v" aria-hidden="true"></span>
                             </span>
-                            <?php if ($saveOrder): ?>
+                            <?php if ($manualOrder): ?>
                                 <input type="text" class="hidden" name="order[]" size="5" value="<?= $item->ordering; ?>">
                             <?php endif; ?>
                         </td>
@@ -139,7 +131,8 @@ $append = fn(string $value, bool $condition = true): string
                         </td>
 
                         <td scope="row">
-                            <a href="<?= Route::_('index.php?option=com_sequence&task=item.edit&id=' . (int) $item->id); ?>" title="<?= Text::_('JACTION_EDIT'); ?> <?= $this->escape($item->heading); ?>">
+                            <a href="<?= Route::_('index.php?option=com_sequence&task=item.edit&id=' . (int) $item->id); ?>"
+                                title="<?= Text::_('JACTION_EDIT'); ?> <?= $this->escape($item->heading); ?>">
                                 <?= $this->escape($item->heading); ?>
                             </a>
                             <?php if ($item->subheading): ?>
@@ -155,7 +148,7 @@ $append = fn(string $value, bool $condition = true): string
                             <div>
                                 <?= $this->escape($item->title); ?>
                             </div>
-                            <?php if($item->caption || $item->sequence_type === 1): ?>
+                            <?php if ($item->caption || $item->sequence_type === 1): ?>
                                 <div>
                                     <?php if ($item->caption): ?>
                                         <span class="small">
@@ -173,7 +166,8 @@ $append = fn(string $value, bool $condition = true): string
                         </td>
 
                         <td class="small d-none d-md-table-cell">
-                            <a href="<?= Route::_('index.php?option=com_sequence&task=sequence.edit&id=' . (int) $item->sequence_id); ?>" title="<?= Text::_('JACTION_EDIT'); ?> <?= $this->escape($item->sequence_title); ?>">
+                            <a href="<?= Route::_('index.php?option=com_sequence&task=sequence.edit&id=' . (int) $item->sequence_id); ?>"
+                                title="<?= Text::_('JACTION_EDIT'); ?> <?= $this->escape($item->sequence_title); ?>">
                                 <?= $this->escape($item->sequence_title); // sequence_title is a dynamic property ?>
                             </a>
                         </td>

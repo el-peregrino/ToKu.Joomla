@@ -16,5 +16,15 @@ use Joomla\CMS\MVC\Controller\FormController;
 
 class ItemController extends FormController
 {
-    
+    protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')
+    {
+        $append = parent::getRedirectToItemAppend($recordId, $urlVar);
+
+        $sequence = $this->input->getInt('sequence');
+        if ($sequence) {
+            return "$append&sequence=$sequence";
+        }
+
+        return $append;
+    }
 }

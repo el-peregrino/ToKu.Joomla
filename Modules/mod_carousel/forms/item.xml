@@ -41,7 +41,7 @@
         type="editor"
         filter="safehtml"
         showon="item_type:carousel"
-        layout="joomla.form.field.labelabove"
+        class="form-vertical"
         label="MOD_CAROUSEL_FIELD_CAROUSEL_TEXT_LABEL"
         description="MOD_CAROUSEL_FIELD_CAROUSEL_TEXT_DESCRIPTION" />
 

@@ -122,7 +122,7 @@ $listDir  = $this->escape($this->state->get('list.direction'));
                         </td>
 
                         <td class="text-center btns">
-                            <a href="<?= Route::_("index.php?option=com_sequence&view=items&task=item.add&sequence=$item->id"); ?>" title="<?= Text::_('COM_SQ_ADD_ITEM_TITLE'); ?>">
+                            <a href="<?= Route::_("index.php?option=com_sequence&task=item.add&sequence=$item->id"); ?>" title="<?= Text::_('COM_SQ_ADD_ITEM_TITLE'); ?>">
                                 <span class="icon-plus" aria-hidden="true"></span><span class="visually-hidden"><?= Text::_('COM_SQ_ADD_ITEM_TITLE'); ?></span>
                             </a>
                         </td>

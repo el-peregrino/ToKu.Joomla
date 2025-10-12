@@ -10,7 +10,7 @@
 
 namespace ToKu\Component\Sequence\Administrator\View\Item;
 
-use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use ToKu\Component\Sequence\Administrator\View\BaseHtmlView;
@@ -34,7 +34,7 @@ class HtmlView extends BaseHtmlView
         $this->item = $model->getItem();
 
         if (!$this->item->sequence_id) {
-            $this->getApp()->enqueueMessage(Text::_('COM_SQ_MSG_PARENT_SEQUENCE'), CMSApplication::MSG_NOTICE);
+            $this->getApp()->enqueueMessage(Text::_('COM_SQ_MSG_PARENT_SEQUENCE'), CMSApplicationInterface::MSG_NOTICE);
         }
 
         /** @var \Joomla\Input\Input */
@@ -57,7 +57,7 @@ class HtmlView extends BaseHtmlView
         /** @var \Joomla\CMS\Toolbar\Toolbar */
         $toolbar = $this->getToolbar();
 
-        ToolbarHelper::title(Text::_('COM_SQ') . ': ' . Text::_('COM_SQ_ADD_ITEM_TITLE'));
+        ToolbarHelper::title(Text::_('COM_SQ') . ': ' . Text::_($this->item->id ? 'COM_SQ_EDIT_ITEM_TITLE' : 'COM_SQ_ADD_ITEM_TITLE'));
         ToolbarHelper::apply('item.apply');
         ToolbarHelper::save('item.save');
         ToolbarHelper::save2copy('item.save2copy');

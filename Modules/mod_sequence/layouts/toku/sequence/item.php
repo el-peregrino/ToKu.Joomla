@@ -119,7 +119,7 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
                         </a>
                     </div>
                 <?php endif; ?>
-                <?php if ($view->footer): ?>
+                <?php if ($item->footer || $view->footer): ?>
                     <div class="sq-item-footer">
                         <?php if ($view->footer !== false && $view->footer['position'] === 'above'): ?>
                             <figure class="sq-image">

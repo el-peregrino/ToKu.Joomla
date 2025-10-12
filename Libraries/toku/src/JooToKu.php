@@ -10,11 +10,13 @@
 
 namespace ToKu\Library;
 
-use Joomla\CMS\Application\SiteApplication;
+use Joomla\CMS\Application\CMSWebApplicationInterface;
 use Joomla\CMS\Document\Document;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\WebAsset\WebAssetManager;
+use Joomla\Registry\Registry;
 
 \defined('_JEXEC') or die;
 
@@ -70,6 +72,12 @@ class JooToKu
      * @var string
      */
     public const NAMESPACE_SEPARATOR = '\\';
+
+    /**
+     * Root CSS class for all ToKu modules.
+     * @var string
+     */
+    public const MODULE_CLASS = 'module-toku';
 
     /**
      * Builds namespace path for ToKu extension.
@@ -207,11 +215,11 @@ class JooToKu
     /**
      * Gets the global application object.
      * Wraps the Factory::getApplication().
-     * @return SiteApplication
+     * @return CMSWebApplicationInterface
      */
-    public static function getApp(): SiteApplication
+    public static function getApp(): CMSWebApplicationInterface
     {
-        if (!self::$application && (Factory::getApplication() instanceof SiteApplication)) {
+        if (!self::$application && (Factory::getApplication() instanceof CMSWebApplicationInterface)) {
             self::$application = Factory::getApplication();
         }
         return self::$application;
@@ -281,4 +289,38 @@ class JooToKu
         return $config ? $config[0]['module'] : false;
     }
 
+    public static function hasValue(\stdClass $object, string $propertyName): false
+    {
+        return property_exists($object, $propertyName) && !empty($object->{$propertyName});
+    }
+
+    public static function hasAnyValue(\stdClass $object, string ...$propertyNames): bool
+    {
+        foreach ($propertyNames as $propertyName) {
+            if (self::hasValue($object, $propertyName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static function getModuleClass(string $name): string
+    {
+        return JooToKu::MODULE_CLASS . ' ' . JooToKu::MODULE_CLASS . '-' . strtolower($name);
+    }
+
+    public static function convertFieldsetToColumn(array &$data, string $name): void
+    {
+        if (isset($data[$name]) && \is_array($data[$name])) {
+            $registry = new Registry($data[$name]);
+
+            $data[$name] = (string) $registry;
+        }
+    }
+
+    public static function convertColumnToFieldset(\stdClass $item, string $name): void
+    {
+        $registry = new Registry($item->$name);
+        $item->$name = $registry->toArray();
+    }
 }

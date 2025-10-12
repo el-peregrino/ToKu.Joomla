@@ -12,7 +12,7 @@ namespace ToKu\Library;
 
 use Joomla\Registry\Registry;
 
-class Closures
+class Closure
 {
     public static function equals(Registry $params)
     {

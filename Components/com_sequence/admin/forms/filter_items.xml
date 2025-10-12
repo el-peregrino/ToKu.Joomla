@@ -5,6 +5,7 @@
         type="list"
         label="COM_SQ_FILTER_SEQUENCE_LABEL"
         accesstype="manage"
+        extension="com_sequence"
         showAll="false"
         filtermode="selector"
         class="js-select-submit-on-change">

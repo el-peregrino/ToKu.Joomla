@@ -46,7 +46,8 @@ class SequenceHelper implements DatabaseAwareInterface
                 ->bind(':levels', $levels);
 
         $db->setQuery($query);
-        return $db->loadObject(SequenceData::class);
+        $data = $db->loadAssoc();
+        return $data ? new SequenceData($data) : null;
     }
 
     public function getItems(Registry $params, string $levels, int $type)
@@ -90,7 +91,14 @@ class SequenceHelper implements DatabaseAwareInterface
         }
 
         $db->setQuery($query);
-        return $db->loadObjectList(ItemData::class);
+        $items = [];
+        $values = $db->loadAssocList('id');
+        if ($values) {
+            foreach ($values as $id => $value) {
+                $items[$id] = new ItemData($value);
+            }
+        }
+        return $items;
     }
 
     private function getDirection(string $direction, int $type): string 

@@ -18,8 +18,7 @@ use ToKu\Library\JooToKu;
 \defined('_JEXEC') or die;
 
 /**
- * Helper for mod_upcomingevent
- *
+ * Helper for mod_carousel
  */
 class CarouselHelper
 {
@@ -31,11 +30,6 @@ class CarouselHelper
     public static function getAsset(string $name): string
     {
         return self::MODULE . ".$name";
-    }
-
-    private static function hasValue($input)
-    {
-        return isset($input) && !empty($input);
     }
 
     /**
@@ -59,7 +53,7 @@ class CarouselHelper
                 continue;
 
             // check the data
-            if (!self::hasValue($item->image) && !self::hasValue($item->heading) && !self::hasValue($item->text))
+            if (!JooToKu::hasAnyValue($item, 'image', 'heading', 'text'))
                 continue;
 
             $output[] = $item;

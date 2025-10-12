@@ -20,4 +20,13 @@ class SequenceData
     public string $header;
     public string $footer;
     public string $images;
+
+    public function __construct(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
 }

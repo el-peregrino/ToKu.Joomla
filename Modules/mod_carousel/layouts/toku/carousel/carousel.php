@@ -18,7 +18,7 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
-use ToKu\Library\Closures;
+use ToKu\Library\Closure;
 use ToKu\Library\Html;
 
 \defined('_JEXEC') or die;
@@ -36,8 +36,8 @@ $params = $displayData['params'];
 
 // define helper closures
 
-$equals = Closures::equals($params);
-$isTrue = Closures::isTrue($params);
+$equals = Closure::equals($params);
+$isTrue = Closure::isTrue($params);
 ?>
 
 <?php if ($equals('link_style', 'card') && !empty($link)): // open the anchor tag ?>

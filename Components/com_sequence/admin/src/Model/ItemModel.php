@@ -11,7 +11,8 @@
 namespace ToKu\Component\Sequence\Administrator\Model;
 
 use Joomla\CMS\MVC\Model\AdminModel;
-use Joomla\Registry\Registry;
+use Joomla\Database\ParameterType;
+use ToKu\Component\Sequence\Administrator\Table\ItemTable;
 use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
@@ -22,6 +23,37 @@ class ItemModel extends AdminModel
     {
         return parent::getTable($type, $prefix, $config);
     }
+
+    public function getItem($pk = null)
+    {
+        $item = parent::getItem($pk);
+
+        // new item
+        if (empty($item->id)) {
+            /**
+             * Current sequence.
+             * The sequence is read from input. If not defined, session value is used.
+             * The result value is written back to the session (user state).
+             * 
+             * Notice: The original getUserStateFromRequest() should do the job, but it may fail silently.
+             * 
+             * @var int $sequence
+             */
+            $sequence = JooToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
+
+            if ($sequence) {
+                $item->sequence_id = $sequence;
+            }
+        }
+
+        if ($item) {
+            JooToKu::convertColumnToFieldset($item, 'links');
+            JooToKu::convertColumnToFieldset($item, 'images');
+        }
+
+        return $item;
+    }
+
 
     private function getSequenceType(array $data): ?int 
     {
@@ -84,22 +116,6 @@ class ItemModel extends AdminModel
         
         // merge data to override missing fields from db
         $data = array_merge($item, $state);
-
-        /**
-         * Current sequence.
-         * The sequence is read from input. If not defined, session value is used.
-         * The result value is written back to the session (user state).
-         * 
-         * Notice: The original getUserStateFromRequest() should do the job, but it may fail silently.
-         * 
-         * @var int $sequence
-         */
-        $sequence = JooToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
-
-        // prefill the sequence_id
-        if (empty($data['sequence_id']) && $sequence) {
-            $data['sequence_id'] = $sequence;
-        }
         
         return $data;
     }
@@ -120,26 +136,35 @@ class ItemModel extends AdminModel
             $table->alias = '';
         }
 
+        if (!$table->id && $table instanceof ItemTable) {
+            $table->ordering = $this->getNextOrdering($table);
+        }
+
         parent::prepareTable($table);
+    }
+
+    private function getNextOrdering(ItemTable $table): int
+    {
+        $db = $this->getDatabase();
+        $query = $db->getQuery(true);
+        $query->select('MAX(ordering)')
+              ->from($db->quoteName('#__sequence_items'))
+              ->where($db->quoteName('sequence_id') . ' = :sequence')
+              ->bind(':sequence', $table->sequence_id, ParameterType::INTEGER);
+
+        $db->setQuery($query);
+        $max = (int) $db->loadResult();
+
+        return $max + 1;
     }
 
     public function save($data): mixed
     {
         /* Add code to modify data before saving */
 
-        // handle links in the form
-        if (isset($data['links']) && \is_array($data['links'])) {
-            $registry = new Registry($data['links']);
-
-            $data['links'] = (string) $registry;
-        }
-
-        // handle images in the form
-        if (isset($data['images']) && \is_array($data['images'])) {
-            $registry = new Registry($data['images']);
-
-            $data['images'] = (string) $registry;
-        }
+        JooToKu::convertFieldsetToColumn($data, 'links');
+        JooToKu::convertFieldsetToColumn($data, 'images');
+        JooToKu::convertFieldsetToColumn($data, 'params');
 
         return parent::save($data);
     }

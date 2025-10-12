@@ -23,5 +23,14 @@ class ItemData
     public string $date;
     public string $images;
     public string $links;
-    public string $params;
+    public ?string $params;
+
+    public function __construct(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
 }

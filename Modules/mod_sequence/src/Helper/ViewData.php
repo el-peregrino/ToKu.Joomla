@@ -64,9 +64,10 @@ class ViewData
      * @var bool
      */
     public readonly bool $parent;
-    public readonly string $icon;
-    public readonly string $css;
+    public readonly ?string $icon;
+    public readonly ?string $css;
     public readonly array|bool $link;
+    public readonly ?string $link_text;
     public readonly bool $body;
     public readonly array|bool $header;
     public readonly array|bool $footer;
@@ -83,7 +84,7 @@ class ViewData
         $this->control = $options->get('control', 1);
         $this->keep = $this->collapsible && $options->get('keep', 0);
         $this->icon = $options->get('icon');
-        $this->icon = $options->get('css');
+        $this->css = $options->get('css');
         // parse links
         $links = new Registry($item->links);
         $url = self::getLinkUrl($links);
@@ -122,7 +123,7 @@ class ViewData
         $this->parent = $this->expandable && $this->mode === 'single';
     }
 
-    protected static function getLinkUrl(Registry $links): string
+    protected static function getLinkUrl(Registry $links): ?string
     {
         switch ($links->get('link_type')) {
             case 'menu':

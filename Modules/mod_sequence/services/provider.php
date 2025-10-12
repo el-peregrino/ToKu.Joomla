@@ -33,7 +33,7 @@ return new class () implements ServiceProviderInterface {
      */
     public function register(Container $container): void
     {
-        $container->registerServiceProvider(new ModuleDispatcherFactory(JooToKu::getNamespace(SequenceHelper::NAME)));
+        $container->registerServiceProvider(new ModuleDispatcherFactory(JooToKu::getNamespace(SequenceHelper::NAME, JooToKu::MODULE)));
         $container->registerServiceProvider(new HelperFactory(JooToKu::getSiteHelper(SequenceHelper::NAME)));
         $container->registerServiceProvider(new Module());
     }

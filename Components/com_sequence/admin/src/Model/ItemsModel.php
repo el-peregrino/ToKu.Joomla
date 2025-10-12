@@ -35,6 +35,7 @@ class ItemsModel extends ListModel
                 'title', 'si.title',
                 'published', 'si.published',
                 'access', 'si.access', 'access_level',
+                'ordering', 'si.ordering',
             ];
         }
 
@@ -43,8 +44,6 @@ class ItemsModel extends ListModel
 
     protected function populateState($ordering = 'si.id', $direction = 'asc')
     {
-        $app = JooToKu::getApp();
-
         /**
          * Current sequence.
          * The sequence is read from input. If not defined, session value is used.
@@ -55,15 +54,6 @@ class ItemsModel extends ListModel
          * @var int $sequence
          */
         $sequence = JooToKu::getUserStateFromRequest('com_sequence.items.filter.sequence', 'sequence', null, 'int');
-
-        // get the sequence filter value from the request state (local, not affected by session)
-        $sequenceFilter = $this->getState('filter.sequence', '');
-        
-        // handle sequence changes
-        if ($sequence != $sequenceFilter) {
-            // filter has changed
-            $app->getInput()->set('limitstart', 0); // reset pagination
-        }
 
         // set the sequence in the request state (local, not affected by session)
         $this->setState('filter.sequence', $sequence);
@@ -79,12 +69,14 @@ class ItemsModel extends ListModel
         $query->select([
             $db->quoteName('si.id'),
             $db->quoteName('si.sequence_id'),
+            $db->quoteName('si.date'),
             $db->quoteName('si.title'),
             $db->quoteName('si.caption'),
             $db->quoteName('si.heading'),
             $db->quoteName('si.subheading'),
             $db->quoteName('si.published'),
-            $db->quoteName('si.note')
+            $db->quoteName('si.note'),
+            $db->quoteName('si.ordering'),
         ]);
         
         $query->from($db->quoteName('#__sequence_items', 'si'));
@@ -156,10 +148,18 @@ class ItemsModel extends ListModel
         }
 
         // add the list ordering clause
+        $ordering = [];
         $listOrdering = $this->getState('list.ordering', 'si.id');
         $listDir     = $db->escape($this->getState('list.direction', 'ASC'));
 
-        $query->order($db->escape($listOrdering) . ' ' . $listDir);
+        if ($listOrdering === 'si.ordering') {
+            // order by sequence first
+            $ordering[] = $db->escape('si.sequence_id') . ' ' . $listDir;
+        }
+
+        $ordering[] = $db->escape($listOrdering) . ' ' . $listDir;
+
+        $query->order($ordering);
 
         return $query;
     }

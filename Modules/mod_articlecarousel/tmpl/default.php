@@ -11,7 +11,7 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
-use ToKu\Library\Closures;
+use ToKu\Library\Closure;
 use ToKu\Library\Html;
 use ToKu\Library\JooToKu;
 use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
@@ -28,9 +28,9 @@ JooToKu::registerWebAssets(
  * @var array $articles
  */
 
-$isFalse = Closures::isFalse($params);
-$isTrue = Closures::isTrue($params);
-$param = Closures::param($params);
+$isFalse = Closure::isFalse($params);
+$isTrue = Closure::isTrue($params);
+$param = Closure::param($params);
 
 if (empty($articles) || count($articles) == 0) {
     echo '<!-- ' . ArticleCarouselHelper::MODULE .' :: no items -->';
