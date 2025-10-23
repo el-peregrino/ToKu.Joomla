@@ -8,8 +8,8 @@
  * @license     GNU General Public License version 3 or later
  */
 
-use Joomla\CMS\Layout\LayoutHelper;
 use ToKu\Library\Closure;
+use ToKu\Library\Joomla;
 use ToKu\Library\JooToKu;
 use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
 
@@ -39,7 +39,7 @@ $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''));
 
 <div class="<?= JooToKu::getModuleClass(UpcomingEventHelper::NAME); ?><?= $param('module_class'); ?>">
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'upcoming-event',
         'type' => 'header',
         'text' => $params->get('module_header_text'),
@@ -51,20 +51,20 @@ $labels = UpcomingEventHelper::getLabels($params->get('countdown_labels', ''));
 
     <div class="upcoming-event event-countdown">
         <div class="upcoming-event-headline"><?= htmlspecialchars($params->get('headline')); ?></div>
-        <?= LayoutHelper::render('toku.upcomingevent.countdown', [
+        <?= JooToKu::render('upcomingevent.countdown', [
             'countdown' => $event->value,
             'expired' => $params->get('expired_text'),
             'labels' => $labels
-        ]); ?>
+        ], UpcomingEventHelper::MODULE); ?>
 
-        <?= LayoutHelper::render('toku.upcomingevent.event', [
+        <?= JooToKu::render('upcomingevent.event', [
             'event' => $event,
             'params' => $params,
             'headline' => null
-        ]); ?>
+        ], UpcomingEventHelper::MODULE); ?>
     </div>
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'upcoming-event',
         'type' => 'footer',
         'text' => $params->get('module_footer_text'),

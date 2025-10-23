@@ -14,6 +14,7 @@ use Joomla\CMS\Application\CMSWebApplicationInterface;
 use Joomla\CMS\Document\Document;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\WebAsset\WebAssetManager;
 use Joomla\Registry\Registry;
@@ -322,5 +323,12 @@ class JooToKu
     {
         $registry = new Registry($item->$name);
         $item->$name = $registry->toArray();
+    }
+
+    public static function render(string $layout, mixed $data, string $extension = null, string $type = Joomla::MODULES): string
+    {
+        $path = Joomla::getLayoutPath($extension ?? self::NAME, $extension ? $type : Joomla::LIBRARIES);
+
+        return LayoutHelper::render($layout, $data, $path);
     }
 }

@@ -48,7 +48,7 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
 
 ?>
 
-<div class="<?= implode(' ', array_filter($styles)); ?>">
+<div id="<?= $view->uid; ?>" class="<?= implode(' ', array_filter($styles)); ?>">
 
     <div class="sq-item-control<?= $collapsed(); ?>"<?= Html::append($attributes); ?>>
         <?php if ($view->control && $view->expandable) : ?>
@@ -74,17 +74,18 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
 
     <div class="sq-item-card">
 
-        <div class="sq-item-header">
+        <span class="sq-arrow"><i class="fa-solid fa-caret-<?= $caret; ?>" aria-hidden="true"></i></span>
+        <span class="sq-caret"><i class="fa-solid fa-caret-up" aria-hidden="true"></i></span>
+
+        <div class="sq-item-header<?= $collapsed(); ?>"<?= Html::append($attributes); ?>>
+        
             <?php if ($view->header !== false && $view->header['position'] === 'above'): ?>
-                <figure class="sq-image">
+                <figure class="sq-image image-above">
                     <?= LayoutHelper::render('joomla.html.image', $view->header); ?>
                 </figure>
             <?php endif; ?>
             
-            <i class="fa-solid fa-caret-<?= $caret; ?> sq-arrow" aria-hidden="true"></i>
-            <i class="fa-solid fa-caret-up sq-caret" aria-hidden="true"></i>
-
-            <div class="sq-item-heading<?= $collapsed(); ?><?= Html::append('has-icon', !!$view->icon); ?>"<?= Html::append($attributes); ?>>
+            <div class="sq-item-heading<?= Html::append('has-icon', !!$view->icon); ?>">
                 <?php if ($view->icon) : ?>
                     <i class="<?= $view->icon; ?> sq-icon" aria-hidden="true"></i>
                 <?php endif; ?>
@@ -97,7 +98,7 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
             </div>
 
             <?php if ($view->header !== false && $view->header['position'] === 'below'): ?>
-                <figure class="sq-image">
+                <figure class="sq-image image-below">
                     <?= LayoutHelper::render('joomla.html.image', $view->header); ?>
                 </figure>
             <?php endif; ?>
@@ -122,7 +123,7 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
                 <?php if ($item->footer || $view->footer): ?>
                     <div class="sq-item-footer">
                         <?php if ($view->footer !== false && $view->footer['position'] === 'above'): ?>
-                            <figure class="sq-image">
+                            <figure class="sq-image image-above">
                                 <?= LayoutHelper::render('joomla.html.image', $view->footer); ?>
                             </figure>
                         <?php endif; ?>
@@ -132,7 +133,7 @@ $label = $view->control && (!empty($item->title) || !empty($item->caption));
                             </div>
                         <?php endif; ?>
                         <?php if ($view->footer !== false && $view->footer['position'] === 'below'): ?>
-                            <figure class="sq-image">
+                            <figure class="sq-image image-below">
                                 <?= LayoutHelper::render('joomla.html.image', $view->footer); ?>
                             </figure>
                         <?php endif; ?>

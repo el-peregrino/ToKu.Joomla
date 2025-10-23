@@ -112,13 +112,13 @@
 
             <field name="header_position"
                 type="list"
-                default="0"
+                default="none"
                 validate="options"
                 label="COM_SQ_FIELD_IMAGE_POSITION_LABEL"
                 description="COM_SQ_FIELD_IMAGE_POSITION_DESCRIPTION">
-                <option value="0">COM_SQ_IMAGE_POSITION_NONE</option>
-                <option value="1">COM_SQ_IMAGE_POSITION_ABOVE</option>
-                <option value="2">COM_SQ_IMAGE_POSITION_BELOW</option>
+                <option value="none">COM_SQ_IMAGE_POSITION_NONE</option>
+                <option value="above">COM_SQ_IMAGE_POSITION_ABOVE</option>
+                <option value="below">COM_SQ_IMAGE_POSITION_BELOW</option>
             </field>
 
             <field
@@ -126,12 +126,14 @@
                 type="media"
                 label="COM_SQ_FIELD_IMAGE_LABEL"
                 schemes="http,https,ftp,ftps,data,file"
+                showon="header_position:above,below"
                 validate="url"
                 relative="true" />
 
             <field
                 name="image_header_alt"
                 type="text"
+                showon="header_position:above,below"
                 label="COM_SQ_FIELD_IMAGE_ALT_LABEL" />
 
         </fieldset>
@@ -140,13 +142,13 @@
 
             <field name="footer_position"
                 type="list"
-                default="0"
+                default="none"
                 validate="options"
                 label="COM_SQ_FIELD_IMAGE_POSITION_LABEL"
                 description="COM_SQ_FIELD_IMAGE_POSITION_DESCRIPTION">
-                <option value="0">COM_SQ_IMAGE_POSITION_NONE</option>
-                <option value="1">COM_SQ_IMAGE_POSITION_ABOVE</option>
-                <option value="2">COM_SQ_IMAGE_POSITION_BELOW</option>
+                <option value="none">COM_SQ_IMAGE_POSITION_NONE</option>
+                <option value="above">COM_SQ_IMAGE_POSITION_ABOVE</option>
+                <option value="below">COM_SQ_IMAGE_POSITION_BELOW</option>
             </field>
 
             <field
@@ -154,12 +156,14 @@
                 type="media"
                 label="COM_SQ_FIELD_IMAGE_LABEL"
                 schemes="http,https,ftp,ftps,data,file"
+                showon="footer_position:above,below"
                 validate="url"
                 relative="true" />
 
             <field
                 name="image_footer_alt"
                 type="text"
+                showon="footer_position:above,below"
                 label="COM_SQ_FIELD_IMAGE_ALT_LABEL" />
 
         </fieldset>

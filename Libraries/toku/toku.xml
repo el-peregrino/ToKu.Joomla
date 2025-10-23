@@ -22,6 +22,7 @@
     <!-- Sources -->
     <files>
         <folder>src</folder>
+        <folder>layouts</folder>
     </files>
 
     <!-- Assets -->
@@ -30,8 +31,6 @@
         <folder>css</folder>
         <folder>js</folder>
     </media>
-
-    <media destination="layouts" folder="layouts" />
 
     <!-- Installation Script -->
     <scriptfile>script.php</scriptfile>

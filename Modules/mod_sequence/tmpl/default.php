@@ -2,9 +2,9 @@
 
 namespace ToKu\Module\Sequence\Site\View;
 
-use Joomla\CMS\Layout\LayoutHelper;
 use ToKu\Library\Closure;
 use ToKu\Library\Html;
+use ToKu\Library\Joomla;
 use ToKu\Library\JooToKu;
 use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
 use ToKu\Module\Sequence\Site\Helper\ViewData;
@@ -12,7 +12,7 @@ use ToKu\Module\Sequence\Site\Helper\ViewData;
 \defined('_JEXEC') or die;
 
 JooToKu::registerExtensionFile(SequenceHelper::MODULE);
-JooToKu::useStyles(SequenceHelper::MODULE . '.style');
+$wa = JooToKu::useStyles(SequenceHelper::MODULE . '.style');
 
 /**
  * @var \Joomla\Registry\Registry $params Module parameters
@@ -23,13 +23,17 @@ JooToKu::useStyles(SequenceHelper::MODULE . '.style');
 $isTrue = Closure::isTrue($params);
 $param = Closure::param($params);
 
+if ($isTrue('module_style_enabled')) {
+    $wa->addInlineStyle($params->get('module_style_css') ?? '');
+}
+
 $images = json_decode($sequence->images);
 $selector = JooToKu::getUniqueId();
 ?>
 
 <div class="<?= JooToKu::getModuleClass(SequenceHelper::NAME); ?><?= $param('module_class'); ?>">
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'sequence',
         'type' => 'header',
         'text' => $isTrue('keep_header_text') ? $sequence->header : $params->get('module_header_text'),
@@ -82,17 +86,17 @@ $selector = JooToKu::getUniqueId();
                 ];
 
                 if ($sequence->type === 1) {
-                    echo LayoutHelper::render('toku.sequence.time', $data);
+                    echo JooToKu::render('sequence.time', $data, SequenceHelper::MODULE);
                 }
                 else {
-                    echo LayoutHelper::render('toku.sequence.item', $data);
+                    echo JooToKu::render('sequence.item', $data, SequenceHelper::MODULE);
                 }
             } ?>
         </div>
     
     </div>
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'sequence',
         'type' => 'footer',
         'text' => $isTrue('keep_footer_text') ? $sequence->footer : $params->get('module_footer_text'),

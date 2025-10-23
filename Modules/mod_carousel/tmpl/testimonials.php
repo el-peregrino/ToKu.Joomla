@@ -48,7 +48,7 @@ $indicators = $params->get('indicators');
 
 <div class="<?= JooToKu::getModuleClass(CarouselHelper::NAME); ?><?= $param('module_class'); ?>">
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'carousel',
         'type' => 'header',
         'text' => $params->get('module_header_text'),
@@ -130,7 +130,7 @@ $indicators = $params->get('indicators');
         <?php endif; ?>
     </div>
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'carousel',
         'type' => 'footer',
         'text' => $params->get('module_footer_text'),

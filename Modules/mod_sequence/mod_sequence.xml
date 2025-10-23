@@ -12,6 +12,7 @@
         <folder module="mod_sequence">services</folder>
         <folder>src</folder>
         <folder>tmpl</folder>
+        <folder>layouts</folder>
     </files>
 
     <!-- Assets -->
@@ -20,8 +21,6 @@
         <folder>css</folder>
         <folder>images</folder>
     </media>
-
-    <media destination="layouts" folder="layouts" />
 
     <languages>
         <language tag="en-GB">language/en-GB/mod_sequence.ini</language>

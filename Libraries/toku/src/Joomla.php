@@ -33,13 +33,24 @@ class Joomla
      */
     public const FORMS = 'forms';
 
+    public const COMPONENTS = 'components';
+    public const LIBRARIES = 'libraries';
+    public const MODULES = 'modules';
+    public const PLUGINS = 'plugins';
+    public const LAYOUTS = 'layouts';
+
     /**
      * Builds file or directory path.
      * @param string[] $names   Parts (folders) of the path.
      * @return string
      */
-    public static function getPath(string ...$names): string 
+    public static function getPath(?string ...$names): string 
     {
-        return implode(DIRECTORY_SEPARATOR, $names);
+        return implode(DIRECTORY_SEPARATOR, array_filter($names));
+    }
+
+    public static function getLayoutPath(string $name, string $type, ?string $subtype = null): string 
+    {
+        return self::getPath(JPATH_ROOT, $type, $subtype, strtolower($name), self::LAYOUTS);
     }
 }

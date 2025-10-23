@@ -72,9 +72,16 @@ class ViewData
     public readonly array|bool $header;
     public readonly array|bool $footer;
 
+    /**
+     * Unique identifier for the item.
+     * @var string
+     */
+    public readonly string $uid;
+
 
     public function __construct(Registry $params, ItemData $item)
     {
+        $this->uid = "toku-sq-$item->id";
         $this->collapsible = $params->get('collapsible', false);
         $this->mode = $params->get('mode', 'single');
         $this->line = $params->get('align');

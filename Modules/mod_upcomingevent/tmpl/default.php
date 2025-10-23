@@ -8,7 +8,6 @@
  * @license     GNU General Public License version 3 or later
  */
 
-use Joomla\CMS\Layout\LayoutHelper;
 use ToKu\Library\Closure;
 use ToKu\Library\JooToKu;
 use ToKu\Module\UpcomingEvent\Site\Helper\UpcomingEventHelper;
@@ -34,7 +33,7 @@ if (empty($event)) {
 
 <div class="<?= JooToKu::getModuleClass(UpcomingEventHelper::NAME); ?><?= $param('module_class'); ?>">
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('toku.module.frame', [
         'name' => 'upcoming-event',
         'type' => 'header',
         'text' => $params->get('module_header_text'),
@@ -45,14 +44,14 @@ if (empty($event)) {
     ]); ?>
 
     <div class="upcoming-event">
-        <?= LayoutHelper::render('toku.upcomingevent.event', [
+        <?= JooToKu::render('toku.upcomingevent.event', [
             'event' => $event,
             'params' => $params,
             'headline' => $params->get('headline')
-        ]); ?>
+        ], UpcomingEventHelper::MODULE); ?>
     </div>
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('toku.module.frame', [
         'name' => 'upcoming-event',
         'type' => 'footer',
         'text' => $params->get('module_footer_text'),

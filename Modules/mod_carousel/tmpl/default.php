@@ -8,9 +8,9 @@
  * @license     GNU General Public License version 3 or later
  */
 
-use Joomla\CMS\Layout\LayoutHelper;
 use ToKu\Library\Closure;
 use ToKu\Library\Html;
+use ToKu\Library\Joomla;
 use ToKu\Library\JooToKu;
 use ToKu\Module\Carousel\Site\Helper\CarouselHelper;
 
@@ -44,7 +44,7 @@ $indicators = $params->get('indicators');
 
 <div class="<?= JooToKu::getModuleClass(CarouselHelper::NAME); ?><?= $param('module_class'); ?>">
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'carousel',
         'type' => 'header',
         'text' => $params->get('module_header_text'),
@@ -85,12 +85,12 @@ $indicators = $params->get('indicators');
                 ?>
                 <div class="carousel-box<?= $param('box_class'); ?><?= Html::append($item->item_class); ?>" data-js="box">
                     
-                    <?= LayoutHelper::render("toku.carousel.$item->item_type", [
+                    <?= JooToKu::render("carousel.$item->item_type", [
                         'image' => $image, 
                         'item' => $item, 
                         'link' => $link, 
                         'params' => $params
-                    ]); ?>
+                    ], CarouselHelper::MODULE); ?>
 
                 </div>
             <?php endforeach; ?>
@@ -116,7 +116,7 @@ $indicators = $params->get('indicators');
         <?php endif; ?>
     </div>
 
-    <?= LayoutHelper::render('toku.module.frame', [
+    <?= JooToKu::render('module.frame', [
         'name' => 'carousel',
         'type' => 'footer',
         'text' => $params->get('module_footer_text'),

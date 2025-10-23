@@ -14,6 +14,7 @@ namespace ToKu\Module\Sequence\Site\Helper;
 
 class ItemData
 {
+    public int $id;
     public string $title;
     public string $caption;
     public string $heading;

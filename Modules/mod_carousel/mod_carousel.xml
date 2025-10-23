@@ -15,6 +15,7 @@
         <folder>src</folder>
         <folder>tmpl</folder>
         <folder>forms</folder>
+        <folder>layouts</folder>
     </files>
 
     <!-- Assets -->
@@ -22,8 +23,6 @@
         <filename>joomla.asset.json</filename>
         <folder>css</folder>
     </media>
-
-    <media destination="layouts" folder="layouts" />
 
     <languages>
         <language tag="en-GB">language/en-GB/mod_carousel.ini</language>
