@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @package     ToKu.Joomla
+ * @subpackage  com_jexcontent
+ *
+ * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @license     GNU General Public License version 3 or later
+ */
+
+namespace ToKu\Component\JexContent\Administrator\Controller;
+
+use Joomla\CMS\MVC\Controller\AdminController;
+use ToKu\Component\JexContent\Administrator\Trait\AjaxSortAwareTrait;
+
+\defined('_JEXEC') or die;
+
+class SequencesController extends AdminController
+{
+    use AjaxSortAwareTrait;
+
+    public function getModel($name = 'Sequence', $prefix = 'Administrator', $config = ['ignore_request' => true])
+    {
+        return parent::getModel($name, $prefix, $config);
+    }
+
+    public function saveOrderAjax()
+    {
+        // check for request forgeries
+        $this->checkToken();
+
+        if ($this->reorderTable()) {
+            echo '1';
+        }
+
+        // close the application
+        $this->app->close();
+    }
+}
