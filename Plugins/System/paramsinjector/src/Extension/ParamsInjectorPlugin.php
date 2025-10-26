@@ -10,9 +10,11 @@
 
 namespace ToKu\Plugin\System\ParamsInjector\Extension;
 
+use Joomla\CMS\Form\Form;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\Event\EventInterface;
 use Joomla\Event\SubscriberInterface;
+use ToKu\Library\Closure;
 use ToKu\Library\Joomla;
 use ToKu\Library\JooToKu;
 
@@ -43,15 +45,30 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
      */
     public function onContentPrepareForm(EventInterface $event): void
     {
+        // only apply to module forms in the administrator
+        if (!$this->getApplication()->isClient('administrator')) {
+            return;
+        }
+
         /** @var \Joomla\CMS\Form\Form */
         $form = $event->getArgument('form');
         $data = $event->getArgument('data');
 
-        // only apply to module forms in the administrator
-        if (!$this->getApplication()->isClient('administrator') || $form->getName() !== 'com_modules.module') {
-            return;
+        $isTrue = Closure::isTrue($this->params);
+
+        // try add module params
+        if ($isTrue('module_frame') && $form->getName() === 'com_modules.module') {
+            $this->loadModuleParams($form, $data);
         }
 
+        // try add menu params
+        if ($isTrue('menu_item') && $form->getName() === 'com_menus.item') {
+            $form->loadFile(Joomla::getPath(JPATH_PLUGINS, Joomla::SYSTEM, self::ELEMENT, Joomla::FORMS, 'menu.xml'));            
+        }
+    }
+
+    private function loadModuleParams(Form &$form, $data): void
+    {
         // only apply to supported modules
         $modules = [
             'mod_articlecarousel', 

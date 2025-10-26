@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fields name="params">
+
+        <fieldset name="menu-options">
+
+            <field name="group_header" type="spacer" label="PLG_PARAMSINJECTOR_SPACER_MENU_ITEM" />
+
+            <field
+                name="menu_enable_icon"
+                type="radio"
+                default="0"
+                layout="joomla.form.field.radio.switcher"
+                label="PLG_PARAMSINJECTOR_FIELD_MENU_ICON_ENABLE_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MENU_ICON_ENABLE_DESCRIPTION">
+                <option value="0">JNo</option>
+                <option value="1">JYes</option>
+            </field>
+
+            <field 
+                name="menu_subtitle" 
+                type="text" 
+                label="PLG_PARAMSINJECTOR_FIELD_MENU_SUBTITLE_LABEL"
+                description="PLG_PARAMSINJECTOR_FIELD_MENU_SUBTITLE_DESCRIPTION" />
+
+        </fieldset>
+    </fields>
+</form>

@@ -5,7 +5,7 @@
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-09-18</creationDate>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
     <description>PLG_PARAMSINJECTOR_DESCRIPTION</description>
     <namespace path="src">ToKu\Plugin\System\ParamsInjector</namespace>
 
@@ -24,6 +24,37 @@
 
     <!-- Update Servers -->
     <updateservers>
-        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+        <server type="collection">https://joomla.toku.cz/jex.toku.xml</server>
     </updateservers>
+
+    <!-- Plugin Configuration -->
+    <config module="mod_sequence">
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field 
+                    name="module_frame" 
+                    type="radio" 
+                    default="0" 
+                    layout="joomla.form.field.radio.switcher"
+                    label="PLG_PARAMSINJECTOR_CONFIG_MODULE_FRAME_LABEL"
+                    description="PLG_PARAMSINJECTOR_CONFIG_MODULE_FRAME_DESCRIPTION" >
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field 
+                    name="menu_item" 
+                    type="radio" 
+                    default="0" 
+                    layout="joomla.form.field.radio.switcher"
+                    label="PLG_PARAMSINJECTOR_CONFIG_MENU_ITEM_LABEL"
+                    description="PLG_PARAMSINJECTOR_CONFIG_MENU_ITEM_DESCRIPTION" >
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
 </extension>
