@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
     <update>
-        <name>ToKu Upcoming Event Filter</name>
+        <name>JEX Upcoming Event Filter</name>
         <element>upcomingeventfilter</element>
         <type>plugin</type>
         <client>site</client>
         <folder>system</folder>
         <version>1.0.5</version>
-        <infourl title="ToKu Upcoming Event Filter">
+        <infourl title="JEX Upcoming Event Filter">
             https://joomla.toku.cz/plugins/plg_upcomingeventfilter.html#version-1-0-5
         </infourl>
         <downloads>

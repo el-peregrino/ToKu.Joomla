@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
     <update>
-        <name>ToKu Carousel Module</name>
+        <name>JEX Carousel</name>
         <element>mod_carousel</element>
         <type>module</type>
         <client>site</client>
         <version>1.0.5</version>
-        <infourl title="ToKu Carousel Module">
+        <infourl title="JEX Carousel">
             https://joomla.toku.cz/modules/mod_carousel.html#version-1.0.5
         </infourl>
         <downloads>

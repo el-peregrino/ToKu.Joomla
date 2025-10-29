@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
     <update>
-        <name>ToKu Params Injector</name>
+        <name>JEX Params Injector</name>
         <element>paramsinjector</element>
         <type>plugin</type>
         <client>site</client>
         <folder>system</folder>
         <version>1.0.5</version>
-        <infourl title="ToKu Params Injector">
+        <infourl title="JEX Params Injector">
             https://joomla.toku.cz/plugins/plg_paramsinjector.html#version-1-0-5
         </infourl>
         <downloads>

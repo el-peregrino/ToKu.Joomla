@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <updates>
     <update>
-        <name>ToKu Upcoming Event Module</name>
+        <name>JEX Upcoming Event Module</name>
         <element>mod_upcomingevent</element>
         <type>module</type>
         <client>site</client>
         <version>1.0.13</version>
-        <infourl title="ToKu Upcoming Event Module">
+        <infourl title="JEX Upcoming Event Module">
             https://joomla.toku.cz/modules/mod_upcomingevent.html#version-1-0-13
         </infourl>
         <downloads>

@@ -73,7 +73,7 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
         $modules = [
             'mod_articlecarousel', 
             'mod_carousel', 
-            'mod_sequence', 
+            'mod_journal', 
             'mod_upcomingevent'
         ];
         $module = $data->module ?? JooToKu::getConfigModule($form);

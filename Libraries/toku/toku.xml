@@ -37,6 +37,6 @@
 
     <!-- Update Servers -->
     <updateservers>
-        <server type="collection">https://joomla.toku.cz/toku.joomla.xml</server>
+        <server type="collection">https://joomla.toku.cz/jex.toku.xml</server>
     </updateservers>
 </extension>

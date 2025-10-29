@@ -28,7 +28,7 @@
     </updateservers>
 
     <!-- Plugin Configuration -->
-    <config module="mod_sequence">
+    <config>
         <fields name="params">
             <fieldset name="basic">
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extensionset name="ToKu Joomla Project" description="Updates of ToKu Joomla Extensions">
+    <extension name="ToKu Joomla Library" element="toku" type="library" client="site" version="1.0.15" detailsurl="https://joomla.toku.cz/libraries/lib_toku.xml"/>
+    <extension name="JEX Params Injector" element="paramsinjector" type="plugin" client="site" folder="system" version="1.0.5" detailsurl="https://joomla.toku.cz/plugins/plg_paramsinjector.xml"/>
+    <extension name="JEX Upcoming Event Filter" element="upcomingeventfilter" type="plugin" client="site" folder="system" version="1.0.5" detailsurl="https://joomla.toku.cz/plugins/plg_upcomingeventfilter.xml"/>
+    <extension name="JEX Content Manager" element="com_jexcontent" type="component" client="administrator" version="1.0.11" detailsurl="https://joomla.toku.cz/components/com_jexcontent.xml"/>
+    <extension name="JEX Carousel" element="mod_carousel" type="module" client="site" version="1.0.5" detailsurl="https://joomla.toku.cz/modules/mod_carousel.xml"/>
+    <extension name="JEX Journal" element="mod_journal" type="module" client="site" version="1.0.5" detailsurl="https://joomla.toku.cz/modules/mod_journal.xml"/>
+    <extension name="JEX Upcoming Event" element="mod_upcomingevent" type="module" client="site" version="1.0.13" detailsurl="https://joomla.toku.cz/modules/mod_upcomingevent.xml"/>
+</extensionset>
