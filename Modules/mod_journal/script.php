@@ -2,7 +2,7 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  mod_sequence
+ * @subpackage  mod_journal
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
@@ -56,13 +56,13 @@ return new class () implements InstallerScriptInterface {
 
         // dependency check
         if (!class_exists('ToKu\Library\JooToKu')) {
-            Factory::getApplication()->enqueueMessage(Text::sprintf('MOD_SEQUENCE_LIBRARY_ERROR', $this->minimumToKu), 'error');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('MOD_JOURNAL_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;
         }
 
         $version = \ToKu\Library\JooToKu::VERSION ?? null;
         if (version_compare($version, $this->minimumToKu, '<')) {
-            Factory::getApplication()->enqueueMessage(Text::sprintf('MOD_SEQUENCE_LIBRARY_ERROR', $this->minimumToKu), 'error');
+            Factory::getApplication()->enqueueMessage(Text::sprintf('MOD_JOURNAL_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;
         }
 

@@ -2,24 +2,24 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  mod_sequence
+ * @subpackage  mod_journal
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
-namespace ToKu\Module\Sequence\Site\Dispatcher;
+namespace ToKu\Module\Journal\Site\Dispatcher;
 
 use Joomla\CMS\Dispatcher\AbstractModuleDispatcher;
 use Joomla\CMS\Helper\HelperFactoryAwareInterface;
 use Joomla\CMS\Helper\HelperFactoryAwareTrait;
 use Joomla\CMS\Helper\ModuleHelper;
-use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
+use ToKu\Module\Journal\Site\Helper\JournalHelper;
 
 \defined('_JEXEC') or die;
 
 /**
- * Dispatcher class for mod_sequence
+ * Dispatcher class for mod_journal
  */
 class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareInterface
 {
@@ -35,7 +35,7 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
         // extract data for the template
         extract($data);
         
-        require ModuleHelper::getLayoutPath(SequenceHelper::MODULE, $data['layout']);
+        require ModuleHelper::getLayoutPath(JournalHelper::MODULE, $data['layout']);
     }
 
     protected function getLayoutData(): array|bool
@@ -49,16 +49,14 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
 
         /** @var \Joomla\Registry\Registry $params */
         $params = $data['params'];
+        $module = $data['module'];
 
-        /** @var SequenceHelper $helper */
-        $helper = $this->getHelperFactory()->getHelper('SequenceHelper');
+        /** @var JournalHelper $helper */
+        $helper = $this->getHelperFactory()->getHelper('JournalHelper');
 
-        $levels = $helper->getAccessLevels($this->app);
-        // load sequence
-        $sequence = $helper->getSequence((int) $params->get('sequence'), $levels);
-        $data['sequence'] = $sequence;
-        // load items
-        $data['items'] = $helper->getItems($params, $levels, $sequence ? $sequence->type : -1);
+        $levels = $this->app->getIdentity()->getAuthorisedViewLevels();
+        // load records
+        $data['records'] = $helper->getRecords($params, $levels, $module->language);
         // layout
         $data['layout'] = $params->get('layout', 'default');
 

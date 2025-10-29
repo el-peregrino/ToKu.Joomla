@@ -2,7 +2,7 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  mod_sequence
+ * @subpackage  mod_journal
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
@@ -14,12 +14,12 @@ use Joomla\CMS\Extension\Service\Provider\ModuleDispatcherFactory;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use ToKu\Library\JooToKu;
-use ToKu\Module\Sequence\Site\Helper\SequenceHelper;
+use ToKu\Module\Journal\Site\Helper\JournalHelper;
 
 \defined('_JEXEC') or die;
 
 /**
- * The sequence module service provider.
+ * The journal module service provider.
  */
 return new class () implements ServiceProviderInterface {
 
@@ -33,8 +33,8 @@ return new class () implements ServiceProviderInterface {
      */
     public function register(Container $container): void
     {
-        $container->registerServiceProvider(new ModuleDispatcherFactory(JooToKu::getNamespace(SequenceHelper::NAME, JooToKu::MODULE)));
-        $container->registerServiceProvider(new HelperFactory(JooToKu::getSiteHelper(SequenceHelper::NAME)));
+        $container->registerServiceProvider(new ModuleDispatcherFactory(JooToKu::getNamespace(JournalHelper::NAME, JooToKu::MODULE)));
+        $container->registerServiceProvider(new HelperFactory(JooToKu::getSiteHelper(JournalHelper::NAME)));
         $container->registerServiceProvider(new Module());
     }
 };

@@ -1,14 +1,14 @@
 {
     "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
-    "name": "mod_sequence",
+    "name": "mod_journal",
     "version": "1.0.2",
-    "description": "ToKu Sequence Module",
+    "description": "ToKu JEX Journal Module",
     "license": "GPL-3.0-or-later",
     "assets": [
       {
-        "name": "mod_sequence.style",
+        "name": "mod_journal.style",
         "type": "style",
-        "uri": "mod_sequence/style.css",
+        "uri": "mod_journal/style.css",
         "version": "1.0.2"
       }
     ]

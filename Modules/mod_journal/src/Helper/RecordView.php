@@ -2,13 +2,13 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  mod_sequence
+ * @subpackage  mod_journal
  *
  * @copyright   (C) 2025 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
-namespace ToKu\Module\Sequence\Site\Helper;
+namespace ToKu\Module\Journal\Site\Helper;
 
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
@@ -16,21 +16,21 @@ use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
-class ViewData
+class RecordView
 {
     /**
-     * True indicates the sequence items are collapsible.
+     * True indicates the journal items are collapsible.
      * @var bool
      */
     public readonly bool $collapsible;
     /**
-     * The expansion mode of the sequence tree.
+     * The expansion mode of the journal tree.
      * Indicates how many items can be expanded (single or multiple).
      * @var string
      */
     public readonly string $mode;
     /**
-     * Position of the sequence line (center, left, right).
+     * Position of the journal line (center, left, right).
      * @var string
      */
     public readonly string $line;
@@ -79,21 +79,21 @@ class ViewData
     public readonly string $uid;
 
 
-    public function __construct(Registry $params, ItemData $item)
+    public function __construct(Registry $params, RecordData $record)
     {
-        $this->uid = "toku-sq-$item->id";
+        $this->uid = "jex-record-$record->id";
         $this->collapsible = $params->get('collapsible', false);
         $this->mode = $params->get('mode', 'single');
         $this->line = $params->get('align');
         
         // parse options
-        $options = new Registry($item->params);
+        $options = new Registry($record->params);
         $this->control = $options->get('control', 1);
         $this->keep = $this->collapsible && $options->get('keep', 0);
         $this->icon = $options->get('icon');
         $this->css = $options->get('css');
         // parse links
-        $links = new Registry($item->links);
+        $links = new Registry($record->links);
         $url = self::getLinkUrl($links);
         $this->link = empty($url) || empty($links->get('link_text'))
             ? false
@@ -105,7 +105,7 @@ class ViewData
         $this->link_text = $links->get('link_text');
 
         // parse images
-        $images = new Registry($item->images);
+        $images = new Registry($record->images);
         $this->header = empty($images->get('image_header')) || $images->get('header_position') === 'none'
             ? false
             : [
@@ -122,7 +122,7 @@ class ViewData
         ];
 
         // has body content
-        $this->body = $item->body || $this->link || $item->footer || $this->footer;
+        $this->body = $record->body || $this->link || $record->footer || $this->footer;
         
         $this->expandable = $this->body && $this->collapsible && !$this->keep;
         $this->collapsed = $this->expandable && !$options->get('initial', false);

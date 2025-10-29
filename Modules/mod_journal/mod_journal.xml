@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>MOD_JOURNAL</name>
+    <version>1.0.5</version>
+    <author>ToKu</author>
+    <creationDate>2025-01-31</creationDate>
+    <description>MOD_JOURNAL_DESCRIPTION</description>
+    <namespace path="src">ToKu\Module\Journal</namespace>
+
+    <!-- Sources -->
+    <files>
+        <folder module="mod_journal">services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>layouts</folder>
+    </files>
+
+    <!-- Assets -->
+    <media destination="mod_journal" folder="media">
+        <filename>joomla.asset.json</filename>
+        <folder>css</folder>
+        <folder>images</folder>
+    </media>
+
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_journal.ini</language>
+        <language tag="en-GB">language/en-GB/mod_journal.sys.ini</language>
+    </languages>
+
+    <!-- Installation Script -->
+    <scriptfile>script.php</scriptfile>
+
+    <!-- Update Servers -->
+    <updateservers>
+        <server type="collection">https://joomla.toku.cz/jex.toku.xml</server>
+    </updateservers>
+
+    <!-- Module Configuration -->
+    <config module="mod_journal">
+        <fields name="params">
+
+            <fieldset name="basic">
+
+                <field name="language" 
+                    type="language"
+                    default="inherit"
+                    label="JFIELD_LANGUAGE_LABEL"
+                    description="JFIELD_LANGUAGE_DESC" >
+                    <option value="inherit">MOD_JOURNAL_OPTION_LANGUAGE</option>
+                    <option value="*">JOPTION_SELECT_LANGUAGE</option>
+                </field>
+
+                <field 
+                    name="timeline" 
+                    type="list" 
+                    default=""
+                    label="MOD_JOURNAL_FIELD_TIMELINE_LABEL" 
+                    description="MOD_JOURNAL_FIELD_TIMELINE_DESCRIPTION">
+                    <option value="">MOD_JOURNAL_TIMELINE_OPTION_ALL</option>
+                    <option value="0">MOD_JOURNAL_TIMELINE_OPTION_NONE</option>
+                    <option value="1">MOD_JOURNAL_TIMELINE_OPTION_ONLY</option>
+                </field>
+
+                <field 
+                    name="timemode" 
+                    type="list" 
+                    default=""
+                    showon="timeline:1"
+                    label="MOD_JOURNAL_FIELD_TIMEMODE_LABEL" 
+                    description="MOD_JOURNAL_FIELD_TIMEMODE_DESCRIPTION">
+                    <option value="">MOD_JOURNAL_TIMEMODE_OPTION_ALL</option>
+                    <option value="past">MOD_JOURNAL_TIMEMODE_OPTION_PAST</option>
+                    <option value="future">MOD_JOURNAL_TIMEMODE_OPTION_FUTURE</option>
+                </field>
+
+                <field 
+                    name="date" 
+                    type="calendar" 
+                    default=""
+                    showon="timeline:1"
+                    label="MOD_JOURNAL_FIELD_DATE_LABEL" 
+                    description="MOD_JOURNAL_FIELD_DATE_DESCRIPTION" />
+
+                <field
+                    name="categories"
+                    type="category"
+                    extension="com_jexcontent"
+                    multiple="true"
+                    layout="joomla.form.field.list-fancy-select"
+                    filter="intarray"
+                    label="MOD_JOURNAL_FIELD_CATEGORIES_LABEL"
+                    description="MOD_JOURNAL_FIELD_CATEGORIES_DESCRIPTION" />
+
+                <field name="tags"
+                    type="tag"
+                    extension="com_jexcontent"
+                    multiple="true"
+                    filter="intarray"
+                    label="MOD_JOURNAL_FIELD_TAGS_LABEL"
+                    description="MOD_JOURNAL_FIELD_TAGS_DESCRIPTION" />
+
+                <field 
+                    name="ordering" 
+                    type="list" 
+                    default="component"
+                    label="MOD_JOURNAL_FIELD_ORDERING_LABEL" 
+                    description="MOD_JOURNAL_FIELD_ORDERING_DESCRIPTION">
+                    <option value="component">MOD_JOURNAL_ORDERING_OPTION_COMPONENT</option>
+                    <option value="random">MOD_JOURNAL_ORDERING_OPTION_RANDOM</option>
+                    <option value="heading">MOD_JOURNAL_ORDERING_OPTION_HEADING</option>
+                </field>
+
+                <field 
+                    name="direction" 
+                    type="list" 
+                    default="component"
+                    label="MOD_JOURNAL_FIELD_DIRECTION_LABEL" 
+                    description="MOD_JOURNAL_FIELD_DIRECTION_DESCRIPTION">
+                    <option value="component">MOD_JOURNAL_DIRECTION_OPTION_COMPONENT</option>
+                    <option value="reverse">MOD_JOURNAL_DIRECTION_OPTION_REVERSE</option>
+                    <option value="ascending">MOD_JOURNAL_DIRECTION_OPTION_ASCENDING</option>
+                    <option value="descending">MOD_JOURNAL_DIRECTION_OPTION_DESCENDING</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="options" label="MOD_JOURNAL_TAB_OPTIONS">
+
+                <field 
+                    name="collapsible" 
+                    type="radio" 
+                    default="1" 
+                    layout="joomla.form.field.radio.switcher"
+                    label="MOD_JOURNAL_FIELD_COLLAPSIBLE_LABEL" >
+                    <option value="0">JNo</option>
+                    <option value="1">JYes</option>
+                </field>
+
+                <field
+                    name="mode" 
+                    type="list" 
+                    showon="collapsible:1"
+                    default="single" 
+                    label="MOD_JOURNAL_FIELD_EXPANSION_MODE_LABEL" >
+                    <option value="single">MOD_JOURNAL_EXPANSION_MODE_OPTION_SINGLE</option>
+                    <option value="multiple">MOD_JOURNAL_EXPANSION_MODE_OPTION_MULTIPLE</option>
+                </field>
+
+                <field
+                    name="align" 
+                    type="list" 
+                    default="center" 
+                    label="MOD_JOURNAL_FIELD_ALIGN_LABEL" >
+                    <option value="center">MOD_JOURNAL_ALIGN_OPTION_CENTER</option>
+                    <option value="left">MOD_JOURNAL_ALIGN_OPTION_LEFT</option>
+                    <option value="right">MOD_JOURNAL_ALIGN_OPTION_RIGHT</option>
+                </field>
+
+                <field
+                    name="datetime_format"
+                    type="text"
+                    required="true"
+                    default="l, j. F Y H:i"
+                    label="MOD_JOURNAL_FIELD_DATETIME_FORMAT_LABEL"
+                    description="MOD_JOURNAL_FIELD_DATETIME_FORMAT_DESCRIPTION" />
+
+            </fieldset>
+
+            <fieldset name="advanced">
+
+                <field
+                    name="layout"
+                    type="modulelayout"
+                    label="JFIELD_ALT_LAYOUT_LABEL"
+                    class="form-select"
+                    validate="moduleLayout" />
+
+                <field 
+                    name="module_class"
+                    type="text"
+                    validate="CssIdentifier"
+                    label="MOD_JOURNAL_FIELD_MODULE_CLASS_LABEL"
+                    description="MOD_JOURNAL_FIELD_MODULE_CLASS_DESCRIPTION" />
+
+                <field 
+                    name="box_class"
+                    type="text"
+                    validate="CssIdentifier"
+                    label="MOD_JOURNAL_FIELD_BOX_CLASS_LABEL"
+                    description="MOD_JOURNAL_FIELD_BOX_CLASS_DESCRIPTION" />
+
+            </fieldset>
+
+        </fields>
+    </config>
+</extension>

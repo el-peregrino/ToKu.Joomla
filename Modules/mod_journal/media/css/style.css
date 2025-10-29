@@ -1,0 +1,368 @@
+:root {
+  --jex-record-title-width: 250px;
+  --jex-record-background: transparent;
+  --jex-record-color-content: var(--body-text-color);
+  --jex-record-color-heading: var(--headings-color);
+}
+
+.jex-journal .jex-record.col-12 {
+  margin: 0;
+  padding: 0;
+}
+
+.jex-record-center,
+.jex-record-left,
+.jex-record-right {
+  background-image: url(../images/journal-line.png);
+  background-repeat: repeat-y;
+}
+
+.jex-record-center {
+  background-position: center;
+}
+
+.jex-record-left {
+  background-position-x: calc(var(--jex-record-title-width) - 2px);
+}
+
+.jex-record-right {
+  background-position-x: calc(100% - var(--jex-record-title-width) + 1px);
+}
+
+.jex-record {
+  position: relative;
+}
+
+.jex-record .record-control {
+  position: absolute;
+  top: 1rem;
+  width: 1.6rem;
+  font-size: 1.6rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.jex-record .record-label {
+  position: absolute;
+  top: 1rem;
+  font-family: Ubuntu;
+  font-weight: 500;
+  font-size: 1.1rem;
+  min-height: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  text-wrap: nowrap;
+}
+
+.jex-record .record-label span:nth-child(2n) {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.jex-record .record-card {
+  position: relative;
+  padding: 1rem;
+  background-color: var(--jex-record-background);
+}
+
+.jex-record .record-card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.jex-record .record-card .jex-record-subtitle {
+  font-family: Ubuntu;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.jex-record .record-card .record-arrow {
+  position: absolute;
+  font-size: 3rem;
+  top: 0.3rem;
+}
+
+.jex-record .record-card .jex-record-icon {
+  font-size: 1.25rem;
+  text-align: center;
+  flex: 0 0 40px;
+}
+
+.jex-record .record-card .record-heading {
+  display: flex;
+  align-items: center;
+}
+
+.jex-record .record-card .record-heading div {
+  flex: 1 1 auto;
+}
+
+.jex-record .record-card .record-container {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+  border-top: 1px dotted;
+}
+
+.jex-record .record-card .record-container p {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.jex-record.left {
+  float: left;
+}
+
+.jex-record.left .record-control {
+  right: -0.8rem;
+}
+
+.jex-record.left .record-label {
+  left: 100%;
+  margin-left: 2rem;
+  text-align: left;
+}
+
+.jex-record.left .record-arrow {
+  right: -0.75rem;
+}
+
+.jex-record.left .record-card .record-heading {
+  flex-direction: row;
+}
+
+.jex-record.left .record-card .record-heading.has-icon div {
+  border-left: 1px solid;
+  padding-left: 0.5rem;
+}
+
+.jex-record.right {
+  float: right;
+}
+
+.jex-record.right .record-control {
+  left: -0.8rem;
+}
+
+.jex-record.right .record-label {
+  right: 100%;
+  margin-right: 2rem;
+  text-align: right;
+}
+
+.jex-record.right .record-arrow {
+  left: -0.75rem;
+}
+
+.jex-record.right .record-card .record-heading {
+  flex-direction: row-reverse;
+}
+
+.jex-record.right .record-card .record-heading.has-icon div {
+  border-right: 1px solid;
+  padding-right: 0.5rem;
+}
+
+.record-arrow,
+.record-caret {
+  display: none;
+}
+
+.jex-expandable .record-control,
+.jex-expandable .record-label,
+.jex-expandable .record-heading {
+  cursor: pointer;
+}
+
+.jex-expandable:hover .record-control,
+.jex-expandable:hover .record-label,
+.jex-expandable:hover .record-heading {
+  opacity: 0.8;
+}
+
+.jex-expandable .record-control .fa-circle-plus,
+.jex-expandable .record-control.collapsed .fa-circle-minus {
+  display: none;
+}
+
+.jex-expandable .record-control.collapsed .fa-circle-plus,
+.jex-expandable .record-control .fa-circle-minus {
+  display: block;
+}
+
+.jex-record[class*="jex-record-color-"] .record-arrow {
+  color: var(--jex-record-background);
+  display: block;
+}
+
+.jex-record[class*="jex-record-color-"] .record-caret {
+  color: var(--jex-record-background);
+}
+
+.jex-record[class*="jex-record-color-"] .record-card {
+  border-radius: 0.3rem;
+  color: var(--jex-record-color-content);
+}
+
+.jex-record[class*="jex-record-color-"] .record-card h3 {
+  color: var(--jex-record-color-heading);
+}
+
+.jex-record.jex-record-color-dark {
+  --jex-record-background: var(--color-dark);
+}
+
+@media (min-width: 768px) {
+
+  .jex-record-left .col-md,
+  .jex-record-right .col-md {
+    width: calc(100% - var(--jex-record-title-width));
+  }
+
+  .jex-record-left .clearfix,
+  .jex-record-right .clearfix {
+    margin-bottom: 0.5rem;
+  }
+
+  .jex-record.left .record-card {
+    margin-right: 1rem;
+  }
+
+  .jex-record.right .record-card {
+    margin-left: 1rem;
+  }
+
+  .jex-record[class*="jex-record-color-"].jex-record-left .record-card {
+    margin-right: 2rem;
+  }
+
+  .jex-record[class*="jex-record-color-"].jex-record-right .record-card {
+    margin-left: 2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+
+  .jex-record-center,
+  .jex-record-left,
+  .jex-record-right {
+    padding-bottom: 1rem;
+  }
+
+  .jex-record-left,
+  .jex-record-center {
+    background-position-x: 13px;
+  }
+
+  .jex-record-right {
+    background-position-x: calc(100% - 13px);
+  }
+
+  .jex-record .record-label {
+    font-size: 1rem;
+  }
+
+  .jex-record .record-card {
+    margin: 3rem 0 0 0;
+  }
+
+  .jex-record .record-card .record-caret {
+    position: absolute;
+    font-size: 3rem;
+    top: -1.4rem;
+  }
+
+  .jex-record.left .record-control {
+    right: 2px;
+  }
+
+  .jex-record.left .record-label {
+    left: unset;
+    right: 2.5rem;
+    margin: 0;
+    text-align: right;
+  }
+
+  .jex-record.left .record-card {
+    padding: 1rem 1.25rem 1rem 0;
+  }
+
+  .jex-record.left .record-card .record-caret {
+    right: 0;
+  }
+
+  .jex-record.left[class*="jex-record-color-"] .record-card {
+    padding: 1rem 1rem 1rem 0.25rem;
+  }
+
+  .jex-record.left[class*="jex-record-color-"] .record-card .record-container {
+    padding-left: 0.5rem;
+  }
+
+  .jex-record.right .record-control {
+    left: 0.1rem;
+  }
+
+  .jex-record.right .record-label {
+    left: 2.5rem;
+    right: unset;
+    margin: 0;
+    text-align: left;
+  }
+
+  .jex-record.right .record-card {
+    padding: 1rem 0 1rem 1.25rem;
+  }
+
+  .jex-record.right .record-card .record-caret {
+    left: 0;
+  }
+
+  .jex-record.right[class*="jex-record-color-"] .record-card {
+    padding: 1rem 0.25rem 1rem 1rem;
+  }
+
+  .jex-record.right[class*="jex-record-color-"] .record-card .record-container {
+    padding-right: 0.5rem;
+  }
+
+  .jex-record[class*="jex-record-color-"] .record-caret {
+    display: block;
+  }
+
+  .jex-record[class*="jex-record-color-"] .record-arrow {
+    display: none;
+  }
+
+  .jex-record[class*="jex-record-color-"] .record-card {
+    margin: 4rem 0 0 0;
+    padding: 1rem;
+  }
+
+  .jex-record-center .jex-record.left .record-control {
+    left: 0.1rem;
+  }
+
+  .jex-record-center .jex-record.left .record-label {
+    left: 2.5rem;
+    right: unset;
+    margin: 0;
+    text-align: left;
+  }
+
+  .jex-record-center .jex-record.left .record-card {
+    padding: 1rem 0 1rem 1.25rem;
+  }
+
+  .jex-record-center .jex-record.left .record-card .record-caret {
+    left: 0;
+    right: unset;
+  }
+
+  .jex-record-center .jex-record.left[class*="jex-record-color-"] .record-card {
+    padding: 1rem 0.25rem 1rem 1rem;
+  }
+
+  .jex-record-center .jex-record.left[class*="jex-record-color-"] .record-card .record-container {
+    padding-right: 0.5rem;
+  }
+}
