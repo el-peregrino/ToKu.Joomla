@@ -14,7 +14,7 @@ use Joomla\CMS\MVC\Controller\FormController;
 
 \defined('_JEXEC') or die;
 
-class SequenceController extends FormController
+class RecordController extends FormController
 {
     
 }

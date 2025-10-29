@@ -15,7 +15,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
-use ToKu\Component\JexContent\Administrator\Helper\SequenceHelper;
+use ToKu\Component\JexContent\Administrator\Helper\RecordHelper;
 use ToKu\Library\Html;
 
 /**
@@ -25,7 +25,7 @@ use ToKu\Library\Html;
  *      The properties of $this are injected into the template via the PHP extract.
  *      They are defined in the HtmlView class, but not used directly.
  * 
- * @var \ToKu\Component\JexContent\Administrator\View\Sequences\HtmlView $this 
+ * @var \ToKu\Component\JexContent\Administrator\View\Records\HtmlView $this 
  */
 
 /**
@@ -40,7 +40,7 @@ $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDir  = $this->escape($this->state->get('list.direction'));
 
 /**
- * Manual ordering is enabled only if the list displays one sequence items, is ordered by the ordering columns and there are items to order.
+ * Manual ordering is enabled only if the list is ordered by the ordering columns and there are items to order.
  * @var bool $manualOrder
  */
 $manualOrder = $listOrder == 's.ordering' && count($this->items) > 1;
@@ -56,7 +56,7 @@ if ($manualOrder) {
 
     $draggable = [
         'class' => 'js-draggable',
-        'data-url' => 'index.php?option=com_jexcontent&task=sequences.saveOrderAjax&' . Session::getFormToken() . '=1',
+        'data-url' => 'index.php?option=com_jexcontent&task=records.saveOrderAjax&' . Session::getFormToken() . '=1',
         'data-direction' => strtolower($listDir),
         'data-nested' => 'false'
     ];
@@ -64,7 +64,7 @@ if ($manualOrder) {
 }
 ?>
 
-<form action="<?= Route::_('index.php?option=com_jexcontent&view=sequences'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?= Route::_('index.php?option=com_jexcontent&view=records'); ?>" method="post" name="adminForm" id="adminForm">
     <?= LayoutHelper::render('joomla.searchtools.default', ['view' => $this, 'options' => ['selectorFieldName' => 'catid']]); ?>
     <?php if (empty($this->items)): ?>
         <div class="alert alert-info">
@@ -74,7 +74,7 @@ if ($manualOrder) {
     <?php else: ?>
         <table class="table table-striped table-hover">
             <caption class="visually-hidden">
-                <?= Text::_('COM_JEX_LIST_SEQUENCES_TITLE'); ?>,
+                <?= Text::_('COM_JEX_LIST_RECORDS_TITLE'); ?>,
                 <span id="orderedBy"><?= Text::_('JGLOBAL_SORTED_BY'); ?> </span>,
                 <span id="filteredBy"><?= Text::_('JGLOBAL_FILTERED_BY'); ?></span>
             </caption>
@@ -111,7 +111,7 @@ if ($manualOrder) {
             </thead>
             <tbody<?= Html::append($attributes); ?>>
                 <?php foreach ($this->items as $i => $item): ?>
-                    <?php /** @var \ToKu\Component\JexContent\Administrator\Table\SequenceTable $item */ ?>
+                    <?php /** @var \ToKu\Component\JexContent\Administrator\Table\RecordTable $item */ ?>
                     <tr<?= Html::attribute('data-draggable-group', $item->catid, $manualOrder); ?>>
 
                         <td><?= HTMLHelper::_('grid.id', $i, $item->id); ?></td>
@@ -126,11 +126,11 @@ if ($manualOrder) {
                         </td>
 
                         <td class="center">
-                            <?= HTMLHelper::_('jgrid.published', $item->published, $i, 'sequences.', true, 'cb'); ?>
+                            <?= HTMLHelper::_('jgrid.published', $item->published, $i, 'records.', true, 'cb'); ?>
                         </td>
 
                         <td scope="row">
-                            <a href="<?= Route::_('index.php?option=com_jexcontent&task=sequence.edit&id=' . (int) $item->id); ?>" 
+                            <a href="<?= Route::_('index.php?option=com_jexcontent&task=record.edit&id=' . (int) $item->id); ?>" 
                                 title="<?= Text::_('JACTION_EDIT'); ?> <?= $this->escape($item->heading); ?>">
                                 <?= $this->escape($item->heading); ?>
                             </a>

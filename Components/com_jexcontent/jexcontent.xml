@@ -30,12 +30,12 @@
 
             <menu type="separator">separator</menu>
 
-            <menu link="option=com_jexcontent&amp;view=sequences">
-                COM_JEXCONTENT_MENU_SEQUENCES
+            <menu link="option=com_jexcontent&amp;view=records">
+                COM_JEXCONTENT_MENU_RECORDS
                 <params>
-                    <menu-quicktask-title>COM_JEXCONTENT_MENU_ADD_SEQUENCE</menu-quicktask-title>
+                    <menu-quicktask-title>COM_JEXCONTENT_MENU_ADD_RECORD</menu-quicktask-title>
                     <menu-quicktask-icon>plus</menu-quicktask-icon>
-                    <menu-quicktask>index.php?option=com_jexcontent&amp;view=sequences&amp;task=sequence.add</menu-quicktask>
+                    <menu-quicktask>index.php?option=com_jexcontent&amp;view=records&amp;task=record.add</menu-quicktask>
                 </params>
             </menu>
 

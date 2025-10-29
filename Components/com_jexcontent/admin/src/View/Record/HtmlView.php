@@ -8,7 +8,7 @@
  * @license     GNU General Public License version 3 or later
  */
 
-namespace ToKu\Component\JexContent\Administrator\View\Sequence;
+namespace ToKu\Component\JexContent\Administrator\View\Record;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Toolbar\ToolbarHelper;
@@ -21,12 +21,12 @@ class HtmlView extends BaseHtmlView
     /** @var \Joomla\CMS\Form\Form $form */
     protected $form;
 
-    /** @var \ToKu\Component\JexContent\Administrator\Table\SequenceTable $item */
+    /** @var \ToKu\Component\JexContent\Administrator\Table\RecordTable $item */
     protected $item;
 
     public function display($tpl = null)
     {
-        /** @var \ToKu\Component\JexContent\Administrator\Model\SequenceModel $model */
+        /** @var \ToKu\Component\JexContent\Administrator\Model\RecordModel $model */
         $model = $this->getModel();
 
         $this->form = $model->getForm();
@@ -50,12 +50,12 @@ class HtmlView extends BaseHtmlView
         /** @var \Joomla\CMS\Toolbar\Toolbar */
         $toolbar = $this->getToolbar();
 
-        ToolbarHelper::title(Text::_('COM_JEX') . ': ' . Text::_($this->item->id ? 'COM_JEX_EDIT_SEQUENCE_TITLE' : 'COM_JEX_ADD_SEQUENCE_TITLE'));
+        ToolbarHelper::title(Text::_('COM_JEX') . ': ' . Text::_($this->item->id ? 'COM_JEX_EDIT_RECORD_TITLE' : 'COM_JEX_ADD_RECORD_TITLE'));
 
-        ToolbarHelper::apply('sequence.apply');
-        ToolbarHelper::save('sequence.save');
-        ToolbarHelper::save2copy('sequence.save2copy');
-        ToolbarHelper::cancel('sequence.cancel', 'JTOOLBAR_CLOSE');
+        ToolbarHelper::apply('record.apply');
+        ToolbarHelper::save('record.save');
+        ToolbarHelper::save2copy('record.save2copy');
+        ToolbarHelper::cancel('record.cancel', 'JTOOLBAR_CLOSE');
 
         // help button
         $toolbar->inlinehelp();

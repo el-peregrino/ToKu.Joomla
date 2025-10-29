@@ -20,7 +20,7 @@ use ToKu\Library\JooToKu;
  *      The properties of $this are injected into the template via the PHP extract.
  *      They are defined in the HtmlView class, but not used directly.
  * 
- * @var \ToKu\Component\JexContent\Administrator\View\Sequence\HtmlView $this 
+ * @var \ToKu\Component\JexContent\Administrator\View\Record\HtmlView $this 
  */
 
 /**
@@ -37,7 +37,7 @@ HTMLHelper::_('script', 'system/toggle-help.js', ['version' => 'auto', 'relative
 
 ?>
 
-<form action="<?= Route::_('index.php?option=com_jexcontent&view=sequence&layout=edit&id=' . (int) $this->item->id); ?>" method="post"
+<form action="<?= Route::_('index.php?option=com_jexcontent&view=record&layout=edit&id=' . (int) $this->item->id); ?>" method="post"
     name="adminForm" id="adminForm" class="form-validate">
 
     <div class="main-card">

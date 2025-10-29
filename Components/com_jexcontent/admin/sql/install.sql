@@ -1,5 +1,5 @@
--- Sequence Items
-CREATE TABLE IF NOT EXISTS `#__jex_sequences` (
+-- Record Items
+CREATE TABLE IF NOT EXISTS `#__jex_records` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `catid` INT UNSIGNED NOT NULL DEFAULT 0,
     `title` VARCHAR(255) NULL,

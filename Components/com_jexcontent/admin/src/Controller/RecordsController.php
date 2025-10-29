@@ -15,11 +15,11 @@ use ToKu\Component\JexContent\Administrator\Trait\AjaxSortAwareTrait;
 
 \defined('_JEXEC') or die;
 
-class SequencesController extends AdminController
+class RecordsController extends AdminController
 {
     use AjaxSortAwareTrait;
 
-    public function getModel($name = 'Sequence', $prefix = 'Administrator', $config = ['ignore_request' => true])
+    public function getModel($name = 'Record', $prefix = 'Administrator', $config = ['ignore_request' => true])
     {
         return parent::getModel($name, $prefix, $config);
     }

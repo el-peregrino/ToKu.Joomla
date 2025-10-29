@@ -12,16 +12,16 @@ namespace ToKu\Component\JexContent\Administrator\Model;
 
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\Database\ParameterType;
-use ToKu\Component\JexContent\Administrator\Table\SequenceTable;
+use ToKu\Component\JexContent\Administrator\Table\RecordTable;
 use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
-class SequenceModel extends AdminModel
+class RecordModel extends AdminModel
 {
     protected $text_prefix = 'COM_JEXCONTENT';
 
-    public function getTable($type = 'Sequence', $prefix = 'Table', $config = [])
+    public function getTable($type = 'Record', $prefix = 'Table', $config = [])
     {
         return parent::getTable($type, $prefix, $config);
     }
@@ -29,7 +29,7 @@ class SequenceModel extends AdminModel
     public function getForm($data = [], $loadData = true): mixed
     {
         // load form from the xml spec
-        $form = $this->loadForm('com_jexcontent.sequence', 'sequence', ['control' => 'jform', 'load_data' => $loadData]);
+        $form = $this->loadForm('com_jexcontent.record', 'record', ['control' => 'jform', 'load_data' => $loadData]);
         return $form ?: false;
     }
 
@@ -47,7 +47,7 @@ class SequenceModel extends AdminModel
     {
         $app = JooToKu::getApp();
         // get form data from session
-        $state = $app->getUserState('com_jexcontent.edit.sequence.data', []);
+        $state = $app->getUserState('com_jexcontent.edit.record.data', []);
 
         // load database values and convert to array safely
         $item = (array) json_decode(json_encode($this->getItem()), true);
@@ -75,19 +75,19 @@ class SequenceModel extends AdminModel
             $table->alias = '';
         }
 
-        if (!$table->id && $table instanceof SequenceTable) {
+        if (!$table->id && $table instanceof RecordTable) {
             $table->ordering = $this->getNextOrdering($table);
         }
 
         parent::prepareTable($table);
     }
 
-    private function getNextOrdering(SequenceTable $table): int
+    private function getNextOrdering(RecordTable $table): int
     {
         $db = $this->getDatabase();
         $query = $db->getQuery(true);
         $query->select('MAX(ordering)')
-              ->from($db->quoteName('#__jex_sequences'))
+              ->from($db->quoteName('#__jex_records'))
               ->where($db->quoteName('catid') . ' = :category')
               ->bind(':category', $table->catid, ParameterType::INTEGER);
 

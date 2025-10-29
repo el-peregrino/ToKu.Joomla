@@ -18,9 +18,9 @@ use ToKu\Library\JooToKu;
 \defined('_JEXEC') or die;
 
 /**
- * Model class for handling list of sequences.
+ * Model class for handling list of records.
  */
-class SequencesModel extends ListModel
+class RecordsModel extends ListModel
 {
     /**
      * Constructor.
@@ -34,13 +34,13 @@ class SequencesModel extends ListModel
     {
         if (empty($config['filter_fields'])) {
             $config['filter_fields'] = [
-                'id', 's.id',
-                'title', 's.title',
-                'heading', 's.heading',
-                'published', 's.published',
-                'access', 's.access', 'access_level',
-                'language', 's.language', 'language_title',
-                'ordering', 's.ordering',
+                'id', 'r.id',
+                'title', 'r.title',
+                'heading', 'r.heading',
+                'published', 'r.published',
+                'access', 'r.access', 'access_level',
+                'language', 'r.language', 'language_title',
+                'ordering', 'r.ordering',
                 'category', 'c.title',
             ];
         }
@@ -48,7 +48,7 @@ class SequencesModel extends ListModel
         parent::__construct($config, $factory);
     }
 
-    protected function populateState($ordering = 's.id', $direction = 'asc')
+    protected function populateState($ordering = 'r.id', $direction = 'asc')
     {
         /**
          * Current category.
@@ -57,12 +57,12 @@ class SequencesModel extends ListModel
          * 
          * Notice: The original getUserStateFromRequest() should do the job, but it may fail silently.
          * 
-         * @var int $sequence
+         * @var int $record
          */
-        $sequence = JooToKu::getUserStateFromRequest('com_jexcontent.sequences.filter.catid', 'catid', null, 'int');
+        $record = JooToKu::getUserStateFromRequest('com_jexcontent.records.filter.catid', 'catid', null, 'int');
 
         // set the category in the request state (local, not affected by session)
-        $this->setState('filter.catid', $sequence);
+        $this->setState('filter.catid', $record);
 
         parent::populateState($ordering, $direction);
     }
@@ -73,21 +73,21 @@ class SequencesModel extends ListModel
         $query = $db->getQuery(true);
 
         $query->select([
-            $db->quoteName('s.id'),
-            $db->quoteName('s.catid'),
-            $db->quoteName('s.title'),
-            $db->quoteName('s.subtitle'),
-            $db->quoteName('s.heading'),
-            $db->quoteName('s.subheading'),
-            $db->quoteName('s.date'),
-            $db->quoteName('s.timeline'),
-            $db->quoteName('s.published'),
-            $db->quoteName('s.language'),
-            $db->quoteName('s.note'),
-            $db->quoteName('s.ordering'),
+            $db->quoteName('r.id'),
+            $db->quoteName('r.catid'),
+            $db->quoteName('r.title'),
+            $db->quoteName('r.subtitle'),
+            $db->quoteName('r.heading'),
+            $db->quoteName('r.subheading'),
+            $db->quoteName('r.date'),
+            $db->quoteName('r.timeline'),
+            $db->quoteName('r.published'),
+            $db->quoteName('r.language'),
+            $db->quoteName('r.note'),
+            $db->quoteName('r.ordering'),
         ]);
         
-        $query->from($db->quoteName('#__jex_sequences', 's'));
+        $query->from($db->quoteName('#__jex_records', 's'));
 
         // language
         $query->select([
@@ -96,21 +96,21 @@ class SequencesModel extends ListModel
         ]);
         $query->join('LEFT',
             $db->quoteName('#__languages', 'l'),
-            $db->quoteName('l.lang_code') . ' = ' . $db->quoteName('s.language')
+            $db->quoteName('l.lang_code') . ' = ' . $db->quoteName('r.language')
         );
 
         // access (asset groups)
         $query->select($db->quoteName('ag.title', 'access_level'));
         $query->join('LEFT',
             $db->quoteName('#__viewlevels', 'ag'),
-            $db->quoteName('ag.id') . ' = ' . $db->quoteName('s.access')
+            $db->quoteName('ag.id') . ' = ' . $db->quoteName('r.access')
         );
 
         // category
         $query->select($db->quoteName('c.title', 'category'));
         $query->join('LEFT',
             $db->quoteName('#__categories', 'c'),
-            $db->quoteName('c.id') . ' = ' . $db->quoteName('s.catid')
+            $db->quoteName('c.id') . ' = ' . $db->quoteName('r.catid')
         );
 
 
@@ -119,11 +119,11 @@ class SequencesModel extends ListModel
 
         if (is_numeric($published)) {
             $published = (int) $published;
-            $query->where($db->quoteName('s.published') . ' = :published')
+            $query->where($db->quoteName('r.published') . ' = :published')
                 ->bind(':published', $published, ParameterType::INTEGER);
         } 
         else {
-            $query->whereIn($db->quoteName('s.published'), [0, 1]);
+            $query->whereIn($db->quoteName('r.published'), [0, 1]);
         }
 
         // filter by search in title
@@ -132,7 +132,7 @@ class SequencesModel extends ListModel
         if (!empty($search)) {
             if (stripos($search, 'id:') === 0) {
                 $search = (int) substr($search, 3);
-                $query->where($db->quoteName('s.id') . ' = :search')
+                $query->where($db->quoteName('r.id') . ' = :search')
                     ->bind(':search', $search, ParameterType::INTEGER);
             } else {
                 $search = '%' . str_replace(' ', '%', trim($search)) . '%';
@@ -140,11 +140,11 @@ class SequencesModel extends ListModel
                 $query->extendWhere(
                     'AND',
                     [
-                        $db->quoteName('s.title') . ' LIKE :search',
-                        $db->quoteName('s.subtitle') . ' LIKE :search',
-                        $db->quoteName('s.heading') . ' LIKE :search',
-                        $db->quoteName('s.subheading') . ' LIKE :search',
-                        $db->quoteName('s.note') . ' LIKE :search',
+                        $db->quoteName('r.title') . ' LIKE :search',
+                        $db->quoteName('r.subtitle') . ' LIKE :search',
+                        $db->quoteName('r.heading') . ' LIKE :search',
+                        $db->quoteName('r.subheading') . ' LIKE :search',
+                        $db->quoteName('r.note') . ' LIKE :search',
                     ],
                     'OR'
                 )
@@ -154,42 +154,42 @@ class SequencesModel extends ListModel
 
         // filter by category
         if ($catid = $this->getState('filter.catid')) {
-            $query->where($db->quoteName('s.catid') . ' = :catid')
+            $query->where($db->quoteName('r.catid') . ' = :catid')
                 ->bind(':catid', $catid, ParameterType::INTEGER);
         }
 
         // filter by access level.
         if ($access = (int) $this->getState('filter.access')) {
-            $query->where($db->quoteName('s.access') . ' = :access')
+            $query->where($db->quoteName('r.access') . ' = :access')
                 ->bind(':access', $access, ParameterType::INTEGER);
         }
 
         // filter on the language.
         if ($language = $this->getState('filter.language')) {
-            $query->where($db->quoteName('s.language') . ' = :language')
+            $query->where($db->quoteName('r.language') . ' = :language')
                 ->bind(':language', $language);
         }
 
         // add the list ordering clause
         $ordering = [];
-        $listOrdering = $this->getState('list.ordering', 's.id');
+        $listOrdering = $this->getState('list.ordering', 'r.id');
         $listDir     = $db->escape($this->getState('list.direction', 'ASC'));
 
-        if ($listOrdering === 's.ordering') {
+        if ($listOrdering === 'r.ordering') {
             // order by category first
-            $ordering[] = $db->escape('s.catid') . ' ' . $listDir;
+            $ordering[] = $db->escape('r.catid') . ' ' . $listDir;
         }
 
         $ordering[] = $db->escape($listOrdering) . ' ' . $listDir;
 
-        if ($listOrdering === 's.heading') {
+        if ($listOrdering === 'r.heading') {
             // order by subheading too
-            $ordering[] = $db->escape('s.subheading') . ' ' . $listDir;
+            $ordering[] = $db->escape('r.subheading') . ' ' . $listDir;
         }
 
-        if ($listOrdering === 's.title') {
+        if ($listOrdering === 'r.title') {
             // order by subtitle too
-            $ordering[] = $db->escape('s.subtitle') . ' ' . $listDir;
+            $ordering[] = $db->escape('r.subtitle') . ' ' . $listDir;
         }
 
         $query->order($ordering);

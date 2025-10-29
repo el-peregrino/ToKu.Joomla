@@ -18,7 +18,7 @@ use Joomla\Registry\Registry;
 
 \defined('_JEXEC') or die;
 
-class SequenceTable extends BaseTable
+class RecordTable extends BaseTable
 {
     /**
      * Category Id.
@@ -57,24 +57,24 @@ class SequenceTable extends BaseTable
     public $timeline;
 
     /**
-     * Date of the timeline sequence item.
+     * Date of the timeline record item.
      */
     public $date;
 
     /**
-     * Header of the sequence item.
+     * Header of the record item.
      * @var string
      */
     public $header;
 
     /**
-     * Body of the sequence item.
+     * Body of the record item.
      * @var string
      */
     public $body;
 
     /**
-     * Footer of the sequence item.
+     * Footer of the record item.
      * @var string
      */
     public $footer;
@@ -116,7 +116,7 @@ class SequenceTable extends BaseTable
     public $note;
 
     /**
-     * Sequence item parameters. Contains JSON structure.
+     * Record item parameters. Contains JSON structure.
      * @var string
      */
     public $params;
@@ -140,9 +140,9 @@ class SequenceTable extends BaseTable
      */
     public function __construct(DatabaseDriver $db, ?DispatcherInterface $dispatcher = null)
     {
-        parent::__construct('#__jex_sequences', 'id', $db, $dispatcher);
+        parent::__construct('#__jex_records', 'id', $db, $dispatcher);
 
-        $this->typeAlias = 'com_jexcontent.sequence';
+        $this->typeAlias = 'com_jexcontent.record';
     }
 
     public function bind($array, $ignore = '')
@@ -166,7 +166,7 @@ class SequenceTable extends BaseTable
             return false;
         }
 
-        // check sequence item data
+        // check record item data
 
         // TODO enhance checks
         if (trim($this->heading) == '') {

@@ -8,7 +8,7 @@
  * @license     GNU General Public License version 3 or later
  */
 
-namespace ToKu\Component\JexContent\Administrator\View\Sequences;
+namespace ToKu\Component\JexContent\Administrator\View\Records;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Toolbar\ToolbarHelper;
@@ -46,7 +46,7 @@ class HtmlView extends BaseHtmlView
 
     public function display($tpl = null)
     {
-        /** @var \ToKu\Component\JexContent\Administrator\Model\SequencesModel $model */
+        /** @var \ToKu\Component\JexContent\Administrator\Model\RecordsModel $model */
         $model = $this->getModel();
         
         $this->items = $model->getItems();
@@ -68,10 +68,10 @@ class HtmlView extends BaseHtmlView
 
     protected function addToolbar()
     {
-        ToolbarHelper::title(Text::_('COM_JEX') . ': ' . Text::_('COM_JEX_LIST_SEQUENCES_TITLE'));
-        ToolbarHelper::addNew('sequence.add');
-        ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'sequences.delete');
-        ToolbarHelper::publish('sequences.publish', 'JTOOLBAR_PUBLISH', true);
-        ToolbarHelper::unpublish('sequences.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+        ToolbarHelper::title(Text::_('COM_JEX') . ': ' . Text::_('COM_JEX_LIST_RECORDS_TITLE'));
+        ToolbarHelper::addNew('record.add');
+        ToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'records.delete');
+        ToolbarHelper::publish('records.publish', 'JTOOLBAR_PUBLISH', true);
+        ToolbarHelper::unpublish('records.unpublish', 'JTOOLBAR_UNPUBLISH', true);
     }
 }
