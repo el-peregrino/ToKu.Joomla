@@ -5,7 +5,7 @@
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2024-07-28</creationDate>
-    <version>1.1.0</version>
+    <version>1.1.17</version>
     <description>COM_JEXCONTENT_DESCRIPTION</description>
     <namespace path="src">ToKu\Component\JexContent</namespace>
 
@@ -30,12 +30,39 @@
 
             <menu type="separator">separator</menu>
 
+            <menu link="option=com_jexcontent&amp;view=carousels">
+                COM_JEXCONTENT_MENU_CAROUSELS
+                <params>
+                    <menu-quicktask-title>COM_JEXCONTENT_MENU_ADD_CAROUSEL</menu-quicktask-title>
+                    <menu-quicktask-icon>plus</menu-quicktask-icon>
+                    <menu-quicktask>index.php?option=com_jexcontent&amp;view=carousels&amp;task=carousel.add</menu-quicktask>
+                </params>
+            </menu>
+
             <menu link="option=com_jexcontent&amp;view=records">
                 COM_JEXCONTENT_MENU_RECORDS
                 <params>
                     <menu-quicktask-title>COM_JEXCONTENT_MENU_ADD_RECORD</menu-quicktask-title>
                     <menu-quicktask-icon>plus</menu-quicktask-icon>
                     <menu-quicktask>index.php?option=com_jexcontent&amp;view=records&amp;task=record.add</menu-quicktask>
+                </params>
+            </menu>
+
+            <menu link="option=com_jexcontent&amp;view=quotes">
+                COM_JEXCONTENT_MENU_QUOTES
+                <params>
+                    <menu-quicktask-title>COM_JEXCONTENT_MENU_ADD_QUOTE</menu-quicktask-title>
+                    <menu-quicktask-icon>plus</menu-quicktask-icon>
+                    <menu-quicktask>index.php?option=com_jexcontent&amp;view=quotes&amp;task=quote.add</menu-quicktask>
+                </params>
+            </menu>
+
+            <menu link="option=com_jexcontent&amp;view=testimonials">
+                COM_JEXCONTENT_MENU_TESTIMONIALS
+                <params>
+                    <menu-quicktask-title>COM_JEXCONTENT_MENU_ADD_TESTIMONIAL</menu-quicktask-title>
+                    <menu-quicktask-icon>plus</menu-quicktask-icon>
+                    <menu-quicktask>index.php?option=com_jexcontent&amp;view=testimonials&amp;task=testimonial.add</menu-quicktask>
                 </params>
             </menu>
 

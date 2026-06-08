@@ -4,14 +4,14 @@
  * @package     ToKu.Joomla
  * @subpackage  com_jexcontent
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 
 /**
  * The View class of the MVC pattern.
@@ -31,7 +31,7 @@ use ToKu\Library\JooToKu;
 
 \defined('_JEXEC') or die;
 
-JooToKu::useScripts('keepalive', 'form.validate');
+Joomlib::useScripts('keepalive', 'form.validate');
 
 HTMLHelper::_('script', 'system/toggle-help.js', ['version' => 'auto', 'relative' => true]);
 

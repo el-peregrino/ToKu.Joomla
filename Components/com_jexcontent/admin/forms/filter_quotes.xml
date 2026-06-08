@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+        name="catid"
+        type="category"
+        label="JCATEGORY"
+        accesstype="manage"
+        extension="com_jexcontent"
+        showAll="false"
+        filtermode="selector"
+        class="js-select-submit-on-change">
+        <option value="">JOPTION_SELECT_CATEGORY</option>
+    </field>
+
+    <fields name="filter">
+
+        <field
+            name="search"
+            type="text"
+            inputmode="search"
+            hint="JSEARCH_FILTER" />
+
+        <field
+            name="published"
+            type="list"
+            label="JSTATUS"
+            class="js-select-submit-on-change"
+            extension="com_jexcontent">
+            <option value="">JOPTION_SELECT_PUBLISHED</option>
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+
+        </field>
+
+        <field name="access" type="accesslevel"
+            label="JFIELD_ACCESS_LABEL"
+            class="js-select-submit-on-change"
+            extension="com_jexcontent">
+            <option value="">JOPTION_SELECT_ACCESS</option>
+        </field>
+
+        <field
+            name="language"
+            type="contentlanguage"
+            label="JGRID_HEADING_LANGUAGE"
+            class="js-select-submit-on-change"
+            extension="com_jexcontent">
+            <option value="">JOPTION_SELECT_LANGUAGE</option>
+        </field>
+
+        <field name="tags"
+            type="tag"
+            extension="com_jexcontent"
+            multiple="true"
+            label="JFIELD_TAGS_LABEL"
+            description="JFIELD_TAGS_DESC"
+            class="js-select-submit-on-change" />
+
+    </fields>
+
+    <fields name="list">
+
+        <field
+            name="limit"
+            type="limitbox"
+            label="JGLOBAL_LIST_LIMIT"
+            class="js-select-submit-on-change"
+            extension="com_jexcontent" />
+
+    </fields>
+</form>

@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  mod_articlecarousel
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 

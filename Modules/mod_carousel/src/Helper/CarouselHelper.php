@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  mod_carousel
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -13,7 +13,7 @@ namespace ToKu\Module\Carousel\Site\Helper;
 use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 
 \defined('_JEXEC') or die;
 
@@ -53,7 +53,7 @@ class CarouselHelper
                 continue;
 
             // check the data
-            if (!JooToKu::hasAnyValue($item, 'image', 'heading', 'text'))
+            if (!Joomlib::hasAnyValue($item, 'image', 'heading', 'text'))
                 continue;
 
             $output[] = $item;
@@ -66,7 +66,7 @@ class CarouselHelper
     {
         switch ($item->link_type) {
             case 'menu':
-                $menu = JooToKu::getApp()->getMenu()->getItem($item->link_menu);
+                $menu = Joomlib::getApp()->getMenu()->getItem($item->link_menu);
                 return Route::_($menu->route);
             case 'article':
                 return Route::_('index.php?option=com_content&view=article&id=' . (int) $item->link_article);

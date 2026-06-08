@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  mod_articlecarousel
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -13,15 +13,15 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use ToKu\Library\Closure;
 use ToKu\Library\Html;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 
 \defined('_JEXEC') or die;
 
-JooToKu::registerWebAssets(
+Joomlib::registerWebAssets(
     [ArticleCarouselHelper::MODULE], 
-    [JooToKu::getAsset('carousel')], 
-    [JooToKu::getAsset('style'), ArticleCarouselHelper::getAsset('style')]);
+    [Joomlib::getAsset('carousel')], 
+    [Joomlib::getAsset('style'), ArticleCarouselHelper::getAsset('style')]);
 
 /**
  * @var \Joomla\Registry\Registry $params Module parameters
@@ -38,7 +38,7 @@ if (empty($articles) || count($articles) == 0) {
 }
 
 // create unique id
-$carouselId = JooToKu::getUniqueId();
+$carouselId = Joomlib::getUniqueId();
 $indicators = $params->get('indicators');
 ?>
 

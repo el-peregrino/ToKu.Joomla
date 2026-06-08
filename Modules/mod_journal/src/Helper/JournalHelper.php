@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  mod_journal
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -97,10 +97,12 @@ class JournalHelper implements DatabaseAwareInterface
         // filter by tags
         $tags = $params->get('tags', []);
         if (!empty($tags)) {
-            $query->join('INNER', 
+            $query->innerJoin(
                 $db->quoteName('#__contentitem_tag_map', 'tm'),
-                $db->quoteName('tm.content_item_id') . ' = ' . $db->quoteName('r.id') . ' AND ' . $db->quoteName('tm.type_alias') . ' = ' . $db->quote($db->escape('com_jexcontent.record')))
-                ->whereIn($db->quoteName('tm.tag_id'), $tags, ParameterType::INTEGER);
+                $db->quoteName('tm.content_item_id') . ' = ' . $db->quoteName('r.id')
+                    . ' AND ' . $db->quoteName('tm.type_alias') . ' = ' . $db->quote('com_jexcontent.record')
+            )
+            ->whereIn($db->quoteName('tm.tag_id'), $tags, ParameterType::INTEGER);
         }
 
         // ordering

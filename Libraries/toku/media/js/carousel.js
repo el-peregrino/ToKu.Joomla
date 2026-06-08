@@ -2,7 +2,7 @@
  * ToKu.Joomla
  * Library for Joomla 5
  *
- * (C) 2025 ToKu <https://www.toku.cz>
+ * (C) 2026 ToKu <https://www.toku.cz>
  * GNU General Public License version 3 or later
  */
 

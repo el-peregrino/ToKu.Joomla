@@ -2,9 +2,9 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  JooToKu
+ * @subpackage  Joomlib
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -18,6 +18,7 @@ namespace ToKu\Library;
 class Joomla 
 {
     // TYPED CONSTANTS ARE SUPPORTED SINCE PHP 8.3
+    // THEY ARE NOT SUPPORTED IN PHP 8.2, SO WE CANNOT USE THEM YET
 
     /**
      * Joomla's system folder name.

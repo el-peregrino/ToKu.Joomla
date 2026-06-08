@@ -5,14 +5,14 @@ namespace ToKu\Module\Journal\Site\View;
 use ToKu\Library\Closure;
 use ToKu\Library\Html;
 use ToKu\Library\Joomla;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 use ToKu\Module\Journal\Site\Helper\JournalHelper;
 use ToKu\Module\Journal\Site\Helper\RecordView;
 
 \defined('_JEXEC') or die;
 
-JooToKu::registerExtensionFile(JournalHelper::MODULE);
-$wa = JooToKu::useStyles(JournalHelper::MODULE . '.style');
+Joomlib::registerExtensionFile(JournalHelper::MODULE);
+$wa = Joomlib::useStyles(JournalHelper::MODULE . '.style');
 
 /**
  * @var \Joomla\Registry\Registry $params Module parameters
@@ -29,9 +29,9 @@ if ($isTrue('module_style_enabled')) {
 $selector = uniqid('jex-');
 ?>
 
-<div class="<?= JooToKu::getModuleClass(JournalHelper::NAME); ?><?= $param('module_class'); ?>">
+<div class="<?= Joomlib::getModuleClass(JournalHelper::NAME); ?><?= $param('module_class'); ?>">
 
-    <?= JooToKu::render('module.frame', [
+    <?= Joomlib::render('module.frame', [
         'name' => 'journal',
         'type' => 'header',
         'text' => $params->get('module_header_text'),
@@ -83,13 +83,13 @@ $selector = uniqid('jex-');
                     'view' => $view
                 ];
 
-                echo JooToKu::render('journal.record', $data, JournalHelper::MODULE);
+                echo Joomlib::render('journal.record', $data, JournalHelper::MODULE);
             } ?>
         </div>
     
     </div>
 
-    <?= JooToKu::render('module.frame', [
+    <?= Joomlib::render('module.frame', [
         'name' => 'journal',
         'type' => 'footer',
         'text' => $params->get('module_footer_text'),

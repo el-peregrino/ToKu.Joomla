@@ -3,14 +3,14 @@
     <name>ToKu Joomla Library</name>
     <libraryname>toku</libraryname>
     <namespace path="src">ToKu\Library</namespace>
-    <version>1.0.15</version>
+    <version>1.0.16</version>
     <author>ToKu</author>
     <authorUrl>www.toku.cz</authorUrl>
     <license>GNU General Public License version 3 or later</license>
     <creationDate>2025-07-13</creationDate>
     <description>
         <![CDATA[
-            <strong>ToKu Library</strong> defines functions and resources for <em>ToKu</em> extensions. The package contains:
+            <strong>ToKu Joomla Library</strong> defines functions and resources for <em>ToKu</em> extensions. The package contains:
             <ul>
                 <li>PHP Library</li>
                 <li>CustomFieldSelectorField</li>

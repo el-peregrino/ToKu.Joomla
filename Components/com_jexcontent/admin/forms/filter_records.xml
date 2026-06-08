@@ -48,6 +48,14 @@
             <option value="">JOPTION_SELECT_LANGUAGE</option>
         </field>
 
+        <field name="tags"
+            type="tag"
+            extension="com_jexcontent"
+            multiple="true"
+            label="JFIELD_TAGS_LABEL"
+            description="JFIELD_TAGS_DESC"
+            class="js-select-submit-on-change" />
+
     </fields>
 
     <fields name="list">

@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  mod_articlecarousel
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -13,7 +13,7 @@ use Joomla\CMS\Extension\Service\Provider\Module;
 use Joomla\CMS\Extension\Service\Provider\ModuleDispatcherFactory;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 use ToKu\Module\ArticleCarousel\Site\Helper\ArticleCarouselHelper;
 
 \defined('_JEXEC') or die;
@@ -31,8 +31,8 @@ return new class () implements ServiceProviderInterface {
      */
     public function register(Container $container): void
     {
-        $container->registerServiceProvider(new ModuleDispatcherFactory(JooToKu::getNamespace(ArticleCarouselHelper::NAME, JooToKu::MODULE)));
-        $container->registerServiceProvider(new HelperFactory(JooToKu::getSiteHelper(ArticleCarouselHelper::NAME)));
+        $container->registerServiceProvider(new ModuleDispatcherFactory(Joomlib::getNamespace(ArticleCarouselHelper::NAME, Joomlib::MODULE)));
+        $container->registerServiceProvider(new HelperFactory(Joomlib::getSiteHelper(ArticleCarouselHelper::NAME)));
         $container->registerServiceProvider(new Module());
     }
 };

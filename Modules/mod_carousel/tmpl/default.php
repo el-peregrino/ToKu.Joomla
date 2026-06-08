@@ -4,22 +4,22 @@
  * @package     ToKu.Joomla
  * @subpackage  mod_carousel
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
 use ToKu\Library\Closure;
 use ToKu\Library\Html;
 use ToKu\Library\Joomla;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 use ToKu\Module\Carousel\Site\Helper\CarouselHelper;
 
 \defined('_JEXEC') or die;
 
-JooToKu::registerWebAssets(
+Joomlib::registerWebAssets(
     [CarouselHelper::MODULE],
-    [JooToKu::getAsset('carousel')],
-    [JooToKu::getAsset('style'), CarouselHelper::getAsset('style')]
+    [Joomlib::getAsset('carousel')],
+    [Joomlib::getAsset('style'), CarouselHelper::getAsset('style')]
 );
 
 /**
@@ -38,13 +38,13 @@ if (empty($items) || count($items) === 0) {
 }
 
 // create unique id
-$carouselId = JooToKu::getUniqueId();
+$carouselId = Joomlib::getUniqueId();
 $indicators = $params->get('indicators');
 ?>
 
-<div class="<?= JooToKu::getModuleClass(CarouselHelper::NAME); ?><?= $param('module_class'); ?>">
+<div class="<?= Joomlib::getModuleClass(CarouselHelper::NAME); ?><?= $param('module_class'); ?>">
 
-    <?= JooToKu::render('module.frame', [
+    <?= Joomlib::render('module.frame', [
         'name' => 'carousel',
         'type' => 'header',
         'text' => $params->get('module_header_text'),
@@ -85,7 +85,7 @@ $indicators = $params->get('indicators');
                 ?>
                 <div class="carousel-box<?= $param('box_class'); ?><?= Html::append($item->item_class); ?>" data-js="box">
                     
-                    <?= JooToKu::render("carousel.$item->item_type", [
+                    <?= Joomlib::render("carousel.$item->item_type", [
                         'image' => $image, 
                         'item' => $item, 
                         'link' => $link, 
@@ -116,7 +116,7 @@ $indicators = $params->get('indicators');
         <?php endif; ?>
     </div>
 
-    <?= JooToKu::render('module.frame', [
+    <?= Joomlib::render('module.frame', [
         'name' => 'carousel',
         'type' => 'footer',
         'text' => $params->get('module_footer_text'),

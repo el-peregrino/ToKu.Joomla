@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  com_jexcontent
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -16,7 +16,7 @@ use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 use ToKu\Component\JexContent\Administrator\Extension\JexContentComponent;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 
 \defined('_JEXEC') or die;
 
@@ -34,8 +34,8 @@ return new class() implements ServiceProviderInterface {
      */
     public function register(Container $container): void
     {
-        $container->registerServiceProvider(new ComponentDispatcherFactory(JooToKu::getNamespace(JexContentComponent::NAME, JooToKu::COMPONENT)));
-        $container->registerServiceProvider(new MVCFactory(JooToKu::getNamespace(JexContentComponent::NAME, JooToKu::COMPONENT)));
+        $container->registerServiceProvider(new ComponentDispatcherFactory(Joomlib::getNamespace(JexContentComponent::NAME, Joomlib::COMPONENT)));
+        $container->registerServiceProvider(new MVCFactory(Joomlib::getNamespace(JexContentComponent::NAME, Joomlib::COMPONENT)));
         $container->set(
             ComponentInterface::class,
             function (Container $container) {

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <config>
+        <inlinehelp button="show" />
+    </config>
+
+    <field name="id" type="hidden" />
+
+    <fieldset name="content">
+
+        <field name="title" type="text" maxlength="255"
+            label="COM_JEX_FIELD_TITLE_LABEL"
+            description="COM_JEX_FIELD_TITLE_DESCRIPTION" />
+
+        <field name="subtitle" type="text" maxlength="255"
+            label="COM_JEX_FIELD_SUBTITLE_LABEL"
+            description="COM_JEX_FIELD_SUBTITLE_DESCRIPTION" />
+
+        <field name="header" type="editor" filter="safehtml"
+            layout="joomla.form.field.labelabove"
+            label="COM_JEX_FIELD_HEADER_LABEL"
+            description="COM_JEX_FIELD_HEADER_DESCRIPTION" />
+
+        <field name="body" type="editor" filter="safehtml"
+            layout="joomla.form.field.labelabove"
+            label="COM_JEX_FIELD_BODY_LABEL"
+            description="COM_JEX_FIELD_BODY_DESCRIPTION" />
+
+        <field name="footer" type="editor" filter="safehtml"
+            layout="joomla.form.field.labelabove"
+            label="COM_JEX_FIELD_FOOTER_LABEL"
+            description="COM_JEX_FIELD_FOOTER_DESCRIPTION" />
+
+    </fieldset>
+
+    <fields name="links">
+        <fieldset name="content-link">
+            <field
+                name="link_type"
+                type="list"
+                default="none"
+                label="COM_JEX_FIELD_LINK_LABEL"
+                description="COM_JEX_FIELD_LINK_DESCRIPTION">
+                <option value="none">COM_JEX_LINK_TYPE_NONE</option>
+                <option value="menu">COM_JEX_LINK_TYPE_MENU</option>
+                <option value="article">COM_JEX_LINK_TYPE_ARTICLE</option>
+                <option value="external">COM_JEX_LINK_TYPE_EXTERNAL</option>
+            </field>
+
+            <field
+                name="link_text"
+                type="text"
+                maxlength="255"
+                showon="link_type!:none"
+                label="COM_JEX_FIELD_LINK_TEXT_LABEL" />
+
+            <field
+                name="menu_item"
+                type="menuitem"
+                filter="component"
+                showon="link_type:menu"
+                label="COM_JEX_FIELD_LINK_MENU_LABEL" />
+
+            <field
+                type="ModalSelect"
+                name="article_id"
+                label="COM_JEX_FIELD_LINK_ARTICLE_LABEL"
+                select="true"
+                iconSelect="fa fa-list"
+                titleSelect="COM_JEX_MODAL_ARTICLE"
+                urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+                clear="true"
+                sql_title_table="#__content"
+                sql_title_column="title"
+                sql_title_key="id"
+                showon="link_type:article" />
+
+            <field
+                name="external_url"
+                type="url"
+                showon="link_type:external"
+                label="COM_JEX_FIELD_LINK_EXTERNAL_LABEL"
+                description="COM_JEX_FIELD_LINK_EXTERNAL_DESCRIPTION" />
+
+            <field
+                name="link_target"
+                type="list"
+                default="_self"
+                showon="link_type!:none"
+                label="COM_JEX_FIELD_LINK_TARGET_LABEL"
+                description="COM_JEX_FIELD_LINK_TARGET_DESCRIPTION">
+                <option value="_self">COM_JEX_LINK_TARGET_SELF</option>
+                <option value="_blank">COM_JEX_LINK_TARGET_NEW</option>
+            </field>
+        </fieldset>
+    </fields>
+
+    <fields name="images">
+        <fieldset name="image-header">
+
+            <field name="image_header"
+                type="media"
+                label="COM_JEX_FIELD_IMAGE_LABEL"
+                schemes="http,https,ftp,ftps,data,file"
+                validate="url"
+                relative="true" />
+
+            <field
+                name="image_header_alt"
+                type="text"
+                label="COM_JEX_FIELD_IMAGE_ALT_LABEL" />
+
+        </fieldset>
+    </fields>
+
+    <fieldset name="general">
+
+        <field name="catid"
+            type="category"
+            extension="com_jexcontent"
+            required="true"
+            label="JCATEGORY">
+            <option value="">JOPTION_SELECT_CATEGORY</option>
+        </field>
+
+        <field name="published"
+            type="list"
+            label="JSTATUS"
+            class="form-select-color-state"
+            default="1"
+            validate="options">
+            <option value="0">JUNPUBLISHED</option>
+            <option value="1">JPUBLISHED</option>
+        </field>
+
+        <field name="access" type="accesslevel"
+            label="JFIELD_ACCESS_LABEL"
+            description="JFIELD_ACCESS_DESC" />
+
+        <field name="language" 
+            type="language"
+            default="*"
+            label="JFIELD_LANGUAGE_LABEL"
+            description="JFIELD_LANGUAGE_DESC" >
+            <option value="*">JOPTION_SELECT_LANGUAGE</option>
+        </field>
+
+        <field name="tags"
+            type="tag"
+            extension="com_jexcontent"
+            multiple="true"
+            label="JFIELD_TAGS_LABEL"
+            description="JFIELD_TAGS_DESC" />
+
+        <field name="note" type="text" maxlength="255"
+            label="COM_JEX_FIELD_NOTE_LABEL" />
+
+    </fieldset>
+
+    <fields name="params">
+        <fieldset name="params">
+
+            <field name="icon" type="text" maxlength="55"
+                validate="CssIdentifier"
+                label="COM_JEX_FIELD_ICON_LABEL"
+                description="COM_JEX_FIELD_ICON_DESCRIPTION" />
+
+            <field name="css" type="text" maxlength="255"
+                validate="CssIdentifier"
+                label="COM_JEX_FIELD_CSS_LABEL"
+                description="COM_JEX_FIELD_CSS_DESCRIPTION" />
+
+        </fieldset>
+    </fields>
+</form>

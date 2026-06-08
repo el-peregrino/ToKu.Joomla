@@ -6,7 +6,7 @@
  *
  * This is override of the Joomla's default mod_menu template. It flattens the menu tree into a list.
  * 
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 

@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  paramsinjector
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -16,7 +16,7 @@ use Joomla\Event\EventInterface;
 use Joomla\Event\SubscriberInterface;
 use ToKu\Library\Closure;
 use ToKu\Library\Joomla;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 
 \defined('_JEXEC') or die;
 
@@ -76,7 +76,7 @@ final class ParamsInjectorPlugin extends CMSPlugin implements SubscriberInterfac
             'mod_journal', 
             'mod_upcomingevent'
         ];
-        $module = $data->module ?? JooToKu::getConfigModule($form);
+        $module = $data->module ?? Joomlib::getConfigModule($form);
         if (!$module || !in_array($module, $modules, true)) {
             return;
         }

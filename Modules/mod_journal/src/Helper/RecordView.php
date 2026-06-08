@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  mod_journal
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -12,7 +12,7 @@ namespace ToKu\Module\Journal\Site\Helper;
 
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 
 \defined('_JEXEC') or die;
 
@@ -134,7 +134,7 @@ class RecordView
     {
         switch ($links->get('link_type')) {
             case 'menu':
-                $menu = JooToKu::getApp()->getMenu()->getItem($links->get('menu_item'));
+                $menu = Joomlib::getApp()->getMenu()->getItem($links->get('menu_item'));
                 return Route::_($menu->route);
             case 'article':
                 return Route::_('index.php?option=com_content&view=article&id=' . (int) $links->get('article_id'));

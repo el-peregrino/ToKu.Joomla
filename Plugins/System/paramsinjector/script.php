@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  paramsinjector
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -55,12 +55,12 @@ return new class () implements InstallerScriptInterface {
         }
 
         // dependency check
-        if (!class_exists('ToKu\Library\JooToKu')) {
+        if (!class_exists('ToKu\Library\Joomlib')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('PLG_PARAMSINJECTOR_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;
         }
 
-        $version = \ToKu\Library\JooToKu::VERSION ?? null;
+        $version = \ToKu\Library\Joomlib::VERSION ?? null;
         if (version_compare($version, $this->minimumToKu, '<')) {
             Factory::getApplication()->enqueueMessage(Text::sprintf('PLG_PARAMSINJECTOR_LIBRARY_ERROR', $this->minimumToKu), 'error');
             return false;

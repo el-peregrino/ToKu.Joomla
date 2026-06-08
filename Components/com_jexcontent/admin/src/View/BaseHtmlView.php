@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  com_jexcontent
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -13,7 +13,7 @@ namespace ToKu\Component\JexContent\Administrator\View;
 use Joomla\CMS\Application\CMSWebApplicationInterface;
 use Joomla\CMS\MVC\View\HtmlView;
 use Joomla\CMS\Toolbar\Toolbar;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 
 \defined('_JEXEC') or die;
 
@@ -38,11 +38,11 @@ abstract class BaseHtmlView extends HtmlView
 
     /**
      * Gets the global application object.
-     * Wraps the JooToKu::getApp().
+     * Wraps the Joomlib::getApp().
      * @return CMSWebApplicationInterface
      */
     protected function getApp(): CMSWebApplicationInterface 
     { 
-        return JooToKu::getApp();
+        return Joomlib::getApp();
     }
 }

@@ -2,9 +2,9 @@
 
 /**
  * @package     ToKu.Joomla
- * @subpackage  JooToKu
+ * @subpackage  Joomlib
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -24,25 +24,26 @@ use Joomla\Registry\Registry;
 /**
  * ToKu.Joomla 5 Library
  */
-class JooToKu
+class Joomlib
 {
     private static $application;
     private static $document;
     private static $webAssetManager;
 
     // TYPED CONSTANTS ARE SUPPORTED SINCE PHP 8.3
+    // THEY ARE NOT SUPPORTED IN PHP 8.2, SO WE CANNOT USE THEM YET
 
     /**
      * Name of the library.
      * @var string
      */
-    public const NAME = 'ToKu';
+    public const NAME = 'Joomlib';
 
     /**
      * Version of the library.
      * @var string
      */
-    public const VERSION = '1.0.15';
+    public const VERSION = '1.0.16';
 
     /**
      * Namespace prefix of a component.
@@ -307,7 +308,7 @@ class JooToKu
 
     public static function getModuleClass(string $name): string
     {
-        return JooToKu::MODULE_CLASS . ' ' . JooToKu::MODULE_CLASS . '-' . strtolower($name);
+        return Joomlib::MODULE_CLASS . ' ' . Joomlib::MODULE_CLASS . '-' . strtolower($name);
     }
 
     public static function convertFieldsetToColumn(array &$data, string $name): void

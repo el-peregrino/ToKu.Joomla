@@ -216,6 +216,13 @@
             <option value="*">JOPTION_SELECT_LANGUAGE</option>
         </field>
 
+        <field name="tags"
+            type="tag"
+            extension="com_jexcontent"
+            multiple="true"
+            label="JFIELD_TAGS_LABEL"
+            description="JFIELD_TAGS_DESC" />
+
         <field name="note" type="text" maxlength="255"
             label="COM_JEX_FIELD_NOTE_LABEL" />
 

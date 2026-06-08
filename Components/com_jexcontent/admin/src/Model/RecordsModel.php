@@ -4,7 +4,7 @@
  * @package     ToKu.Joomla
  * @subpackage  com_jexcontent
  *
- * @copyright   (C) 2025 ToKu <https://www.toku.cz>
+ * @copyright   (C) 2026 ToKu <https://www.toku.cz>
  * @license     GNU General Public License version 3 or later
  */
 
@@ -13,7 +13,7 @@ namespace ToKu\Component\JexContent\Administrator\Model;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\ParameterType;
-use ToKu\Library\JooToKu;
+use ToKu\Library\Joomlib;
 
 \defined('_JEXEC') or die;
 
@@ -22,14 +22,6 @@ use ToKu\Library\JooToKu;
  */
 class RecordsModel extends ListModel
 {
-    /**
-     * Constructor.
-     *
-     * @param   array                 $config   An optional associative array of configuration settings.
-     * @param   ?MVCFactoryInterface  $factory  The factory.
-     *
-     * @since   1.6
-     */
     public function __construct($config = [], ?MVCFactoryInterface $factory = null)
     {
         if (empty($config['filter_fields'])) {
@@ -59,7 +51,7 @@ class RecordsModel extends ListModel
          * 
          * @var int $record
          */
-        $record = JooToKu::getUserStateFromRequest('com_jexcontent.records.filter.catid', 'catid', null, 'int');
+        $record = Joomlib::getUserStateFromRequest('com_jexcontent.records.filter.catid', 'catid', null, 'int');
 
         // set the category in the request state (local, not affected by session)
         $this->setState('filter.catid', $record);
@@ -87,7 +79,7 @@ class RecordsModel extends ListModel
             $db->quoteName('r.ordering'),
         ]);
         
-        $query->from($db->quoteName('#__jex_records', 's'));
+        $query->from($db->quoteName('#__jex_records', 'r'));
 
         // language
         $query->select([
@@ -168,6 +160,34 @@ class RecordsModel extends ListModel
         if ($language = $this->getState('filter.language')) {
             $query->where($db->quoteName('r.language') . ' = :language')
                 ->bind(':language', $language);
+        }
+
+        // filter by tag(s)
+        $tags = $this->getState('filter.tags') ?: $this->getState('filter.tag');
+
+        if (!empty($tags)) {
+            // Normalize to array of ints
+            if (!is_array($tags)) {
+                $tags = explode(',', (string) $tags);
+            }
+
+            $tagIds = array_map('intval', $tags);
+            $tagIds = array_filter($tagIds, fn($v) => $v > 0);
+
+            if (!empty($tagIds)) {
+                // Join tag map to ensure only records with the tag(s) are returned
+                $query->join('INNER',
+                    $db->quoteName('#__contentitem_tag_map', 'tm'),
+                    $db->quoteName('tm.content_item_id') . ' = ' . $db->quoteName('r.id')
+                    . ' AND ' . $db->quoteName('tm.type_alias') . ' = ' . $db->quote('com_jexcontent.record')
+                );
+
+                // Filter by selected tag ids (any match)
+                $query->where($db->quoteName('tm.tag_id') . ' IN (' . implode(',', $tagIds) . ')');
+
+                // Avoid duplicate rows when a record has multiple matching tags
+                $query->group($db->quoteName('r.id'));
+            }
         }
 
         // add the list ordering clause
